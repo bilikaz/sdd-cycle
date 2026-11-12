@@ -1,55 +1,44 @@
 # Escalation and evolution
 
-A change to a settled task has exactly one home, and the fork is one question: **does it move the settled
-shape?** If yes, `sdd step 2` re-settles the documents. If no, the change is an **evolution**, recorded in
-`evolution.md`. The user answers the question — the agent may suggest an answer, never give it. Escalation is how
-a change or a QA finding that carries a decision reaches that fork.
+After settlement, changes arising in steps 3–5 are recorded in `evolution.md`.
+The original plan stays frozen so later agents can distinguish the baseline from the approved adjustments.
 
 ## Escalation
 
-- **sdd.escalation.1.** A QA finding too large, too tangled, or with a remedy that carries a decision is
-  **escalated**, not fixed in `sdd step 3`. The executor names the options and settles none; the user decides.
-- **sdd.escalation.2.** An escalated finding is resolved by the user one of two ways: an **evolution**, or
-  re-entering `sdd step 2`. There is no third door. The agent may prejudge — *this leaves the settled shape
-  standing* — and suggest the door with that reason; the ruling is the user's, never an agent's, and never an
-  coordinating role's.
-- **sdd.escalation.3.** An escalation is not a deferral: it hands back a decision nobody has taken, together
-  with the ledger row and the done-when that follow from the answer.
+- **sdd.escalation.1.** A finding whose remedy needs a user decision is escalated with the issue, options
+  and what it blocks. Do not implement an unresolved decision.
+- **sdd.escalation.2.** Resolve changes through evolution in the current task, or propose a new task when
+  the work is better separated. Agents and delegated coordinators do not route back to step 2.
+- **sdd.escalation.3.** Record the pending decision in the task's register and ask the user for the needed
+  ruling. A register entry is not permission to proceed with the dependent work.
 
 ## Evolution
 
-- **sdd.escalation.4.** An evolution is a change to the settled plan the user ruled leaves the settled shape
-  standing: no decision, done-when or scope line of `task.md` changes and the plan of `implementation.md` holds.
-  It is recorded in `evolution.md` in the user's words and applied in `sdd step 3`; the settled documents stay
-  frozen (`sdd.step2.4`).
-- **sdd.escalation.5.** One row per change, appended as it resolves:
-
-```md
-| # | What was asked | Answer, verbatim | Landed in |
-|---|---|---|---|
-| E-<n> | <the change, and at which step it was asked> | <their words> | <what it added or changed> |
-```
-
-  A correction row (sdd.escalation.10) carries no user words: its *Answer* column reads *correction — no ruling*
-  and its *Landed in* names the misstatement it fixes.
-
-- **sdd.escalation.11.** A revised evolution rewrites its row to the change that now stands, and one of which
-  nothing stands is deleted ([current-truth.md](../documentation/current-truth.md)).
-- **sdd.escalation.6.** Thinking lands in `grill.md`; the ruling lands in `evolution.md`. The reasoning is a
-  ledger row; the change is the evolution row.
-- **sdd.escalation.7.** `evolution.md` is the ledger of *what evolved and why* — a requirement added, a
-  direction changed. It is not a plan and not a review.
+- **sdd.escalation.4.** Evolution records adjustments to the settled requirements or design, including
+  scope changes approved by the user. Read approved evolution with the original plan; it governs the affected
+  parts without editing `task.md` or `implementation.md`. Ordinary fixes that restore the agreed behavior
+  need their finding disposition, not an evolution row for every code edit.
+- **sdd.escalation.5.** Use the [evolution template](templates/evolution.md).
+  Mark who initiated each change: **agent** or **person**. An agent proposal remains pending until the
+  required ruling; refinements already authorized by the task cite that authority.
+- **sdd.escalation.11.** Revise an evolution row to its current ruling under
+  [current-truth.md](../documentation/current-truth.md). Keep its id; remove a row when none of it stands.
+- **sdd.escalation.6.** Record user answers verbatim in `grill.md`; evolution links the ruling and records
+  the change and its destination. Do not duplicate the discussion.
+- **sdd.escalation.7.** Evolution states what changed and why, with enough detail to implement and review it.
+  It supplements the original plan; it is not a replacement plan or a review report.
+  Review leads report needed changes; the implementing agent records their approved evolution.
 
 ## Re-entering `sdd step 2`
 
-- **sdd.escalation.8.** A change that carries a decision edits `task.md` and `implementation.md`, is confirmed
-  by the user, and commits ([step-2-settle.md](step-2-settle.md)).
-- **sdd.escalation.9.** A change so large the task restarts, or that reaches beyond the task, is outside the
-  cycle: the user decides what happens to the task.
+- **sdd.escalation.8.** Only an explicit human instruction to re-settle the plan authorizes step-2 re-entry
+  after implementation has begun. A finding, scope change or delegated implementation loop is not that signal.
+  On that instruction, follow [step 2](step-2-settle.md) and obtain document confirmation before settlement.
+- **sdd.escalation.9.** Propose a new task for work better handled independently. The user decides whether
+  to open it; do not create or switch tasks automatically.
 
-## What is neither
+## Factual corrections
 
-- **sdd.escalation.10.** A settled document that merely misstates something already settled — a wrong count, a
-  stale name, a sentence superseded in its sibling — carries no decision. The frozen documents are not edited
-  for it: it takes an `evolution.md` row marked *correction*, which needs no ruling, and the next `sdd step 2`
-  re-entry folds it in. It is not escalated and not asked about.
+- **sdd.escalation.10.** A frozen plan's factual misstatement takes an evolution row marked correction,
+  with the initiating agent/person and supporting evidence. It needs no new ruling when the intended answer
+  is already settled. Keep the original documents frozen; there is no automatic step-2 reconciliation.

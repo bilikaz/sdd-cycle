@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
-# The gate.
+# An unwired gate starter.
 #
-# This is the one entry point `sdd step 3` runs (docs/instructions/implementation/testing.md) and the one
-# CI runs — never a hand-assembled list of tools. Put your whole check here: lint, typecheck, unit, e2e,
-# whatever proves the work. It must exit non-zero on any failure and must have no path that runs a subset
-# silently.
+# Configure each repository's actual full gate in docs/instructions/workspace.md. If this script is that
+# gate, wire the project's required checks here. It must exit non-zero on any failure and must not silently
+# skip required checks; see docs/instructions/implementation/testing.md.
 #
 # It exits non-zero out of the box, on purpose: a gate that cannot fail is not a gate.
 set -euo pipefail

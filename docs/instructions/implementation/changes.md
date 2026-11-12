@@ -1,7 +1,7 @@
 # The task's change map
 
-`changes.md` is the shared file and line inventory used by QA and built-code review. It lets a lead assign
-relevant material and a specialist find that material before opening source or a targeted diff.
+`changes.md` is the shared file and line inventory used by QA and built-code review. Each specialist uses
+it with the task records to select relevant material before opening source or a targeted diff.
 
 ## Generate
 
@@ -20,12 +20,12 @@ For multiple Git roots, repeat `--root <path> --base <starting-commit>` for ever
 Paths are resolved from the invocation directory. The task folder must already exist; the script prints
 the resulting `<task-folder>/changes.md` path.
 
-- **sdd.changes.1.** Establish each root's starting commit before the task's first implementation edit and
-  retain it through every round. For the workspace this is the settlement commit; for another root it is
-  the commit from which the task branch was cut. An existing task supplies those original commits explicitly.
+- **sdd.changes.1.** Use each root's initial starting commit from `progress.md` Git context under the
+  [progress template](templates/progress.md#git-context). Step 0 records it when the task branch is created;
+  a newly participating root records its start before its first edit. Retain these hashes through every round.
   A later checkpoint, re-settlement or current HEAD never silently replaces a starting commit.
 - **sdd.changes.2.** Before each QA or built-code review round, its lead refreshes the map with all changed
-  Git roots and their original starting commits. On later rounds, reuse the Roots table in the existing map.
+  Git roots and their original starting commits from progress. Later rounds retain those hashes in the Roots table.
   When a task first changes another root, add that root and its starting commit. Preparation does not change
   Git's index, working files or history. The report is replaced only after all roots are collected successfully.
 - **sdd.changes.3.** Each root covers its entire tree except `docs/tasks/`, including committed, staged,
@@ -45,10 +45,11 @@ the resulting `<task-folder>/changes.md` path.
   have zero changed lines. Root and combined totals count files, additions, deletions and binary files.
   Counts describe the net change from the starting commit, not how many edits were made along the way.
   Paths are JSON-quoted so unusual filenames remain one table cell.
-- **sdd.changes.6.** The map contains locations and counts. A reviewer opens the assigned current source and
-  targeted diffs to establish behavior, following relevant dependencies outside the map where necessary.
-  A changed-line range does not limit what can cause a defect. The lead records the map's fingerprints in
-  its round report; a source change during a round requires a refreshed map and a new read of affected work
+- **sdd.changes.6.** Each reviewer selects relevant files and ranges from the map and task records according
+  to its responsibilities; the lead assigns no files. Open current source and targeted diffs to establish
+  behavior, following relevant dependencies outside the map where necessary.
+  A changed-line range does not limit what can cause a defect. The lead checks snapshot identity against
+  the map, which owns its fingerprints; a source change during a round requires a refreshed map and a new read of affected work
   before the round can be called complete.
 - **sdd.changes.7.** Each generated report explains its purpose, comparison scope, change labels, count and
   coordinate conventions, and snapshot identity. It is readable without opening the script or these

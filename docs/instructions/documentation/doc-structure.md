@@ -1,8 +1,8 @@
 # Doc structure — one heading per logical cut
 
 Every workspace document keeps the same heading anatomy, so any reader scans any document the same way. The
-structure **states the split** — a reader sees the boundaries before reading a word. A harness document follows
-the harness's own standard instead ([workspace.md](../workspace.md), sdd.workspace.4).
+structure **states the split** — a reader sees the boundaries before reading a word. A document in another
+repository follows that repository's own standard ([workspace.md](../workspace.md), sdd.workspace.4).
 
 1. **H1 — the main title**, once, followed by the intro paragraph.
 2. **H2 — the logical cuts.** The document splits by logical meaning; a fixed anatomy (`task.md`,

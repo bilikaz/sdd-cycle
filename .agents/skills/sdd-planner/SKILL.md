@@ -1,94 +1,89 @@
 ---
 name: sdd-planner
-description: Performs an existing task's step-2 drafting and settlement, delegating plan reviews until the plan is clean or the loop stops making progress. Zero findings or info-only findings are clean. Use for sdd-planner or a delegated planning/review cycle. Presents documents for confirmation before settlement; creates no task and builds nothing.
+description: Coordinates an explicitly requested drafting and plan-review loop for an existing task. Defaults to five review dispatches, then prioritizes outstanding choices. Presents actual documents for confirmation before settlement; builds nothing.
 ---
 
-# sdd-planner — the delegated planning loop
+# sdd-planner
 
-The coordinating role for [sdd-plan](../sdd-plan/SKILL.md). Runs step 2 under
-`docs/instructions/implementation/step-2-settle.md` and delegates review to
-[sdd-plan-review](../sdd-plan-review/SKILL.md). This skill owns drafting, dispositions, settlement and the
-loop's stopping rules.
+Run [sdd-plan's procedure](../sdd-plan/SKILL.md) yourself and delegate independent reviews to fresh
+[sdd-plan-review](../sdd-plan-review/SKILL.md) leads. Drafting, user questions and confirmation stay here.
+This file owns the loop and its stops.
 
-## Dispatch
+## Entry and resume
 
-- Require the user's explicit delegation; invoking this skill supplies it. Find the named task, or the task
-  folder matching the current branch. An absent or ambiguous task needs identification, not a new folder.
-  Opening a task belongs to `sdd-new-task`.
-- Read `docs/instructions/implementation/cycle.md`, the step-2 instructions, and the task's
-  `progress.md`, `grill.md`, existing `task.md`, `implementation.md` and `evolution.md`. Read the register for
-  unresolved decisions. Check the task's branch before writing.
-- Start from the resolved ledger. The two documents may be absent, drafts, or a previously settled plan being
-  revised; earlier built work is context, never permission to alter source. Unresolved scope is a user decision.
-- Record the delegation in `grill.md` in the user's words, with its boundary: drafting and review routing are
-  delegated; new decisions, document confirmation, settlement approval and the build remain the user's.
+- Require the user's request for this role or its loop. A single-step request or an agent's own invocation
+  supplies no delegation; otherwise name `sdd-plan` and stop.
+- Read [the cycle](../../../docs/instructions/implementation/cycle.md) and
+  [step-2 entry](../../../docs/instructions/implementation/step-2-settle.md#entry).
+  Satisfy prerequisites before any write. An unfinished initial grill names `sdd-grill` and stops;
+  after implementation begins, require explicit human re-settlement.
+- Record delegation as a verbatim G-row in grill.md and maintain Planner run in the task's report.md under the
+  [report template](../../../docs/instructions/implementation/templates/report.md).
+  You own the step-2 progress entry; reviewers do not.
+- Default to **five review dispatches per delegated run**, unless the user instructs another limit.
+  Start a new run at zero; resume an active run's saved count. Increment before dispatch, including
+  replacement leads and confirmation rechecks. Record the in-flight lead/report so a resumed session can
+  identify it. Read reports/dispositions under sdd.step2.10; do not repeat completed work merely on resume.
+  An unreachable in-flight lead follows Review failure below.
 
-## The loop
+## Draft and review
 
-`sdd step 2 draft → plan review → sdd step 2 dispositions → fresh plan review → …`
+Draft from the ledger under step 2 and the
+[implementation template](../../../docs/instructions/implementation/templates/implementation.md).
+Delegate each review to a fresh lead with the task path and current documents.
+Read its verified report. As the plan's fixer, check relevant current material while applying corrections
+under [sdd.cycle.6](../../../docs/instructions/implementation/cycle.md#finding-verification).
+Append dispositions under sdd.step2.10.
 
-| Act | Who | Boundary |
-|---|---|---|
-| Draft, dispose and settle | you | follow step 2 yourself; draft the documents from the resolved ledger, edit them in place and record dispositions; hold final confirmation and the settlement commit until the plan is clean |
-| Plan review | a fresh agent invoking sdd-plan-review | give it the task-folder path and the tools below; use the returned final document |
-| Progress | you alone | keep the step-2 entry current while drafting, reviewing or waiting for guidance or confirmation; review adds no entry |
-| Register | you, and the reviewer within its reporting boundary | unresolved decisions and stopped findings name what they block |
+Apply factual corrections as one batch, then review the changed documents once, within the run limit.
+Do not review each individual edit or re-review unchanged documents already clean after valid dispositions.
+Never reject a real defect, hide a known error as an optional choice, or make implementation checkpoints.
 
-- For each review round, spawn a fresh agent with read/search, file-writing, shell and agent-management
-  tools (spawn, wait and message, or their equivalents). Invoke it with: `Use sdd-plan-review for <task-folder>.`
-- Wait for its final-document path and summary, then read that document for the step-2 dispositions.
-- Before editing, verify each finding's quoted span, rule, ledger basis and proposed remedy yourself.
-  Use sdd.step2.10's dispositions; every finding takes one, and a real defect cannot be rejected.
-- The delegation authorizes corrections with one answer inside the ledger. A design choice or remedy that no
-  ledger row rules goes under the documents' Proposals, never silently into their body; ask the user nothing
-  mid-loop. Never invent the answer or describe registered defects as resolved.
-- An error is fixed wherever it sits. A finding that shows an error — against a rule, a ruling or the code — is
-  **fixed**, whether it is in the documents' body, in a Proposal, or in an Alternative's options or trade, and
-  including an error an earlier fix introduced. A wrong fact or an incomplete list is checked against the code and
-  corrected, never copied from the finding unverified and never moved to Proposals or Alternatives.
-- Never flip a choice. Only a choice between valid options is held: a disposition that would reverse an earlier
-  choice, or a pick between two reviews' opposite remedies where both are valid, is not applied — name both options
-  under Alternatives, keep the documents' current text, and dispose the finding as **named**.
-- Apply each disposition by reading the affected section and editing it in place; never bulk-replace text. After
-  each edit wave, search both documents for the old term or mechanism, so no section still describes the old design.
-- Record applied and rejected dispositions with their reasons. Give fresh reviewers the current plan and
-  ledger, rather than the prior verdicts.
-  Re-review after every plan edit, including one made while disposing a finding.
+Handle Proposals and Alternatives under their template COMMENTS guidance:
+a valid open choice with one consistent option in the body can wait for presentation.
+A decision needed to continue drafting or remove a genuine defect goes to Guidance.
+Ask no decision questions between review waves.
 
-## Stop and hand back
+## Stops
 
-- **Clean:** the latest independent plan review meets
-  [sdd.cycle.5](../../../docs/instructions/implementation/cycle.md#review-cleanliness) on the current documents.
-  Zero findings or info-only findings proceed to document presentation and confirmation. Note info
-  observations in the review's Dispositions and carry them to the hand-back; they require no document edit,
-  extra review round or register resolution. Any later plan edit needs another review.
-- **Cycling:** the same underlying findings recur without progress, fixes reverse one another, or the share
-  of findings caused by the previous fixes is rising. Verify the causal link against the actual document
-  changes; touching a span is not evidence that its defect was introduced by the fix. Stop before another edit
-  wave, freeze what is churning and register the residue with the round/finding ids, changes and ruling needed.
-- **Round limit:** after five plan-review rounds, stop whatever the last count.
-- **Guidance:** remaining changes require a user decision. Register what is undecided and what each answer
-  would unblock. A silence from the user is not a ruling. An info observation alone is not a guidance stop.
+- **Clean:** current documents satisfy
+  [sdd.cycle.5](../../../docs/instructions/implementation/cycle.md#review-cleanliness).
+  Proceed to presentation.
+- **Limit:** stop dispatching at the configured limit. Prioritize presenting and resolving the Proposals
+  and Alternatives gathered so far, then identify remaining findings. Do not automatically start another
+  correction wave. If the current documents are reviewed and clean, proceed to confirmation.
+  If user rulings change them, record/apply those rulings and hand back the outstanding review.
+  Further dispatch needs the user's instruction to continue or extend the limit.
+- **Guidance:** a decision prevents a consistent draft or leaves a genuine defect unresolved.
+  Record it in the register with what it blocks and hand it back before another dispatch.
+  A valid open Proposal or Alternative alone is not this stop.
+- **Cycling:** the same defects recur without progress or fixes reverse one another.
+  Hand back the issue and needed ruling; valid alternatives belong in the template's choice sections.
+- **Review failure:** return a repairable coverage gap to the original lead under sdd.cycle.6;
+  this is follow-up, not another dispatch or another source-verification pass.
+  A failed, unreachable or nonresponsive lead gets one counted replacement within the limit if review
+  remains possible. If no report can be obtained, or the lead reports unavailable evidence/capability,
+  hand back the gap. Never call incomplete coverage clean or wait indefinitely for an unavailable lead.
 
-At any stop, present what the user approves, in this order:
+On hand-back, persist unresolved choices/findings in the plan or register and link them in the reply.
+Mark the run handed-back and leave step 2 current; no separate occasion entry under
+[sdd.progress.5](../../../docs/instructions/implementation/cycle.md#progressmd).
+Waiting for choices or document confirmation keeps the run active.
+Hand-back or settlement ends the run. A later user instruction to continue starts a new allowance;
+an answer to a pending question alone does not authorize another review loop.
 
-1. **The surface** — every endpoint, event and stored shape the plan adds or changes: its link, what it does, who
-   may call it, its request and its response with an example, and the flow that strings them together. This is
-   reviewed and approved as a whole, not picked line by line.
-2. **The Proposals, then the Alternatives, one at a time** — for each: how the thing works today, what the plan
-   changes, the options, the trade, what it touches, and a recommendation, in plain words a reader without the plan
-   open can rule on. Never present as a choice what a convention, the code's pattern or a ruling already decides,
-   and never ask the user to re-confirm an obvious pick.
+## Present and settle
 
-The user rules each one; every ruling, accepted or rejected, lands as a `grill.md` row, and a rejected option is
-never raised again. Apply each ruling to the documents as it is given. Another cycle runs only on the user's word.
+1. Present outstanding Proposals and Alternatives and ask about each separately. A choice ruling is not
+   final document confirmation. Record rulings in `grill.md`, apply them and remove resolved choices.
+2. If rulings change the documents, review the batch within the remaining allowance.
+   At the limit, hand back the changed, unreviewed documents; never settle them on the old verdict.
+   A clean confirmation recheck continues to item 3 without reasking resolved choices.
+3. Present the actual documents and settlement paths under sdd.step2.5–6, honoring recorded waivers.
+   Only the user's confirmation that the presented documents cover the ledger authorizes settlement.
+4. Mark the run settled, close step 2 and commit the canonical settlement paths under sdd.commit.1.
+   If the commit fails, restore active run/progress state and report incomplete settlement.
+   Otherwise report settlement and stop.
 
-On a non-clean stop, also say what converged, what remains, and which changes have not had an independent read;
-link the relevant findings and register rows, suggest the next decision, and ask the user for guidance. Leave
-step 2 current. Do not claim settlement or silently launch another round.
-
-On a clean stop, present the actual `task.md` and `implementation.md` for confirmation under sdd.step2.5;
-identify any existing user-approved waiver under sdd.step2.9. A clean review does not approve the documents.
-Only after the user's confirmation close step 2 and make the settlement commit allowed by sdd.commit.1,
-including this cycle's plan-review reports, reviewer reports and persistent preparation. A change after presentation returns
-to the loop before confirmation. Never build, deliver or push from this skill.
+An edit after presentation needs the same review and presentation checks before confirmation.
+Never build, deliver, push or reopen a built task's plan without explicit human re-settlement.

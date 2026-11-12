@@ -1,40 +1,33 @@
 ---
 name: sdd-review
-description: Reviews built work through a lead and six specialist reviewers, using the shared change map, convention assignments and reusable source guides. Use for sdd step review, sdd-review or deep code review of an existing task. Reports findings for step 3; proposed-design review belongs to sdd-plan-review.
+description: Reviews built work through a fresh lead and applicable specialists using the shared change map and reusable guides. Use for sdd step review, sdd-review or deep code review. Returns verified findings for step 3; proposed-design review belongs to sdd-plan-review.
 ---
 
 # sdd-review
 
-Follow [the built-code review protocol](../../../docs/instructions/implementation/step-review.md).
-You are the **review-lead**. The six reviewer definitions are `.agents/agents/sdd-review-<reviewer>.md`:
-backend, devops, frontend, persistence, simplicity and tester.
+Read [the built-code protocol](../../../docs/instructions/implementation/step-review.md).
+Resolve task and prerequisites under
+[Lead and inputs](../../../docs/instructions/implementation/step-review.md#lead-and-inputs).
+Without built work, name step 3 and stop.
 
-Work in a fresh review context separate from the builder and plan author. Coordinate reviewers and their
-reports here, then return the final-review path, summary and coverage status.
+Follow [review independence](../../../docs/instructions/implementation/cycle.md#independent-reviews):
+if this session built or planned the work, delegate the whole lead role to a fresh context.
+If unavailable, report the limitation instead of reviewing your own work.
+One round per authorized invocation, always with fresh review context.
 
-## Inputs
+1. Read progress and current task/standing documents under the protocol.
+   Refresh the map with every changed root's original starting commit.
+2. Select the round and exact paths under Outputs. Create or reuse `review/assignments.md`.
+   Dispatch applicable fresh specialists with the full sdd.review.18 payload. They select relevant files
+   from changes.md and task records themselves; assign no files.
+3. Verify their findings and applicable coverage. Obtain missing evidence under the protocol's recovery rules;
+   unavailable reviewers leave a final report with explicit incomplete coverage, never fabricated reports.
+4. Produce reports from the
+   [shared template](../../../docs/instructions/implementation/templates/report.md), following its COMMENTS.
+   Discover current findings before consulting previous verdicts.
+5. Return the final path, summary, coverage status and cleanliness under
+   [sdd.cycle.5](../../../docs/instructions/implementation/cycle.md#review-cleanliness).
 
-Find the named task, or the unambiguous built and undelivered task from `docs/tasks/*/progress.md`.
-Read `progress.md`, `grill.md`, `task.md`, `implementation.md`, `evolution.md` when present, and the convention
-documents. Require built work. Refresh the task's `changes.md` using the
-[changes protocol](../../../docs/instructions/implementation/changes.md); preserve its original starting
-commit per root. The map is the file and line inventory used for assignment.
-
-## Work
-
-1. Follow the protocol's Preparation section to create or reuse `review/assignments.md`. Assign applicable
-   conventions and every changed file to the relevant specialists; refresh file assignments each round.
-2. Dispatch fresh applicable reviewers with their definition, relevant task context, convention assignments,
-   assigned map paths/ranges, persistent `review/<reviewer>.md` path and exact round-report path. Reviewers
-   explore relevant source on first dispatch and reuse and refresh their source guides later.
-3. Read every report and verify all findings against current source, grill, conventions and settled context.
-   The responsible reviewer supplies further source investigation. Confirm assigned coverage, accounted-for
-   handoffs, skipped reviewers and shared concerns. Check the map still describes the material reviewed.
-4. Write the final report yourself. Merge verified findings with shared credit, preserve disagreements,
-   explain exclusions and state completeness. Freeze current Findings before reading the newest previous
-   final review; use it to trace closed, standing and recurring findings against current evidence.
-5. Return the final path, summary and coverage status for step-3 disposition. Questions the record does not
-   answer go to `open-questions.md` and an info finding. Write no progress entry, fix or disposition.
-
-Under delegated routing, sdd-implementer delegates the whole review to this lead with read/search, shell,
-report-writing and agent-management tools. Specialist work and verification remain here.
+Under delegated implementation, require the supplied QA report reference and its lead's clean, complete status.
+Standalone review does not impose that gate.
+Write no progress entry, fix or disposition; never commit, push or route to another step.

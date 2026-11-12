@@ -1,38 +1,33 @@
 ---
 name: sdd-qa
-description: Runs sdd step 4 through a fresh QA lead and three specialist agents (code-review, conventions, drift), using the shared change map and reusable preparation. Use for QA or settlement-conformance review of built work in an existing task. Reports findings for step 3; never the builder's own review.
+description: Runs sdd step 4 through a fresh QA lead and three specialists using the shared change map. Use for independent QA of built task work. Returns verified findings for step 3.
 ---
 
 # sdd-qa
 
-Follow [the QA protocol](../../../docs/instructions/implementation/step-4-qa.md). You are the **qa-lead**.
-The three agent definitions are `.agents/agents/sdd-qa-code-review.md`, `sdd-qa-conventions.md` and
-`sdd-qa-drift.md`.
+Read [the QA protocol](../../../docs/instructions/implementation/step-4-qa.md).
+Resolve task and built-work prerequisites under
+[Lead and inputs](../../../docs/instructions/implementation/step-4-qa.md#lead-and-inputs).
+Without built work, name step 3 and stop.
 
-Work in a fresh review context separate from the builder. One round per session. Coordinate the three
-agents here, then return the final QA path, summary and coverage status.
+Follow [review independence](../../../docs/instructions/implementation/cycle.md#independent-reviews):
+if this session built the work, delegate the whole lead role to a fresh context.
+If unavailable, report the limitation instead of reviewing your own work.
+One round per authorized invocation, always with fresh review context.
 
-## Inputs
+1. Read progress and the protocol's current task inputs. Refresh the shared map with each root's original
+   starting commit under [the changes protocol](../../../docs/instructions/implementation/changes.md).
+2. Select the round and exact paths under the protocol's Outputs. Prepare or reuse assignments;
+   dispatch all three lanes with the full sdd.step4.15 payload. Specialists select relevant material from
+   the map and task records themselves; assign no files. Follow sdd.step4.3 for recovery.
+3. Verify findings and coverage. If a specialist is unavailable, still write a final report naming incomplete
+   coverage; never impersonate it.
+4. Produce specialist/final output from the
+   [report template](../../../docs/instructions/implementation/templates/report.md), following its COMMENTS.
+   Current discovery precedes the previous verdict.
+5. Return final path, summary, coverage status and cleanliness under
+   [sdd.cycle.5](../../../docs/instructions/implementation/cycle.md#review-cleanliness).
+   Standalone, open/resume and close step-4 progress under the protocol; with
+   **progress owner: coordinator**, write no progress entry.
 
-Find the named task, or the unambiguous built and undelivered task from `docs/tasks/*/progress.md`.
-Read `progress.md`, `grill.md`, `task.md`, `implementation.md`, `evolution.md` when present, and the applicable
-standing documents. Require built work. Refresh the task's `changes.md` under the
-[changes protocol](../../../docs/instructions/implementation/changes.md), preserving the starting commits.
-Read previous QA only after current Findings freeze.
-
-## Work
-
-1. Follow the protocol's Preparation section to create or reuse `qa/assignments.md`. Assign current map
-   material, settled requirements and rule paths to code-review, conventions and drift.
-2. Dispatch all three fresh agents with their definitions, relevant task context, assignments, map paths/ranges,
-   persistent `qa/<type>.md` source-guide paths and exact round-report paths. Wait for all guides and reports.
-3. Verify every finding against current source, rulings and applicable rules. Obtain further source evidence
-   from the responsible agent as needed. Account for assigned coverage, actual reads, shared concerns and handoffs.
-4. Write the final report yourself, recording verification, shared credit, disagreements, exclusions and
-   coverage. Freeze current Findings before reading the newest previous QA report for evidence-based follow-up.
-   Questions the record does not answer go to `open-questions.md` and an info finding.
-5. Close the step-4 progress entry unless sdd-implementer owns progress. Return the final path, summary and
-   coverage status for step-3 disposition. Never fix, dispose, commit, push or run another round in this session.
-
-Under delegated routing sdd-implementer supplies read/search, shell, report-writing and agent-management
-tools to this lead and retains progress ownership. The lead dispatches its agents and verifies their work.
+Never fix, dispose findings, commit, push or start the next step from this round.

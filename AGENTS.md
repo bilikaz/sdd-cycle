@@ -24,31 +24,32 @@ Point subagents at the same specific documents and verified execution boundaries
 
 ## What the instruction set governs
 
-The task cycle, one task at a time in `docs/tasks/task<n>/` — five user-driven steps whose rules carry stable
+The task cycle, one task at a time in `docs/tasks/task<n>/` — steps 0–5 whose rules carry stable
 ids, the model being [`docs/instructions/implementation/cycle.md`](docs/instructions/implementation/cycle.md).
 This file only points; the standing documents are updated to current truth as work lands, and implementation
 never rewrites a settled document mid-build.
 
 ## The task cycle — the short version
 
-Five steps, one folder per task, **driven by the user**: they name the step, an agent runs it and stops. A skill
+Six numbered steps, one folder per task, **driven by the user**: they name the step, an agent runs it and stops. A skill
 runs each.
 
 | Skill | Steps | Does |
 |---|---|---|
-| `sdd-new-task` | 1 · 2 | grill the task, then settle `task.md` + `implementation.md` and commit them — nothing is built |
+| `sdd-new-task` | 0 | initialize the branch, task folder, progress and initial grill record under [step 0](docs/instructions/implementation/step-0-new-task.md) |
+| `sdd-grill` | 1 | resolve the task's questions in the answer ledger, report completion and wait |
 | `sdd-plan` | 2 | draft or revise an existing task's documents, confirm and settle; related coordinating role: [sdd-planner](.agents/skills/sdd-planner/SKILL.md) |
 | `sdd-implement` | 3 | build to the settled documents, verify and update standing docs; related coordinating role: [sdd-implementer](.agents/skills/sdd-implementer/SKILL.md) |
 | `sdd-qa` | 4 | a fresh QA lead uses the shared change map, dispatches code-review, conventions and drift agents, verifies their reports and writes `qa<y>.md` |
 | `sdd-commit` | 5 | commit the changed repositories and record the delivery under the step-5 rules and the project's configured Git targets |
-| `sdd-review` | review | a fresh review lead assigns built changes and conventions to six specialists, verifies their reports and writes `review<x>.md` for step 3 |
-| `sdd-plan-review` | plan review | a lead assigns conventions to six specialist reviewers once, reuses their source guides, verifies their reports and writes `plan-review<x>.md` for step 2 to dispose |
-| `sdd-planner` | 2 ↔ plan review | drive drafting and plan reviews under a delegated routing; stop at a clean plan for document confirmation, or at cycling for user guidance |
+| `sdd-review` | review | a fresh lead coordinates applicable specialists under the [review protocol](docs/instructions/implementation/step-review.md) |
+| `sdd-plan-review` | plan review | a lead coordinates applicable specialists using reusable assignments and reviewer-owned source guides, verifies findings and writes `plan-review<x>.md` for step 2 |
+| `sdd-planner` | 2 ↔ plan review | draft, delegate plan review, then settle or hand back under the [planner's routing and stop rules](.agents/skills/sdd-planner/SKILL.md) |
 | `sdd-implementer` | 3 ↔ 4 · review | coordinate implementation, QA and code review under explicit delegation, then return the report |
 
 Three things worth knowing without opening the rules: the **settled documents are the truth** an agent reads —
 never the conversation; the **QA reviewer is never the builder**; and the **user drives** — an agent takes no
-step that was not named.
+step outside the user's request or [explicitly delegated routing](docs/instructions/implementation/cycle.md#the-numbered-steps).
 
 ## The procedure is fixed while it is used
 
@@ -71,9 +72,9 @@ with the why.
 Two commit occasions, each needing its own explicit signal: the **settlement** at the end of `sdd step 2` — the
 user's word confirming the documents is its signal, so settling and committing are one act — and the
 **delivery** at `sdd step 5`, which commits the changed repositories and pushes to their configured targets. Between them nothing is
-pushed, and the only other commit is a local **checkpoint** of each changed task branch before each new edit
-wave (sdd.commit.4). A prior signal authorizes only the change in front of it, never the follow-ups, and the
-default between signals is read-only.
+pushed. Local preservation in step 0 and implementation checkpoints follow the exceptions in
+[cycle.md](docs/instructions/implementation/cycle.md#commits). A prior signal authorizes only the change in
+front of it, never the follow-ups; commits and pushes need their applicable signal.
 
 Repository boundaries and permitted Git targets are recorded in
 [workspace.md](docs/instructions/workspace.md) (sdd.workspace.1–3).

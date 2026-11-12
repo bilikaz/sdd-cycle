@@ -30,3 +30,13 @@ either stops rendering or becomes unreadable exactly where it matters.
 - A different root is a different section with its own table.
 - A file inventory has **three columns — `path | files | what`**: the folder once, its files as short names,
   and never a brace-expansion path (`{a,b}.ts` wraps badly and reads worse).
+
+## Templates
+
+Keep only basic file-wide guidance in the top COMMENTS block. Put field-specific instructions and examples
+in a COMMENTS block beside their field or section.
+
+## Reports
+
+Use the [shared report template](../implementation/templates/report.md).
+Its section COMMENTS blocks own report structure, field guidance and examples.

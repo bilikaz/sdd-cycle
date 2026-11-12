@@ -1,19 +1,24 @@
 # sdd step 4 — QA
 
-Step 4 is an independent read of built work against the settled documents. A fresh QA lead prepares the
-shared change map, assigns work to three fresh specialist agents, verifies their reports and composes the
-round's final document.
+A fresh QA lead checks built work against settled scope through three independent specialists.
+The lead verifies their reports and writes one final report for step 3.
 
 ## Lead and inputs
 
-- **sdd.step4.1.** The **qa-lead** is the agent executing this round, in a fresh context separate from the
-  builder. One round per lead session. It coordinates three fresh agents: code-review, conventions and drift.
-- **sdd.step4.2.** The lead and its agents report; they never fix, dispose, commit, push or route. Every
-  verified defect is a finding. Writes are limited to assigned QA preparation/reports, the shared map,
-  the task register and the lead's step-4 entry when progress is not delegated to sdd-implementer.
-- **sdd.step4.5.** The lead reads `progress.md`, `grill.md`, `task.md`, `implementation.md`, `evolution.md`
-  when present, and the applicable standing documents. The settled context and the user's rulings establish
-  the comparison. A builder's log or earlier review is not an input to discovery.
+- **sdd.step4.1.** The qa-lead and its code-review, conventions and drift specialists follow
+  [the independence rule](cycle.md#independent-reviews). One round per invocation.
+- **sdd.step4.2.** Reviewers report rather than fix, dispose, commit, push or route.
+  The lead writes preparation/final reports, the shared map and register. Specialists write only their
+  assigned guide and report. Standalone, the lead opens/resumes and closes step-4 progress under
+  [the progress rules](cycle.md#progressmd); under sdd-implementer, progress owner is the coordinator and
+  the lead writes no progress entry.
+- **sdd.step4.5.** Identify the named task, otherwise the unambiguous built task from progress and branch
+  context; ask if ambiguous. Require built work and settled inputs, honoring recorded document waivers.
+  Establish built work from the task's implementation record and current source, including committed work;
+  a closed step-3 entry or nonempty map alone is not a universal prerequisite or proof. Without task
+  implementation, name step 3 and stop before writing a round under sdd.cycle.2.
+  Read progress, grill, required task/implementation documents, approved evolution and applicable standing
+  documents. Report other missing evidence and its effect on coverage.
 
 ## Outputs
 
@@ -22,107 +27,76 @@ Paths are relative to the task folder.
 | File | Author | Contents |
 |---|---|---|
 | `changes.md` | Script, invoked by lead | Shared inventory under the [changes protocol](changes.md). |
-| `qa/assignments.md` | Lead | Agents, assigned rules, current material and coverage responsibilities. |
-| `qa/<type>.md` | Agent | Source paths with 2–3 sentences explaining relevance, reused and refreshed across rounds. |
-| `qa<y>-<type>.md` | Agent | Current findings, summary, reads and shared concerns. |
-| `qa<y>.md` | Lead | Verified combined findings, coverage, exclusions and follow-up. |
+| `qa/assignments.md` | Lead | Agent roster and convention assignments. |
+| `qa/<type>.md` | Specialist | Reusable source guide: paths and relevance, refreshed against current source. |
+| `qa<y>-<type>.md` | Specialist | Current findings and numeric severity counts. |
+| `qa<y>.md` | Lead | Verified findings and numeric severity counts. |
 
-`<type>` is code-review, conventions or drift. `<y>` is empty for the first round, then `2`, `3` and so on.
-The lead selects the next round from existing report names and supplies each agent its exact output path.
-Previous reports are preserved; persistent preparation has no round number.
+Types are code-review, conventions and drift. Select round `<y>` under [sdd.naming.1](cycle.md#naming).
+Guides remain under `qa/`; round reports are in the task root.
 
 ## Preparation
 
-- **sdd.step4.14.** The lead refreshes `changes.md` before the round, retaining each root's original starting
-  commit. It creates or reuses `qa/assignments.md`, assigning applicable rule paths and changed files to the
-  three agents. Refresh material assignments each round and extend rule assignments when the task's scope or
-  rules change. All three agents run; every changed file is covered by every applicable lane. A lane with no
-  applicable material reports that fact with its reason.
-- **sdd.step4.15.** Each agent receives its definition, relevant settled context, grill rulings, assigned
-  rules, assigned paths and map ranges, other agents, guide path and report path. On first dispatch it explores
-  relevant source and writes `qa/<type>.md`; later agents reuse and refresh that guide against current source.
-  It reads its assigned source and targeted diffs and follows relevant dependencies. The shared map locates
-  material; its line ranges do not restrict investigation or prove behavior.
+- **sdd.step4.14.** Refresh the map with every changed root and its original starting commit.
+  Reuse `qa/assignments.md`, updating newly applicable rules. Run all three lanes;
+  each covers all material applicable to its responsibilities. A lane with no applicable material explains
+  why in its reply to the lead.
+- **sdd.step4.15.** Give each specialist its definition, task/settled/grill/evolution paths,
+  assigned rules, shared change-map path, other agents, source-guide path and exact report path.
+  It explores relevant source on first dispatch and reuses and refreshes navigation thereafter.
+  The map locates material; ranges neither prove behavior nor limit investigation.
 
-The preparation follows the [plan-review assignment/source-guide model](step-plan-review.md#preparation).
-QA's assignment file records Agents, Convention assignments and File assignments, the latter per Git root.
-Each source guide records Sources per Git root. Guides contain paths and relevance, with findings kept in
-round reports.
+Use the plan-review preparation mechanics, with QA's paths above. Produce files from the
+[assignments](templates/assignments.md) and [source-guide](templates/source-guide.md) templates.
 
 ## The three agents
 
-| Type | Its goal | Definition |
-|---|---|---|
-| code-review | Does the changed code work: logic, boundaries, failures and effective tests? | [sdd-qa-code-review.md](../../../.agents/agents/sdd-qa-code-review.md) |
-| conventions | Does the change obey every applicable standing rule and canonical term? | [sdd-qa-conventions.md](../../../.agents/agents/sdd-qa-conventions.md) |
-| drift | Does the built work match task, implementation and approved evolution? | [sdd-qa-drift.md](../../../.agents/agents/sdd-qa-drift.md) |
+| Type | Definition |
+|---|---|
+| code-review | [sdd-qa-code-review](../../../.agents/agents/sdd-qa-code-review.md) |
+| conventions | [sdd-qa-conventions](../../../.agents/agents/sdd-qa-conventions.md) |
+| drift | [sdd-qa-drift](../../../.agents/agents/sdd-qa-drift.md) |
 
-- **sdd.step4.3.** The lead dispatches all three agents together in fresh contexts and waits for all reports
-  and guides before composing. Dispatch in batches when concurrency limits require it. Each agent writes only
-  its own guide and round report. A reported discovery is not a final finding until the lead verifies it.
-- **sdd.step4.4.** All three round reports are mandatory discovery records, including a report with no findings.
-  Each records the rule and source paths actually read, incomplete checks and shared concerns.
-- **sdd.step4.6.** Across its assignments, drift accounts for the whole changed material against every applicable
-  settled requirement, including missing implementation. Code-review reads changed code and relevant dependencies;
-  conventions checks each exercised rule and term. Each starts from the map and opens the relevant source and
-  targeted diffs; unrelated patch content need not be loaded into its context.
+- **sdd.step4.3.** Dispatch all three in fresh contexts, in batches if necessary. Wait for their guides
+  and reports. Handle unavailable agents and follow-up evidence under
+  [sdd.plan-review.11 and .13](step-plan-review.md#review-round) for dispatch recovery and follow-up only;
+  missing independent coverage is never clean. An unavailable specialist still leaves a final report naming the gap.
+- **sdd.step4.4.** Each agent writes its assigned guide and report, including a report with no findings.
+  Follow the report template and return shared concerns with evidence to the lead.
+- **sdd.step4.6.** Drift traces requirements as modified by approved evolution through the built work, including missing
+  implementation. Code-review examines behavior and dependencies; conventions checks exercised rules and terms.
+  Each chooses relevant material from the map and task records under [sdd.changes.6](changes.md#the-report).
+  Read relevant source and targeted diffs rather than loading unrelated patches.
 
 ## Review round
 
-- **sdd.step4.7.** In order: prepare; dispatch the three agents and wait; verify and compose current Findings;
-  read only the newest previous QA document; trace previous findings against current evidence and write the
-  follow-up. Look for an answer in the record before registering a question. An unanswered question receives
-  a row in `open-questions.md` and an info finding; the lead asks the user nothing.
-- **sdd.step4.8.** Current Findings freeze before the previous document is read. Every finding quotes its
-  source or settled passage verbatim; a span that does not exist voids the claim. Missing implementation is
-  grounded in the exact requirement and evidence of its absence.
-- **sdd.step4.9.** A question already answered by the settled documents, grill, evolution or instructions is
-  a defect of the review. The lead checks that answer and its citation before retaining a finding.
-- **sdd.step4.16.** The lead verifies every finding's quote, factual basis, rule, remedy and severity against
-  the current source and settled context. It checks each assignment, the agents' reads, coverage gaps,
-  shared concerns and handoffs. The responsible agent supplies further evidence when needed. The lead records
-  verification, excludes unsupported claims with reasons, merges duplicates with shared credit and preserves
-  explained disagreements. It records the map's fingerprints; changed source requires a refresh and affected
-  reads under the changes protocol. Cleanliness follows [sdd.cycle.5](cycle.md#review-cleanliness);
-  info observations allow the implementer's loop to advance to built-code review without a fix wave.
+- **sdd.step4.7.** Prepare, dispatch, verify and compose current findings before consulting the newest previous
+  final QA. Check earlier findings against current evidence; report current defects once and omit resolved
+  histories. Look for answers in the record before registering unanswered questions. Task-identification questions are allowed at entry;
+  questions about the reviewed work go to the register, not a user interview.
+- **sdd.step4.8.** Ground findings in current source or exact settled requirements. Quote only what helps
+  locate or explain the defect. Missing work needs the requirement and evidence of its absence.
+- **sdd.step4.9.** Do not retain a question already answered by the settled documents, grill, evolution or instructions.
+- **sdd.step4.16.** The lead verifies each finding's location, factual basis, applicable rule and severity;
+  checks overall role/rule coverage and shared concerns; and obtains missing evidence from the responsible agent.
+  Merge duplicates and omit unsupported claims. Material unresolved disagreements belong in the finding's reason.
+  Follow map freshness under [sdd.changes.6](changes.md#the-report).
+  Verification needs no separate audit narrative. Cleanliness follows [sdd.cycle.5](cycle.md#review-cleanliness).
 
 ## The QA document
 
-```md
-# QA — <task folder> — <qa file> — <date>
-
-## Coverage
-| Agent | Assigned material | Completion or limit |
-
-### Change map
-<Root and fingerprint from changes.md for this round>
-
-## Findings
-| # | severity | agent(s) | the issue (file · quoted span) | why it is an issue (a cited rule or a named hole) | proposed fix | lead verification |
-
-### Summary
-<N blocker · N major · N warning · N info; complete or incomplete coverage>
-
-## Excluded claims
-| Agent finding | Reason and evidence |
-
-## Follow-up from past QA rounds
-<what closed · what stands · what recurred>
-```
-
-- **sdd.step4.10.** Severity is one of **blocker** (broken behaviour, or a violated settled rule with real
-  consequence) · **major** (a genuine defect) · **warning** (a rule broken with limited consequence, or a hazard
-  no rule names) · **info** (a stated observation, not an error; its proposed fix may be `—`).
-- **sdd.step4.11.** A finding's why cites a settled or standing document, or names a security or logical hole.
-  Bare opinion is not a finding.
-- **sdd.step4.12.** Agent reports contain Findings, Summary, Read and Shared concerns. Their findings table
-  uses `# | severity | the issue (file · quoted span) | why it is an issue | proposed fix`. The Summary states
-  counts and missing evidence or incomplete checks; Read names actual rule and source paths opened. An empty
-  findings table and a documented read are a valid result.
+- **sdd.step4.10.** Severity is **blocker** (broken behavior, or a violated settled rule with real
+  consequence), **major** (a genuine defect), or **warning** (a rule broken with limited consequence, or a
+  hazard no rule names).
+- **sdd.step4.11.** Explain why a finding is wrong using the applicable rule, ruling or specific security/logical
+  hole. Bare preference is not a finding.
+- **sdd.step4.12.** Produce specialist and final reports from the
+  [shared report template](templates/report.md), following its COMMENTS guidance.
+  Record unanswered review questions in the register; origin and approved changes follow
+  [evolution](escalation.md).
 
 ## Closing
 
-- **sdd.step4.13.** The lead writes the final report and returns its path, summary and coverage status. It
-  closes the step-4 entry naming the QA file unless sdd-implementer owns progress under delegated routing.
-  Detailed agent work stays in the lead's context. Finding dispositions belong to
-  [sdd step 3](step-3-implement.md).
+- **sdd.step4.13.** Return the final path, summary, coverage status and cleanliness. Close the step-4 entry
+  unless the coordinator owns progress. Run only this round; findings go to
+  [step 3](step-3-implement.md#disposing-of-a-qa-round-or-a-review).

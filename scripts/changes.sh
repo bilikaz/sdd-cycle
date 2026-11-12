@@ -2,7 +2,7 @@
 # Write <task-folder>/changes.md: paths, Git statuses, line counts and changed ranges.
 # Compare a fixed starting commit to current files, including committed, staged,
 # unstaged and nonignored untracked changes. Exclude docs/tasks/ in every root.
-# Use the map to assign review work and locate source; assess behavior in the code.
+# Reviewers use the map and task records to choose relevant source; assess behavior in the code.
 # Requires Git and Python 3. Run with --help for task IDs, starting commits and examples.
 set -euo pipefail
 exec python3 - "$@" <<'PY'
@@ -146,7 +146,7 @@ Use the task's original starting commit again on later runs; do not move the bas
             parser.error('Within a scanned root, the output task folder must be under docs/tasks/.')
     now = datetime.datetime.now(datetime.timezone.utc).isoformat(timespec='seconds')
     report = ['# Changes', '', f'Generated: {now}', '', f'Task folder: {cell(task)}', '',
-              'Use this map to assign review work, check file coverage and locate relevant source.',
+              'Each reviewer uses this map and the task records to choose relevant source and check coverage.',
               'Counts measure edit size; determine intent, correctness and risk from the task documents,',
               'current source and targeted diffs. Follow relevant dependencies beyond the listed ranges.', '',
               'Comparison: the net difference from each fixed starting commit to its current working tree,',

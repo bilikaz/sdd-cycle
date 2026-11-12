@@ -1,50 +1,52 @@
 ---
 name: sdd-plan
-description: "Runs sdd step 2 for an existing task: drafts or revises task.md and implementation.md, presents them for confirmation and makes the settlement commit. Use for sdd-plan, planning an opened task, settling changed scope or resuming step 2. Delegated planning and review loops use sdd-planner; opening a task uses sdd-new-task."
+description: "Runs sdd step 2 for an existing task: drafts the required plan documents and commits their settlement on user confirmation. Use for planning, resuming step 2 or explicit human re-settlement. Delegated planning uses sdd-planner; task creation uses sdd-new-task."
 ---
 
 # sdd-plan — `sdd step 2`
 
-Plans a task that already exists, from its resolved ledger or an approved change to its settled shape.
-The step's rules are `docs/instructions/implementation/step-2-settle.md`; this skill carries the entry and
-the boundary. The related coordinating role is [sdd-planner](../sdd-planner/SKILL.md), invoked when the user
-delegates the drafting and plan-review loop. Running this step alone does not delegate that loop.
+Read and follow [the step-2 procedure](../../../docs/instructions/implementation/step-2-settle.md).
+Draft from the resolved ledger or an explicit human instruction to re-settle, following
+[the escalation rules](../../../docs/instructions/implementation/escalation.md).
+The related coordinating role is [sdd-planner](../sdd-planner/SKILL.md); a single-step request delegates no loop.
 
-## Dispatch
+## Entry and reads
 
-- Read the existing task folder's `progress.md` and `grill.md`. Draft from its resolved ledger, or revise the
-  current documents for the change the user approved. A missing task belongs to `sdd-new-task`.
-- The change is settled **before** it is built: this step writes documents and commits, and applies nothing.
+- Satisfy every [sdd.step2.11 entry check](../../../docs/instructions/implementation/step-2-settle.md#entry),
+  including prerequisites, task branch, progress entry and the active planner's ownership.
+  After implementation begins, only explicit human re-settlement reopens step 2.
+- Read [cycle.md](../../../docs/instructions/implementation/cycle.md) and the task's records required by
+  that entry, then [workspace.md](../../../docs/instructions/workspace.md) and relevant available project rules.
+- Produce documents from the [task](../../../docs/instructions/implementation/templates/task.md) and
+  [implementation](../../../docs/instructions/implementation/templates/implementation.md) templates,
+  following their COMMENTS guidance.
 
-## Read, in this order
+## Draft and review
 
-| # | File | Why |
-|---|---|---|
-| 1 | `docs/instructions/implementation/cycle.md` | the folder, the ids, `progress.md`, the commit, the register |
-| 2 | `docs/instructions/implementation/step-2-settle.md` | `sdd step 2` in full |
-| 3 | `docs/instructions/implementation/escalation.md` | what reached this step — an escalation, an evolution, a decision |
-| 4 | the settled context: `task.md` · `implementation.md` · `grill.md` · `evolution.md` | what is already settled, so nothing is re-decided |
-| 5 | `docs/conventions/INDEX.md` and `harness/AGENTS.md` — per the code touched (sdd.workspace.8); `docs/instructions/workspace.md` — the standing documents | they bind on every change, including a re-settle |
-| 6 | `docs/instructions/documentation/implementation-guide.md` · `format.md` | the guide's anatomy |
+- New decisions surfacing during planning follow
+  [sdd.step2.11](../../../docs/instructions/implementation/step-2-settle.md#entry);
+  their answers join the living ledger under
+  [sdd.step1.15](../../../docs/instructions/implementation/step-1-grilling.md#grillmd--the-answer-ledger).
+  If the initial grill is unfinished, name `sdd-grill` and stop before any write.
+- Draft or revise the existing documents under [step 2](../../../docs/instructions/implementation/step-2-settle.md),
+  honoring only user-approved
+  [sdd.step2.9 waivers](../../../docs/instructions/implementation/step-2-settle.md#the-confirmation-and-the-commit).
+- Populate [workspace setup under sdd.step2.12](../../../docs/instructions/implementation/step-2-settle.md#entry).
+  Read the relevant review rounds and dispose findings under
+  [sdd.step2.10](../../../docs/instructions/implementation/step-2-settle.md#disposing-of-a-plan-review).
+  With no report, skip disposal. Standalone planning starts no review of its own.
+  A requested review needs a fresh `sdd-plan-review` lead; never become the reviewer of your own plan.
+  A delegated loop needs the user's request for `sdd-planner`.
 
-## The step
+## Confirm and close
 
-- A decision the shape carries is **grilled** first, inside this step — `sdd step 1`'s interview, its answers
-  landed in `grill.md` (`step-1-grilling.md`).
-- Edit `task.md` and `implementation.md` **in place**: append what is newly settled and align what it
-  supersedes. No parallel document, no fix document.
-- Present the documents; on the user's confirmation, make the settlement commit — `grill.md`, `task.md`,
-  `implementation.md`, `progress.md` (`cycle.md`, sdd.commit.1).
+Follow [sdd.step2.5–6](../../../docs/instructions/implementation/step-2-settle.md#the-confirmation-and-the-commit):
+resolve open choices, then present the updated task documents with the exact
+[settlement paths](../../../docs/instructions/implementation/cycle.md#commits).
+Only the user's word that the presented documents cover the ledger confirms them; a nod at a summary does not.
+On that confirmation, close the step-2 entry, commit those paths,
+report settlement and stop.
+Without confirmation, leave step 2 current and commit nothing. Apply new rulings, present updated documents
+again, then wait for confirmation. If the settlement commit fails, report it and keep step 2 current.
 
-## A plan review
-
-- A `plan-review<x>.md` newer than the documents is disposed of before they are presented under sdd.step2.10.
-  Append its `## Dispositions` table; info observations are noted and do not require a document edit or
-  another review. Cleanliness follows [sdd.cycle.5](../../../docs/instructions/implementation/cycle.md#review-cleanliness).
-
-## Never
-
-- Never apply the change — settling and building are two consents.
-- Never write a parallel or fix document.
-- Never edit a settled document before the change is settled.
-- Never commit beyond the settlement files, and never push.
+This skill neither builds nor pushes. Reviewer suggestions do not replace user rulings.
