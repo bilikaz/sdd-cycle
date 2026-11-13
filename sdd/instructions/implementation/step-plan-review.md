@@ -135,12 +135,12 @@ The detailed responsibilities live in each agent definition:
 - **sdd.plan-review.16.** Findings go to step 2 under
   [sdd.step2.10](step-2-settle.md#disposing-of-a-plan-review). A new authorized round reuses the assignment
   and source guides against the updated plan. The lead provides the final report and coverage status for
-  the step-2 disposition work. Each invocation runs one round; the user or delegated planner authorizes
-  further rounds.
+  the step-2 disposition work. Each invocation runs one round; a further round needs its own request.
 - **sdd.plan-review.18.** The lead and specialists write only the current round's reports and persistent
-  plan-review preparation; the lead also records relevant `open-questions.md` rows. They do not edit the plan, ledger,
-  implementation or progress, dispose their own findings, request settlement confirmation, commit or push.
-  The planner owns changes and dispositions after the review returns.
+  plan-review preparation; the lead also records relevant `open-questions.md` rows. They do not edit the plan, ledger
+  or implementation, dispose their own findings, request settlement confirmation, commit or push. The lead writes the
+  review's progress entry under [sdd.progress.6](cycle.md#progressmd): it closes the open step-2 entry, opens its
+  own and closes it under the [progress template](templates/progress.md).
 
 ## Final document
 

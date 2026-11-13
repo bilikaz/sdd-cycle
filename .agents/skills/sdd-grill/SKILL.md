@@ -1,6 +1,6 @@
 ---
 name: sdd-grill
-description: Runs sdd step 1 for an initialized task, recording interview answers or documented-bug citations in grill.md. Use for the initial grill, resuming step 1 or an explicitly requested re-grill. New questions arising inside step 2 remain with sdd-plan or its delegated planner. Task creation belongs to sdd-new-task.
+description: Runs sdd step 1 for an initialized task, recording interview answers or documented-bug citations in grill.md. Use for the initial grill, resuming step 1 or an explicitly requested re-grill. New questions arising inside step 2 remain with step 2. Task creation belongs to sdd-new-task.
 ---
 
 # sdd-grill — `sdd step 1`
@@ -17,7 +17,7 @@ Open step 1 if it has not run; resume a current entry. A request to grill again 
 bare continuation after a done grill reports it done and stops. Never reopen completed progress.
 A missing task names `sdd-new-task` and stops; incomplete records or mismatched branch information
 are reported for direction. Create no folder, branch or replacement records here.
-Questions within active planning remain with that planner without closing its progress entry.
+Questions within a running step 2 stay with step 2 without closing its progress entry.
 
 ## Work and close
 

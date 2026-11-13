@@ -105,12 +105,12 @@ END COMMENTS -->
 
 Status: current
 Review: <QA report path>
-Findings: <N> blocker · <N> major · <N> warning
+Summary: <N> blocker · <N> major · <N> warning · <N> info
 
 <!-- COMMENTS
 Only the report filename and numeric finding counts belong here. All other review data stays in its report.
-Example: qa2.md — 0 blocker · 0 major · 1 warning.
-The standalone QA lead writes this entry; under delegation the coordinator does.
+Example: Review: qa2.md · Summary: 0 blocker · 0 major · 1 warning · 0 info.
+The QA lead writes this entry (sdd.progress.6).
 END COMMENTS -->
 
 ## sdd step 5 · Commit — opened <YYYY-MM-DD>
@@ -129,12 +129,12 @@ END COMMENTS -->
 Status: current
 Records: <Relevant report / register paths>
 Reviews:
-- <Review report> — <N> blocker · <N> major · <N> warning
+- <Review report> — <N> blocker · <N> major · <N> warning · <N> info
 
 <!-- COMMENTS
 Use for a non-step occasion under the cycle's progress rules; omit Reviews when irrelevant.
-For every review kind, use only the filename and numeric finding counts in the owning coordinator's
-record. This does not change reviewer write ownership or open a second entry beside an active step.
+For every review kind, use only the filename and its Summary counts; this opens no second entry beside an
+active step.
 On hand-back, link pending decisions and reports rather than summarizing their contents.
 END COMMENTS -->
 
@@ -142,9 +142,16 @@ END COMMENTS -->
 
 Status: current
 Review: <review report path>
+Summary: <N> blocker · <N> major · <N> warning · <N> info
 
 
 ## sdd step review — <review file> — opened <YYYY-MM-DD>
 
 Status: current
 Review: <review report path>
+Summary: <N> blocker · <N> major · <N> warning · <N> info
+
+<!-- COMMENTS
+Both review entries: the lead writes them (sdd.progress.6) and fills
+Summary with its final report's `## Summary` line when it closes the entry. Nothing else from the review belongs here.
+END COMMENTS -->

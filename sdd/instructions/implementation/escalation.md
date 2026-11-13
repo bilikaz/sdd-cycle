@@ -8,7 +8,7 @@ The original plan stays frozen so later agents can distinguish the baseline from
 - **sdd.escalation.1.** A finding whose remedy needs a user decision is escalated with the issue, options
   and what it blocks. Do not implement an unresolved decision.
 - **sdd.escalation.2.** Resolve changes through evolution in the current task, or propose a new task when
-  the work is better separated. Agents and delegated coordinators do not route back to step 2.
+  the work is better separated. Agents do not route back to step 2.
 - **sdd.escalation.3.** Record the pending decision in the task's register and ask the user for the needed
   ruling. A register entry is not permission to proceed with the dependent work.
 
@@ -32,7 +32,7 @@ The original plan stays frozen so later agents can distinguish the baseline from
 ## Re-entering `sdd step 2`
 
 - **sdd.escalation.8.** Only an explicit human instruction to re-settle the plan authorizes step-2 re-entry
-  after implementation has begun. A finding, scope change or delegated implementation loop is not that signal.
+  after implementation has begun. A finding or a scope change is not that signal.
   On that instruction, follow [step 2](step-2-settle.md) and obtain document confirmation before settlement.
 - **sdd.escalation.9.** Propose a new task for work better handled independently. The user decides whether
   to open it; do not create or switch tasks automatically.

@@ -53,7 +53,7 @@ Step 0 creates the task's branch and records. Its entry point is
   fails, report which roots were branched and where the work is preserved; do not start grilling or claim
   initialization complete.
 
-## Create the records and stop
+## Create the records and start the grill
 
 - **sdd.step0.11.** Create `project/docs/tasks/<folder>/progress.md` with verified Git context and a step-0 entry,
   and `grill.md` with the user's original brief and initial answers using the
@@ -61,8 +61,8 @@ Step 0 creates the task's branch and records. Its entry point is
   Follow step 1's [answer-ledger rules](step-1-grilling.md#grillmd--the-answer-ledger); record the user's
   work-preservation and base choices without treating initialization as a design interview.
 - **sdd.step0.12.** Close step 0 after branch creation, work restoration and record creation succeed. Report
-  the task folder and every root's task branch, say that `sdd-grill` / `sdd step 1` is next, and stop. Never start grilling,
-  planning or the planner loop automatically. Task records remain uncommitted until settlement.
+  the task folder and every root's task branch, then open [step 1](step-1-grilling.md) in the same session: opening a
+  task is a formality with nothing left to decide, and the grill is where the user's input begins. Task records remain uncommitted until settlement.
 
 Git behavior is documented in [pull](https://git-scm.com/docs/git-pull),
 [switch](https://git-scm.com/docs/git-switch) and [stash](https://git-scm.com/docs/git-stash).

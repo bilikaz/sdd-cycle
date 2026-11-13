@@ -32,6 +32,10 @@ Dev and test have distinct runtime identities, port allocations and mutable stat
 Stateful verification targets the configured test stack, with target identity checked before writes.
 Do not clean dev or shared data as test teardown.
 
+An agent starts, rebuilds, recreates or stops the dev stack only when the user asks. Verification runs on the test
+stack, which is recreated at the start of a run and left running after it — never stopped as teardown — so a run's
+containers, logs and data stay open to inspection.
+
 Resource operations name the owning stack and its resources. No global prune or cross-project cleanup.
 Port allocations follow [service ports](service-ports.md); connection URLs change with their allocation.
 

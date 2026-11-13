@@ -8,10 +8,8 @@ The lead verifies their reports and writes one final report for step 3.
 - **sdd.step4.1.** The qa-lead and its code-review, conventions and drift specialists follow
   [the independence rule](cycle.md#independent-reviews). One round per invocation.
 - **sdd.step4.2.** Reviewers report rather than fix, dispose, commit, push or route.
-  The lead writes preparation/final reports, the shared map and register. Specialists write only their
-  assigned guide and report. Standalone, the lead opens/resumes and closes step-4 progress under
-  [the progress rules](cycle.md#progressmd); under sdd-implementer, progress owner is the coordinator and
-  the lead writes no progress entry.
+  The lead writes preparation/final reports, the shared map and register. Specialists write only their assigned guide and report. The lead writes the step-4 progress entry under [sdd.progress.6](cycle.md#progressmd): it closes the open step entry, opens its own and closes it under the
+  [progress template](templates/progress.md).
 - **sdd.step4.5.** Identify the named task, otherwise the unambiguous built task from progress and branch
   context; ask if ambiguous. Require built work and settled inputs, honoring recorded document waivers.
   Establish built work from the task's implementation record and current source, including committed work;
@@ -98,5 +96,5 @@ Use the plan-review preparation mechanics, with QA's paths above. Produce files 
 ## Closing
 
 - **sdd.step4.13.** Return the final path, summary, coverage status and cleanliness. Close the step-4 entry
-  unless the coordinator owns progress. Run only this round; findings go to
+  under sdd.progress.6. Run only this round; findings go to
   [step 3](step-3-implement.md#disposing-of-a-qa-round-or-a-review).

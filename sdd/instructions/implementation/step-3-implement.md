@@ -2,8 +2,7 @@
 
 Step 3 interleaves building, testing and documentation. It implements settled scope and disposes of
 QA or built-code review findings. Its entry point is
-[sdd-implement](../../../.agents/skills/sdd-implement/SKILL.md); an explicitly delegated loop uses
-[sdd-implementer](../../../.agents/skills/sdd-implementer/SKILL.md).
+[sdd-implement](../../../.agents/skills/sdd-implement/SKILL.md).
 
 ## Entry
 
@@ -14,7 +13,7 @@ QA or built-code review findings. Its entry point is
   build nothing and start no planning step. A refactor walk uses its recorded waiver and evolution instead.
   Select the named task, otherwise the branch-matching task, otherwise the sole task with step 3 current;
   ask if absent or ambiguous. Open or resume its progress entry under
-  [the cycle's progress rules](cycle.md#progressmd), unless the delegating coordinator owns it.
+  [the cycle's progress rules](cycle.md#progressmd).
 - **sdd.step3.3.** On re-entry, read the QA or review report that returned the task to implementation before
   acting. Resolve an ambiguous report selection rather than guessing from lexical filename order.
 - **sdd.step3.22.** Verify the task branches initialized by [step 0](step-0-new-task.md) in every participating
@@ -40,7 +39,7 @@ QA or built-code review findings. Its entry point is
   a defect; or **registered** for an unanswered question entered in `open-questions.md`.
 - **sdd.step3.10.** A real defect is never rejected; escalate it if it cannot be fixed within the settled scope.
 - **sdd.step3.11.** The fixer checks current source before acting, under
-  [sdd.cycle.6](cycle.md#finding-verification). The coordinator does not repeat this investigation.
+  [sdd.cycle.6](cycle.md#finding-verification).
 - **sdd.step3.12.** Append [Dispositions from the report template](templates/report.md#dispositions) to the originating report.
   Preserve the reviewer's findings.
 
@@ -71,5 +70,4 @@ QA or built-code review findings. Its entry point is
 - **sdd.step3.20.** Complete the step when the build is done, required verification passes and affected
   documents are current. Otherwise report the incomplete work and its cause.
 - **sdd.step3.21.** Close the progress entry with those implementation tables. The reply states the
-  outcome, material limits and next step briefly. Under delegated routing, return the result to the
-  coordinator that owns progress.
+  outcome, material limits and next step briefly.

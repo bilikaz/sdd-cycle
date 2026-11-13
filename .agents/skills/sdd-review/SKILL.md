@@ -28,6 +28,6 @@ One round per authorized invocation, always with fresh review context.
 5. Return the final path, summary, coverage status and cleanliness under
    [sdd.cycle.5](../../../sdd/instructions/implementation/cycle.md#review-cleanliness).
 
-Under delegated implementation, require the supplied QA report reference and its lead's clean, complete status.
-Standalone review does not impose that gate.
-Write no progress entry, fix or disposition; never commit, push or route to another step.
+Write no fix or disposition; never commit, push or route to another step. Write this review's progress entry under
+sdd.progress.6: close the open step entry, open `sdd step review — <report>` and close it
+under the progress template.

@@ -17,7 +17,8 @@ Missing configuration requires clarification, never a guessed `main`, remote or 
 
 Follow the procedure's delivery order so task-index/progress updates are included in the record-root
 commit. Commit the whole participating working trees except explicit user and standing exclusions.
-Perform the authorized configured actions and post-delivery actions; report actual results.
+Perform the authorized configured actions and post-delivery actions; report actual results. Never deploy or
+rebuild staging or production as part of delivery; that runs only on the user's explicit request (sdd.step5.9).
 
 On conflict or rejected push, stop and report partial delivery under sdd.step5.3 and .6.
 Do not force, reset successful work or claim delivery complete. A local-only request stays local.

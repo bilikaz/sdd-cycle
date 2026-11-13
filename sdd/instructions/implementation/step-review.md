@@ -9,11 +9,7 @@ final report for step 3. Proposed-design review belongs to [plan review](step-pl
   unambiguous built task from progress and branch context; ask if ambiguous. Establish actual task
   implementation from its record and current source, including committed work; map rows alone are not proof.
   Without built work, name step 3 and stop before writing a round.
-- **sdd.review.2.** Under [delegated implementation](../../../.agents/skills/sdd-implementer/SKILL.md),
-  code review follows clean QA. The delegation supplies the QA report path, its lead's returned
-  cleanliness/coverage status and progress ownership. Use that status without repeating its investigation.
-  Failed QA returns to the fixer.
-  A standalone user-requested code review does not require a preceding QA round.
+- **sdd.review.2.** *Retired.* A code review requires no preceding QA round.
 - **sdd.review.3.** Read progress, grill, required settled task/implementation documents, approved evolution
   and applicable standing documents. Honor recorded waivers; report missing evidence and its coverage effect.
   Refresh the shared [change map](changes.md).
@@ -100,8 +96,8 @@ its COMMENTS guidance.
   final report and register. Task-identification questions are allowed at entry; questions about reviewed
   work are registered. Look for answers before registering questions
   in `open-questions.md`. Severity follows the defect's consequence.
-- **sdd.review.7.** Write no progress entry. The reports are this round's record; a standalone review can run
-  with any step open.
+- **sdd.review.7.** The lead writes the review's progress entry under [sdd.progress.6](cycle.md#progressmd): it
+  closes the open step entry, opens its own and closes it under the [progress template](templates/progress.md). The reports hold everything else.
 - **sdd.review.15.** Return the final path, summary, coverage status and cleanliness.
   Findings go to [step 3](step-3-implement.md#disposing-of-a-qa-round-or-a-review), which appends dispositions
   without editing original findings. Each invocation runs one round.

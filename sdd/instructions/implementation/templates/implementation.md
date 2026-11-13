@@ -229,8 +229,8 @@ END COMMENTS -->
 Optional: omit when empty. Include only unresolved choices between valid options that affect behavior,
 cost, scope or future work. State the option carried by the body, alternatives and their tradeoffs.
 Choices already settled by a ruling, convention or established pattern belong in the body.
-Review Proposals and Alternatives with the rest of the plan. Present outstanding choices at the planner's
-presentation or guidance stop, not between review waves. Record rulings in grill.md, remove resolved
+Review Proposals and Alternatives with the rest of the plan. Present outstanding choices when the plan is
+presented for confirmation. Record rulings in grill.md, remove resolved
 entries and do not raise rejected options again.
 END COMMENTS -->
 

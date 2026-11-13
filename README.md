@@ -15,7 +15,7 @@ an agent runs it and stops.
 
 | Step | Skill | Does |
 |---|---|---|
-| 0 | `sdd-new-task` | initialize the task branch, folder, progress and first grill entries |
+| 0 → 1 | `sdd-new-task` | initialize the task branch, folder, progress and first grill entries, then run the grill |
 | 1 | `sdd-grill` | interview one question at a time, record answers, then stop before planning |
 | 2 | `sdd-plan` | draft or revise an existing task's documents, confirm and settle; related coordinating role: [sdd-planner](.agents/skills/sdd-planner/SKILL.md) |
 | 3 | `sdd-implement` | build, verify and update standing docs; related coordinating role: [sdd-implementer](.agents/skills/sdd-implementer/SKILL.md) |

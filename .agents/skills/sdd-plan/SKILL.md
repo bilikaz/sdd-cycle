@@ -1,6 +1,6 @@
 ---
 name: sdd-plan
-description: "Runs sdd step 2 for an existing task: drafts the required plan documents and commits their settlement on user confirmation. Use for planning, resuming step 2 or explicit human re-settlement. Delegated planning uses sdd-planner; task creation uses sdd-new-task."
+description: "Runs sdd step 2 for an existing task: drafts the required plan documents and commits their settlement on user confirmation. Use for planning, resuming step 2 or explicit human re-settlement. Task creation uses sdd-new-task."
 ---
 
 # sdd-plan — `sdd step 2`
@@ -8,12 +8,11 @@ description: "Runs sdd step 2 for an existing task: drafts the required plan doc
 Read and follow [the step-2 procedure](../../../sdd/instructions/implementation/step-2-settle.md).
 Draft from the resolved ledger or an explicit human instruction to re-settle, following
 [the escalation rules](../../../sdd/instructions/implementation/escalation.md).
-The related coordinating role is [sdd-planner](../sdd-planner/SKILL.md); a single-step request delegates no loop.
 
 ## Entry and reads
 
 - Satisfy every [sdd.step2.11 entry check](../../../sdd/instructions/implementation/step-2-settle.md#entry),
-  including prerequisites, task branch, progress entry and the active planner's ownership.
+  including prerequisites, task branch and progress entry.
   After implementation begins, only explicit human re-settlement reopens step 2.
 - Read [cycle.md](../../../sdd/instructions/implementation/cycle.md) and the task's records required by
   that entry, then [workspace.md](../../../sdd/workspace.md) and relevant available project rules.
@@ -34,9 +33,8 @@ The related coordinating role is [sdd-planner](../sdd-planner/SKILL.md); a singl
 - Populate [workspace setup under sdd.step2.12](../../../sdd/instructions/implementation/step-2-settle.md#entry).
   Read the relevant review rounds and dispose findings under
   [sdd.step2.10](../../../sdd/instructions/implementation/step-2-settle.md#disposing-of-a-plan-review).
-  With no report, skip disposal. Standalone planning starts no review of its own.
+  With no report, skip disposal. Planning starts no review of its own.
   A requested review needs a fresh `sdd-plan-review` lead; never become the reviewer of your own plan.
-  A delegated loop needs the user's request for `sdd-planner`.
 
 ## Confirm and close
 

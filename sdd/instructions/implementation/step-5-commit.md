@@ -24,10 +24,7 @@ Changes to the settled task follow [evolution](escalation.md), including changes
   Include record updates in delivery commits rather than writing them after the last commit and leaving
   them unpublished. Final results after pushes/checks may need a final records commit under the same policy.
   That commit and its configured publication remain part of this delivery.
-- **sdd.step5.9.** Run configured post-delivery actions in the selected workspace.
-  Deployment is not universal. Follow shared-resource ownership under the
-  [Docker convention](../../../project/docs/conventions/docker.md); delivery authorizes no unrelated host or global cleanup.
-  A failure reports which Git actions already succeeded.
+- **sdd.step5.9.** Run configured post-delivery actions in the selected workspace. A deploy or rebuild of a shared environment — staging, production — is never one of them: it runs only when the user asks for that deploy, because several tasks are usually merged and checked together, and a deploy per task spends a long rebuild on a   state nobody reviews. Follow shared-resource ownership under the [Docker convention](../../../project/docs/conventions/docker.md); delivery authorizes no unrelated host or global cleanup. A failure reports which Git actions already succeeded.
 
 ## Closing
 

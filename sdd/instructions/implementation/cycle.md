@@ -26,7 +26,6 @@ the task takes from it, recorded in `task.md` as **Milestone.** A folder carries
 |---|---|
 | `progress.md` | task Git context and the step log — one entry per step occurrence |
 | `grill.md` | the answer ledger — one row per resolved question |
-| `report.md` | task-level review tracking and coordinator run state under the [report template](templates/report.md) |
 | `task.md` | the settled intent |
 | `implementation.md` | the settled plan |
 | `evolution.md` | post-settlement adjustments and their agent/person origin under [evolution](escalation.md) |
@@ -59,16 +58,10 @@ the task takes from it, recorded in `task.md` as **Milestone.** A folder carries
 Escalation and evolution are [escalation.md](escalation.md); verification is [testing.md](testing.md).
 
 Beside the numbered steps, `sdd step review` judges built work ([step-review.md](step-review.md)); `sdd step plan review`
-judges proposed designs ([step-plan-review.md](step-plan-review.md)). Both require the user's request or their
-delegated routing. Delegated routing is carried by
-[sdd-planner](../../../.agents/skills/sdd-planner/SKILL.md) for drafting and plan review, and
-[sdd-implementer](../../../.agents/skills/sdd-implementer/SKILL.md) for implementation, QA and built-code review.
+judges proposed designs ([step-plan-review.md](step-plan-review.md)). Both require a request.
 
 Task creation uses [sdd-new-task](../../../.agents/skills/sdd-new-task/SKILL.md); grilling uses
 [sdd-grill](../../../.agents/skills/sdd-grill/SKILL.md). Neither starts planning automatically.
-The step entry points link to their coordinating roles: [sdd-plan](../../../.agents/skills/sdd-plan/SKILL.md)
-to sdd-planner, and [sdd-implement](../../../.agents/skills/sdd-implement/SKILL.md) to sdd-implementer.
-Invoking a single step does not delegate the corresponding loop.
 
 ## Ids
 
@@ -79,7 +72,7 @@ retired rule keeps its number and reads *retired, see `<id>`*; a new rule takes 
 ## Order
 
 - **sdd.cycle.1.** The user names the step and the agent runs that step only. No step is refused for order and
-  none is taken unprompted.
+  none is taken unprompted, with one exception: step 0 runs straight into step 1 (sdd.step0.12).
 - **sdd.cycle.2.** A missing prerequisite is the only refusal. Step 0 needs a brief and the Git choices
   required by its initialization procedure. Step 1 needs an initialized task; step 2 needs that task's
   completed grill or documented-bug citations. Name the missing prerequisite instead of creating it through
@@ -103,12 +96,10 @@ retired rule keeps its number and reads *retired, see `<id>`*; a new rule takes 
 
 ## Finding verification
 
-- **sdd.cycle.6.** The review lead verifies specialist findings before returning the final report.
-  A coordinator receives that verified report and routes work from its findings, result and coverage status;
-  it does not repeat the source investigation or approve each fixer's dispositions before work starts.
+- **sdd.cycle.6.** The review lead verifies specialist findings before returning the final report; whoever
+  receives it acts on its findings, result and coverage status without repeating the source investigation.
   Missing reports or coverage gaps go back to the lead. The agent making the fix checks the relevant current
-  code or documents before changing them and owns the disposition. When one agent both coordinates and
-  fixes, that check belongs to fixing; it is not an additional verification stage or report.
+  code or documents before changing them and owns the disposition.
 
 ## Independent reviews
 
@@ -129,14 +120,14 @@ Use the [progress template](templates/progress.md) and its COMMENTS guidance for
   report filenames and numeric finding counts; review details stay in their reports. Step 3 carries its implementation tables.
   Do not add generic summaries or repeat content already in the task records.
 - **sdd.progress.3.** A done entry is never rewritten. A further round opens a new entry at the same step id.
-- **sdd.progress.4.** Only the agent running a step writes its entry; nothing else edits `progress.md`. Two
-  carve-outs: under a delegated routing the coordinating role writes the entries of the steps it delegates;
-  and an entry an agent left open is either resumed (sdd.cycle.3) or, where the user names another step, closed
+- **sdd.progress.4.** Only the agent running a step writes its entry; nothing else edits `progress.md`. One
+  carve-out: an entry an agent left open is either resumed (sdd.cycle.3) or, where the user names another step, closed
   by the next agent as its first act, recording its actual state and relevant record references.
-- **sdd.progress.5.** A non-step occasion — an implementation hand-back, dev bring-up or recovery —
+- **sdd.progress.5.** A non-step occasion — an implementation hand-back, a recovery, or infrastructure work the user asked for —
   gets its own entry using the progress template.
-  A planner waiting for guidance or document confirmation remains within its current step-2 entry; that
-  pause creates no separate hand-back occasion entry. Close step 2 only on settlement or under sdd.progress.4.
+  A step waiting for the user's guidance or confirmation stays within its current entry; that pause is not
+  an occasion.
+- **sdd.progress.6.** A review is a step of its own in progress, and its lead writes that entry. A plan review (`sdd step plan review — <report>`), a QA round (`sdd step 4 · QA — <report>`) or a built-code review (`sdd step review — <report>`) starts by closing the open step entry and opening its own, and closes it, under the [progress template](templates/progress.md). The agent that resumes after opens a new entry for its own step.
 
 ## Registers
 
@@ -147,7 +138,7 @@ Use the [progress template](templates/progress.md) and its COMMENTS guidance for
   after the cycle, in one sitting — never mid-loop.
 - **sdd.register.3.** Register deferrable questions and continue with the reading the documents best support.
   This does not replace a required user choice: step-0 Git decisions, unresolved scope, a changed ruling and
-  document confirmation still wait for the user. A delegated loop carries such decisions to its hand-back.
+  document confirmation still wait for the user.
 - **sdd.register.4.** Where the project uses them, two standing lists outlive the tasks, both in project-relative `docs/roadmap/`
   beside its `plan.md`: `todo.md` — what the product must still do that no task owns yet;
   `revisit.md` — a settled
@@ -182,7 +173,7 @@ Use the [progress template](templates/progress.md) and its COMMENTS guidance for
   (`wip(<folder>): checkpoint before <the wave>`),
   so each wave's changes stay apart and none is lost. A checkpoint is never pushed; the step-5 delivery pushes it
   with the rest. A settlement commit still holds only the settlement paths (sdd.commit.1).
-- **sdd.commit.5.** At an implementation hand-back — step 3 or its delegated implementation loop — undo only
+- **sdd.commit.5.** When step 3 hands its work back to the user, undo only
   that task's own local, unpushed checkpoints, preserving the working files and every settlement or other
   non-checkpoint commit. If the checkpoints form the tip of the branch, use `git reset --mixed` to the last
   non-checkpoint commit, never automatically to the branch point. If they are interleaved with other commits

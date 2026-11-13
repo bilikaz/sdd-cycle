@@ -17,9 +17,17 @@ This file owns the loop and its stops.
   [step-2 entry](../../../sdd/instructions/implementation/step-2-settle.md#entry).
   Satisfy prerequisites before any write. An unfinished initial grill names `sdd-grill` and stops;
   after implementation begins, require explicit human re-settlement.
-- Record delegation as a verbatim G-row in grill.md and maintain Planner run in the task's report.md under the
-  [report template](../../../sdd/instructions/implementation/templates/report.md).
-  You own the step-2 progress entry; reviewers do not.
+- Record delegation as a verbatim G-row in grill.md. Keep the run's state in the task's `report.md`: a
+  `## Planner run` table — State (`active` · `handed-back` · `settled`) · Limit · Dispatched · In flight — and under
+  it a `Reviews:` list, one line per returned report with its Summary counts. A standalone `sdd-plan` knows
+  nothing of this file; while your run is active, you are step 2's only writer.
+- You run step 2, so you write its entries. Each plan-review lead writes its own review entry under
+  [sdd.progress.6](../../../sdd/instructions/implementation/cycle.md#progressmd), closing your open step-2 entry;
+  on its return, open a new step-2 entry for the dispositions. Waiting for guidance or confirmation stays within
+  the current step-2 entry.
+- Give each plan-review lead the task and the current documents only; it treats your request as a user's.
+- A decision needed to go on is a Guidance stop; a choice that can wait is disposed **named** and presented with
+  the documents. Present outstanding choices only at presentation, never between review waves.
 - Default to **five review dispatches per delegated run**, unless the user instructs another limit.
   Start a new run at zero; resume an active run's saved count. Increment before dispatch, including
   replacement leads and confirmation rechecks. Record the in-flight lead/report so a resumed session can

@@ -4,8 +4,7 @@ Step 2 writes the task's two settled documents from the ledger: `task.md` is *wh
 `implementation.md` is *how*. Later re-settlement follows
 [the human-only re-entry rule](escalation.md#re-entering-sdd-step-2).
 
-The step entry point is [sdd-plan](../../../.agents/skills/sdd-plan/SKILL.md); its related coordinating role
-is [sdd-planner](../../../.agents/skills/sdd-planner/SKILL.md) for an explicitly delegated drafting/review loop.
+The step entry point is [sdd-plan](../../../.agents/skills/sdd-plan/SKILL.md).
 
 ## Entry
 
@@ -16,11 +15,8 @@ is [sdd-planner](../../../.agents/skills/sdd-planner/SKILL.md) for an explicitly
   or bug citations. If that prerequisite is missing, name `sdd-grill` and stop before changing progress or drafting.
   After implementation begins, require explicit human re-settlement under sdd.escalation.8.
   Verify the task branch before edits; report a mismatch and stop without switching or creating a branch.
-  Open or resume one step-2 progress entry; a delegated planner owns it while its reviewers work.
-  A standalone invocation reads the Planner run state in the task's `report.md`: active means the planner still owns
-  the work; handed-back means that run ended. Do not create a second writer alongside an active planner.
-  Wait for its return or explicit user reassignment; report active work rather than drafting
-  concurrently. Questions arising during planning add ledger answers within this entry, without opening
+  Open or resume one step-2 progress entry; a plan review closes it and the disposal that follows opens a new one ([sdd.progress.6](cycle.md#progressmd)).
+  Questions arising during planning add ledger answers within this entry, without opening
   step 1 again.
 - **sdd.step2.12.** Populate relevant sections of [workspace.md](../../workspace.md) from the setup answers in
   the ledger and verified project configuration. Do not invent hosts, commands, remotes or project-document
@@ -53,9 +49,8 @@ that already lives in one of [the standing documents](../../workspace.md#standin
 
 ## Disposing of a plan review
 
-- **sdd.step2.10.** Review runs only on the user's request or delegated routing under sdd.cycle.1. With no
-  report, skip disposal; standalone planning launches no review on its own. A user-requested review belongs
-  to `sdd-plan-review`, and a delegated loop to `sdd-planner`. Otherwise read the highest
+- **sdd.step2.10.** Review runs only on request under sdd.cycle.1. With no report, skip disposal; planning
+  launches no review on its own, and a requested review belongs to `sdd-plan-review`. Otherwise read the highest
   review round of `plan-review<x>.md` ([step-plan-review.md](step-plan-review.md)); round 1 is the unnumbered
   `plan-review.md` under sdd.naming.1. Read that round
   and any earlier round with unfinished dispositions; file modification times do not determine review order.
@@ -63,11 +58,9 @@ that already lives in one of [the standing documents](../../workspace.md#standin
   disposition before the documents are presented: **fixed** — `task.md` or `implementation.md` edited in place, one
   right answer inside the ledger · **grilled** — the remedy carries a decision: a question to the user, its answer
   a ledger row, then fixed · **rejected** — only when the finding is not a defect · **registered** — a row in
-  `open-questions.md` · **named** — under a planner loop, the choice moved to the documents' Proposals or
-  Alternatives for the user's ruling at the cycle's end. Standalone planning asks for a needed decision;
-  a delegated planner uses **named** for a decision awaiting the user's ruling, rather than marking it
-  **grilled** before the question has been answered. It carries the decision to presentation or hand-back,
-  never inventing a ruling mid-loop. A real defect is never
+  `open-questions.md` · **named** — a choice that can wait, moved to the documents' Proposals or
+  Alternatives for the user's ruling when the documents are presented. A decision needed to go on is asked;
+  a ruling is never invented, and **grilled** is used only once the user has answered. A real defect is never
   rejected. Append dispositions using the
   [report template's Dispositions section](templates/report.md#dispositions). A review of already committed documents follows
   sdd.step2.4; it does not itself authorize re-settlement.

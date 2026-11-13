@@ -123,7 +123,8 @@ port numbering lives in [service ports](../project/docs/conventions/service-port
 |---|---|---|---|---|
 
 Identify the owner and connection references for each host-wide shared service, plus any configured
-post-delivery commands and their prerequisites. A project without these concerns can mark this section not applicable.
+post-delivery commands and their prerequisites. A deploy recorded here runs only on the user's explicit request,
+never as part of delivery (sdd.step5.9). A project without these concerns can mark this section not applicable.
 
 - **sdd.workspace.12.** Follow configured dependencies, ownership and permitted lifecycle operations.
   This map supplies no default deployment command. Host-wide Docker service lifecycle follows the

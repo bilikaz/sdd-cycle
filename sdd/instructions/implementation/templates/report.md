@@ -2,7 +2,6 @@
 Replace placeholders and remove COMMENTS blocks from the generated file.
 Shared by plan-review, QA and built-code review, for specialist and final reports.
 The workflow supplies the title, round and exact output path.
-Optional task-level review tracking and run state live in the task's report.md.
 END COMMENTS -->
 
 # <Review kind> — <task> — <role or final report> — <round/date>
@@ -35,7 +34,7 @@ END COMMENTS -->
 | <Id> | <Disposition> | <Reason or relevant reference> |
 
 <!-- COMMENTS
-Reviewers omit this section. The planner/fixing agent appends it later to the same final report.
+Reviewers omit this section. The agent disposing the findings appends it later to the same final report.
 Preserve the reviewer's findings. Use sdd.step2.10's disposition set for plan review and sdd.step3.9 for QA/code review.
 One row per finding. Keep reasons/references brief; include them for rejection, escalation, pending decisions
 and relevant ledger/register entries. Omit discovery/edit history.

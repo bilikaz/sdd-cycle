@@ -23,6 +23,10 @@ The project owns its gates; this file governs their use in the task cycle.
   against its identified test environment. Check target identity before writes. Follow the
   [Docker convention](../../../project/docs/conventions/docker.md) where Docker is used; dev and shared data are not disposable
   test state.
+- **sdd.testing.38.** Verification never starts, rebuilds, recreates or stops the dev stack; an agent does that
+  only when the user asks, because a rebuild is a long cycle and the dev stack is the user's working state. Tests
+  run on the test stack alone. The test stack is recreated at the start of a run and left running after it —
+  never stopped as teardown — so its containers, logs and data stay open to inspection.
 - **sdd.testing.35.** Run the project's required lint, coverage and other supplemental checks where the full
   gate does not include them. Use its configured thresholds; this cycle supplies no universal coverage percentage.
 

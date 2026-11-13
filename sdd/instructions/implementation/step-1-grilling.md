@@ -16,7 +16,7 @@ Do not create replacement records, a duplicate task or a repair branch.
 Check the branch against [Git context in progress](templates/progress.md#git-context) before writing. Report a mismatch or missing branch
 information instead of creating a branch or switching away with unhandled work.
 
-Questions within a running step 2 stay with its planner under sdd.step2.11; do not close that entry or
+Questions within a running step 2 stay with step 2 under sdd.step2.11; do not close that entry or
 open step 1 merely to answer them. Otherwise, resume a current step-1 entry or open one when step 1 has
 not run. A request to grill again after a completed interview opens a new occurrence under sdd.progress.3.
 A bare continuation after a done grill reports it done and stops; never reopen its completed entry.
@@ -88,4 +88,4 @@ Use the [grill template](templates/grill.md); its COMMENTS block defines the ans
   names planned destinations whose files do not yet exist, names any
   deferred register items and what they block, and says that
   `sdd-plan` / `sdd step 2` is available. It then stops for the user's instruction. It never starts planning
-  or invokes `sdd-planner` automatically; the coordinating role is always invoked separately.
+  automatically.

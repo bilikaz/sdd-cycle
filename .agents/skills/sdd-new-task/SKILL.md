@@ -1,6 +1,6 @@
 ---
 name: sdd-new-task
-description: Initializes a new task as sdd step 0, creating its Git branch, folder, progress.md and initial grill.md. Use when the user asks to open or start a new task. Existing-task interviews use sdd-grill; planning uses sdd-plan.
+description: Initializes a new task as sdd step 0, creating its Git branch, folder, progress.md and initial grill.md, then runs the grill (sdd step 1). Use when the user asks to open or start a new task. Existing-task interviews use sdd-grill; planning uses sdd-plan.
 ---
 
 # sdd-new-task — `sdd step 0`
@@ -26,9 +26,10 @@ do not turn it into a new task.
    [Preserve existing work](../../../sdd/instructions/implementation/step-0-new-task.md#preserve-existing-work),
    then [update the base and branch](../../../sdd/instructions/implementation/step-0-new-task.md#update-the-base-and-branch).
 3. Create the initial records, opening and closing the step-0 progress entry under
-   [sdd.step0.11–12](../../../sdd/instructions/implementation/step-0-new-task.md#create-the-records-and-stop).
-   Report the task folder and each root's task branch and name `sdd-grill` / `sdd step 1` as next, then stop.
+   [sdd.step0.11–12](../../../sdd/instructions/implementation/step-0-new-task.md#create-the-records-and-start-the-grill).
+   Report the task folder and each root's task branch, then continue with step 1 by following
+   [sdd-grill](../sdd-grill/SKILL.md); it stops when the grill is done.
 
 Only the user's chosen local preservation commit on the current branch is allowed under
 [sdd.commit.6](../../../sdd/instructions/implementation/cycle.md#commits). Never merge, push or deliver.
-This skill starts no design-grilling, planning step or planner loop; initialization questions still wait for the user.
+This skill starts no planning step; initialization questions still wait for the user.

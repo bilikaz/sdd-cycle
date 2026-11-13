@@ -15,8 +15,9 @@ does not delegate the loop; without delegation, name `sdd-implement` and stop.
 Select the task under [step-3 entry](../../../sdd/instructions/implementation/step-3-implement.md#entry),
 including its settlement or recorded waiver.
 
-Record delegation as a verbatim G-row in grill.md and maintain Implementer run in the task's report.md using the
-[report template](../../../sdd/instructions/implementation/templates/report.md).
+Record delegation as a verbatim G-row in grill.md. Keep the run's state in the task's `report.md`: an
+`## Implementer run` table — State (`active` · `handed-back`) · Fixer · Rounds · In flight — and under it a
+`Reviews:` list, one line per returned QA or code-review report with its Summary counts. No step knows this file.
 Resolve roots, task branches, original starting commits, environment and gates from the task and
 [workspace.md](../../../sdd/workspace.md).
 On resume, read progress, the saved run and returned reports. Continue pending work rather than repeating
@@ -25,9 +26,10 @@ completed rounds. A still-running dispatch needs a reachable agent; an unreachab
 ## Loop
 
 1. Delegate the build or pending findings to a separate fixer using [sdd-implement](../sdd-implement/SKILL.md).
-   Give it the task, returning report, original starting commits, execution boundary and
-   **progress owner: coordinator**. Retain it across fix rounds; hand off context if it becomes unavailable.
-   The fixer takes pre-wave checkpoints; it does not undo them when returning to you.
+   Give it the task, returning report, original starting commits and execution boundary. Retain it across
+   fix rounds; hand off context if it becomes unavailable.
+   The fixer takes pre-wave checkpoints; tell it to keep them when returning to you, so they are undone only
+   at your hand-back.
 2. Only a completed implementation with passing required verification proceeds to a fresh
    [sdd-qa](../sdd-qa/SKILL.md) lead. An incomplete result stays with the fixer when it can address the cause;
    missing prerequisites or required decisions go to the user. Do not dispatch QA to disguise failed gates.
@@ -39,8 +41,8 @@ completed rounds. A still-running dispatch needs a reachable agent; an unreachab
    Return when QA and the code review following it are clean under
    [sdd.cycle.5](../../../sdd/instructions/implementation/cycle.md#review-cleanliness).
 
-Give leads the task, execution boundary, original starting commits and **progress owner: coordinator**;
-give the code-review lead the QA report path and its lead's returned cleanliness/coverage status.
+Give leads the task, execution boundary and original starting commits. Code review follows clean QA: give the
+code-review lead the QA report path, and route only after its QA lead returned clean, complete coverage.
 Leads prepare the map, dispatch specialists and verify.
 Route the verified final result without another source investigation under
 [sdd.cycle.6](../../../sdd/instructions/implementation/cycle.md#finding-verification).
@@ -74,10 +76,11 @@ with agent/person origin; only explicit human re-settlement reopens step 2.
 
 ## Progress and hand-back
 
-You own progress. Open/resume step entries and close each before moving to the next under
-[the progress rules](../../../sdd/instructions/implementation/cycle.md#progressmd).
-Reread progress immediately before writing; delegated fixers and leads do not write it.
-Use the [progress template](../../../sdd/instructions/implementation/templates/progress.md).
+Every step writes its own progress entries under
+[the progress rules](../../../sdd/instructions/implementation/cycle.md#progressmd): the fixer its step-3 entries,
+each QA and code-review lead its review entry. You write only the hand-back occasion entry
+([sdd.progress.5](../../../sdd/instructions/implementation/cycle.md#progressmd)), using the
+[progress template](../../../sdd/instructions/implementation/templates/progress.md).
 Return the outcome, final reports, actual limits and decisions needed, linking existing detail.
 
 Mark the run handed-back and handle local checkpoints under

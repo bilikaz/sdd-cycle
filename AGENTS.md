@@ -48,7 +48,7 @@ runs each.
 
 | Skill | Steps | Does |
 |---|---|---|
-| `sdd-new-task` | 0 | initialize the branch, task folder, progress and initial grill record under [step 0](sdd/instructions/implementation/step-0-new-task.md) |
+| `sdd-new-task` | 0 → 1 | initialize the branch, task folder, progress and initial grill record under [step 0](sdd/instructions/implementation/step-0-new-task.md), then run the grill |
 | `sdd-grill` | 1 | resolve the task's questions in the answer ledger, report completion and wait |
 | `sdd-plan` | 2 | draft or revise an existing task's documents, confirm and settle; related coordinating role: [sdd-planner](.agents/skills/sdd-planner/SKILL.md) |
 | `sdd-implement` | 3 | build to the settled documents, verify and update standing docs; related coordinating role: [sdd-implementer](.agents/skills/sdd-implementer/SKILL.md) |
@@ -61,7 +61,7 @@ runs each.
 
 Three things worth knowing without opening the rules: the **settled documents are the truth** an agent reads —
 never the conversation; the **QA reviewer is never the builder**; and the **user drives** — an agent takes no
-step outside the user's request or [explicitly delegated routing](sdd/instructions/implementation/cycle.md#the-numbered-steps).
+step outside the user's request or a coordinator the user explicitly delegated to (`sdd-planner`, `sdd-implementer`).
 
 ## The procedure is fixed while it is used
 

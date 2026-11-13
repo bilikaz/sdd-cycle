@@ -8,13 +8,13 @@ description: Runs sdd step 3 to build settled task work or fix QA/review finding
 Read [step 3](../../../sdd/instructions/implementation/step-3-implement.md),
 [testing](../../../sdd/instructions/implementation/testing.md) and
 [evolution](../../../sdd/instructions/implementation/escalation.md).
-Follow step-3 entry for task selection, landed settlement or recorded waiver, and progress ownership.
+Follow step-3 entry for task selection, landed settlement or recorded waiver, and the step-3 progress entry.
 Read progress, grill, required plans, approved evolution and applicable standing documents.
 When fixing findings, read the returning report; ask if that selection is ambiguous.
 
 Missing settlement or a missing/mismatched task branch is a prerequisite gap: report it and stop,
-without opening planning, creating a branch or switching away. Under sdd-implementer, return results
-to the coordinator and do not write progress; otherwise open/resume and close the step-3 entry yourself.
+without opening planning, creating a branch or switching away. Open/resume and close the step-3 entry
+yourself.
 
 ## Work
 
@@ -39,8 +39,5 @@ to the coordinator and do not write progress; otherwise open/resume and close th
   its section COMMENTS supply the output guidance.
 
 Never claim unrun checks as passing or reject a real defect.
-No delivery or push here. Undo checkpoints under sdd.commit.5 only when handing back to the user;
-under delegation the coordinator handles that at the loop's hand-back, not after each fixer return.
+No delivery or push here. Undo checkpoints under sdd.commit.5 when handing back, unless told to keep them.
 Preserve settlement commits and working files.
-
-Running this skill alone does not delegate [sdd-implementer](../sdd-implementer/SKILL.md).
