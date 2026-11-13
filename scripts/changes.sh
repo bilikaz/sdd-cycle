@@ -5,7 +5,8 @@
 # Reviewers use the map and task records to choose relevant source; assess behavior in the code.
 # Requires Git and Python 3. Run with --help for task IDs, starting commits and examples.
 set -euo pipefail
-exec python3 - "$@" <<'PY'
+SDD_WORKSPACE_ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd -P)"
+exec python3 - "$SDD_WORKSPACE_ROOT" "$@" <<'PY'
 import argparse
 import datetime
 import hashlib
@@ -16,6 +17,16 @@ import re
 import subprocess
 import sys
 import tempfile
+
+WORKSPACE = Path(sys.argv.pop(1))
+PROJECT = WORKSPACE / 'project'
+
+
+def project_root():
+    root = Path(os.fsdecode(git(PROJECT, 'rev-parse', '--show-toplevel')).strip()).resolve()
+    if root != PROJECT.resolve():
+        raise ValueError('project/ must be an independent Git checkout; initialize it or clone the project there.')
+    return root
 
 
 def git(root, *args, allowed=(0,)):
@@ -43,8 +54,19 @@ def ranges(hunks, side):
     return ', '.join(result) or '—'
 
 
-def excluded(path):
-    return path == 'docs/tasks' or path.startswith('docs/tasks/')
+def task_exclusions(root, task):
+    paths = ['docs/tasks']
+    try:
+        relative = task.parent.relative_to(root).as_posix()
+    except ValueError:
+        return paths
+    if task.parent.name == 'tasks' and task.parent.parent.name == 'docs':
+        paths.append(relative)
+    return paths
+
+
+def excluded(path, task_paths):
+    return any(path == prefix or path.startswith(prefix + '/') for prefix in task_paths)
 
 
 def change_kind(status):
@@ -54,12 +76,13 @@ def change_kind(status):
             'T': 'Type changed'}.get(status[0], 'Other')
 
 
-def inspect_root(root_arg, base_arg):
+def inspect_root(root_arg, base_arg, task):
     root = Path(os.fsdecode(git(Path(root_arg).resolve(), 'rev-parse', '--show-toplevel')).strip())
     base = git(root, 'rev-parse', '--verify', '--end-of-options', base_arg + '^{commit}').decode().strip()
     head = git(root, 'rev-parse', 'HEAD').decode().strip()
     options = ['--no-ext-diff', '--no-textconv', '--no-color', '--find-renames', '--ignore-submodules=all']
-    scope = ['--', '.', ':(top,exclude)docs/tasks']
+    task_paths = task_exclusions(root, task)
+    scope = ['--', '.', *[':(top,exclude,literal)' + path for path in task_paths]]
     names = git(root, 'diff', *options, '--name-status', '-z', base, *scope).split(b'\0')
     entries = []
     index = 0
@@ -83,7 +106,7 @@ def inspect_root(root_arg, base_arg):
     rows = []
     digest = hashlib.sha256()
     for status, old_path, path, diff in sorted(entries, key=lambda item: item[2]):
-        if excluded(path) and excluded(old_path):
+        if excluded(path, task_paths) and excluded(old_path, task_paths):
             continue
         if status == '?':
             diff = git(root, 'diff', *options, '--no-index', '--unified=0', '--inter-hunk-context=0',
@@ -106,35 +129,37 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         description='Write a task change map from a starting Git commit to the current working tree.',
         epilog='''Includes committed changes since the starting commit, staged and unstaged changes,
-and nonignored untracked files. Excludes docs/tasks/ in every root.
+and nonignored untracked files. Excludes docs/tasks/ in every root and the selected task record tree.
 Reports the net change: paths, additions, deletions and changed line ranges, without patch text.
-Writes docs/tasks/task<ID>/changes.md for a task ID, or <task-folder>/changes.md for a path.
+Writes project/docs/tasks/task<ID>/changes.md for a task ID, or <task-folder>/changes.md for a path.
 The task folder must already exist. Requires Git and Python 3.
+Task IDs and the default Git root use project/ beside this script's workspace.
+Explicit task-folder paths and --root paths are relative to the invocation directory.
 
 Examples (run from your workspace):
   bash scripts/changes.sh task1 --base abc1234
   bash scripts/changes.sh 1 --base abc1234
-  bash scripts/changes.sh docs/tasks/task1 --root . --base abc1234
-  bash scripts/changes.sh task1 --root . --base abc1234 --root ./other --base def5678
+  bash scripts/changes.sh project/docs/tasks/task1 --root project --base abc1234
+  bash scripts/changes.sh task1 --root project --base abc1234 --root ./other --base def5678
 
 Use the task's original starting commit again on later runs; do not move the baseline to HEAD.'''
     )
     parser.add_argument('task_folder', metavar='TASK', help='Task ID (1 or task1) or an existing task-folder path')
-    parser.add_argument('--root', action='append', metavar='PATH', help='Git root (default: current repository); repeat with one --base per root')
+    parser.add_argument('--root', action='append', metavar='PATH', help='Git root (default: workspace project/); repeat with one --base per root')
     parser.add_argument('--base', action='append', required=True, metavar='COMMIT', help='Starting Git commit hash or ref; one per root, in the same order')
     args = parser.parse_args()
-    args.root = args.root or ['.']
+    if args.root is None:
+        args.root = [project_root()]
     if len(args.root) != len(args.base):
         parser.error('Supply exactly one --base for each --root, in the same order.')
     task_id = re.fullmatch(r'(?:task)?([0-9]+)', args.task_folder)
     if task_id:
-        workspace = Path(os.fsdecode(git(Path.cwd(), 'rev-parse', '--show-toplevel')).strip())
-        task = workspace / 'docs/tasks' / ('task' + task_id.group(1))
+        task = project_root() / 'docs/tasks' / ('task' + task_id.group(1))
     else:
         task = Path(args.task_folder).resolve()
     if not task.is_dir():
         parser.error('The named task folder must already exist.')
-    results = [inspect_root(root, base) for root, base in zip(args.root, args.base)]
+    results = [inspect_root(root, base, task) for root, base in zip(args.root, args.base)]
     if len({result[0] for result in results}) != len(results):
         parser.error('Each Git root must be listed only once.')
     for root, *_ in results:
@@ -142,8 +167,8 @@ Use the task's original starting commit again on later runs; do not move the bas
             relative = (task / 'changes.md').relative_to(root).as_posix()
         except ValueError:
             continue
-        if not excluded(relative):
-            parser.error('Within a scanned root, the output task folder must be under docs/tasks/.')
+        if not excluded(relative, task_exclusions(root, task)):
+            parser.error('Within a scanned root, the output task folder must be under a docs/tasks/ directory.')
     now = datetime.datetime.now(datetime.timezone.utc).isoformat(timespec='seconds')
     report = ['# Changes', '', f'Generated: {now}', '', f'Task folder: {cell(task)}', '',
               'Each reviewer uses this map and the task records to choose relevant source and check coverage.',
@@ -151,7 +176,8 @@ Use the task's original starting commit again on later runs; do not move the bas
               'current source and targeted diffs. Follow relevant dependencies beyond the listed ranges.', '',
               'Comparison: the net difference from each fixed starting commit to its current working tree,',
               'including committed, staged, unstaged and nonignored untracked changes. Edits later undone',
-              'cancel out. Each root excludes `docs/tasks/`; nested independent repositories need their own root.', '',
+              'cancel out. Each root excludes `docs/tasks/` and the selected task record tree, including',
+              'when nested below an outer root. Independent repositories need their own root.', '',
               '## How to read the file tables', '',
               'Paths are JSON-quoted and relative to the root named above each table.',
               'Change labels each file as New, Deleted, Updated, Moved, Copied or Type changed.',

@@ -6,16 +6,28 @@ rule stated in two places is a rule that will disagree with itself.
 
 ## What this workspace is
 
-A portable spec-driven task cycle and the skills that run it. Task records live under `docs/tasks/`;
+A portable spec-driven task cycle and the skills that run it. The independent application checkout is
+`project/`; its task records live under `project/docs/tasks/`. The outer repository owns `sdd/`;
 the consuming project's repositories, document homes, execution environments and gates are recorded in
-[workspace.md](docs/instructions/workspace.md).
+[workspace.md](sdd/workspace.md).
+
+## Application Git and command location
+
+The application Git repository is `project/`. Run application Git commands with `git -C project ...`
+from this workspace, or change into `project/` first. Running `git` at the outer root operates on the
+SDD tooling repository. Application branch creation, settlement commits, implementation checkpoints
+and delivery target the project repository, including its `docs/tasks/` records.
+
+Run application build and verification commands from the project checkout in the environment selected
+by [workspace.md](sdd/workspace.md#where-things-run). Workspace scripts under `scripts/` resolve that
+checkout themselves. Involve the outer Git repository only when the task changes its SDD files; verify
+each participating root under [the repository boundaries](sdd/workspace.md#repository-and-document-boundaries).
 
 ## Read these before you touch anything
 
-1. [docs/instructions/INDEX.md](docs/instructions/INDEX.md) — the cycle and documentation instructions.
-2. [docs/instructions/workspace.md](docs/instructions/workspace.md) — the project setup map, initially a
-   template and populated during planning.
-3. [docs/tasks/INDEX.md](docs/tasks/INDEX.md) and the named task's records — its current step and user rulings.
+1. [sdd/instructions/INDEX.md](sdd/instructions/INDEX.md) — the cycle and documentation instructions.
+2. [sdd/workspace.md](sdd/workspace.md) — the current workspace map and repository boundaries.
+3. [project/docs/tasks/INDEX.md](project/docs/tasks/INDEX.md) and the named task's records — its current step and user rulings.
 
 Read applicable project documents when they exist and the task needs them. Initial grilling does not
 require a populated architecture map, glossary, conventions or decision log.
@@ -24,8 +36,8 @@ Point subagents at the same specific documents and verified execution boundaries
 
 ## What the instruction set governs
 
-The task cycle, one task at a time in `docs/tasks/task<n>/` — steps 0–5 whose rules carry stable
-ids, the model being [`docs/instructions/implementation/cycle.md`](docs/instructions/implementation/cycle.md).
+The task cycle, one task at a time in `project/docs/tasks/task<n>/` — steps 0–5 whose rules carry stable
+ids, the model being [`sdd/instructions/implementation/cycle.md`](sdd/instructions/implementation/cycle.md).
 This file only points; the standing documents are updated to current truth as work lands, and implementation
 never rewrites a settled document mid-build.
 
@@ -36,20 +48,20 @@ runs each.
 
 | Skill | Steps | Does |
 |---|---|---|
-| `sdd-new-task` | 0 | initialize the branch, task folder, progress and initial grill record under [step 0](docs/instructions/implementation/step-0-new-task.md) |
+| `sdd-new-task` | 0 | initialize the branch, task folder, progress and initial grill record under [step 0](sdd/instructions/implementation/step-0-new-task.md) |
 | `sdd-grill` | 1 | resolve the task's questions in the answer ledger, report completion and wait |
 | `sdd-plan` | 2 | draft or revise an existing task's documents, confirm and settle; related coordinating role: [sdd-planner](.agents/skills/sdd-planner/SKILL.md) |
 | `sdd-implement` | 3 | build to the settled documents, verify and update standing docs; related coordinating role: [sdd-implementer](.agents/skills/sdd-implementer/SKILL.md) |
 | `sdd-qa` | 4 | a fresh QA lead uses the shared change map, dispatches code-review, conventions and drift agents, verifies their reports and writes `qa<y>.md` |
 | `sdd-commit` | 5 | commit the changed repositories and record the delivery under the step-5 rules and the project's configured Git targets |
-| `sdd-review` | review | a fresh lead coordinates applicable specialists under the [review protocol](docs/instructions/implementation/step-review.md) |
+| `sdd-review` | review | a fresh lead coordinates applicable specialists under the [review protocol](sdd/instructions/implementation/step-review.md) |
 | `sdd-plan-review` | plan review | a lead coordinates applicable specialists using reusable assignments and reviewer-owned source guides, verifies findings and writes `plan-review<x>.md` for step 2 |
 | `sdd-planner` | 2 ↔ plan review | draft, delegate plan review, then settle or hand back under the [planner's routing and stop rules](.agents/skills/sdd-planner/SKILL.md) |
 | `sdd-implementer` | 3 ↔ 4 · review | coordinate implementation, QA and code review under explicit delegation, then return the report |
 
 Three things worth knowing without opening the rules: the **settled documents are the truth** an agent reads —
 never the conversation; the **QA reviewer is never the builder**; and the **user drives** — an agent takes no
-step outside the user's request or [explicitly delegated routing](docs/instructions/implementation/cycle.md#the-numbered-steps).
+step outside the user's request or [explicitly delegated routing](sdd/instructions/implementation/cycle.md#the-numbered-steps).
 
 ## The procedure is fixed while it is used
 
@@ -73,11 +85,11 @@ Two commit occasions, each needing its own explicit signal: the **settlement** a
 user's word confirming the documents is its signal, so settling and committing are one act — and the
 **delivery** at `sdd step 5`, which commits the changed repositories and pushes to their configured targets. Between them nothing is
 pushed. Local preservation in step 0 and implementation checkpoints follow the exceptions in
-[cycle.md](docs/instructions/implementation/cycle.md#commits). A prior signal authorizes only the change in
+[cycle.md](sdd/instructions/implementation/cycle.md#commits). A prior signal authorizes only the change in
 front of it, never the follow-ups; commits and pushes need their applicable signal.
 
 Repository boundaries and permitted Git targets are recorded in
-[workspace.md](docs/instructions/workspace.md) (sdd.workspace.1–3).
+[workspace.md](sdd/workspace.md) (sdd.workspace.1–3).
 
 ## How we talk
 

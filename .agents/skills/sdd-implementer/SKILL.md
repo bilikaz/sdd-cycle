@@ -5,20 +5,20 @@ description: Coordinates an explicitly delegated implementation, QA and built-co
 
 # sdd-implementer
 
-Coordinate the existing steps under [the cycle](../../../docs/instructions/implementation/cycle.md).
+Coordinate the existing steps under [the cycle](../../../sdd/instructions/implementation/cycle.md).
 The routing and stopping rules below belong to this role.
 
 ## Entry and resume
 
 Require the user's request for this role or its loop. A single-step request or an agent's own invocation
 does not delegate the loop; without delegation, name `sdd-implement` and stop.
-Select the task under [step-3 entry](../../../docs/instructions/implementation/step-3-implement.md#entry),
+Select the task under [step-3 entry](../../../sdd/instructions/implementation/step-3-implement.md#entry),
 including its settlement or recorded waiver.
 
 Record delegation as a verbatim G-row in grill.md and maintain Implementer run in the task's report.md using the
-[report template](../../../docs/instructions/implementation/templates/report.md).
+[report template](../../../sdd/instructions/implementation/templates/report.md).
 Resolve roots, task branches, original starting commits, environment and gates from the task and
-[workspace.md](../../../docs/instructions/workspace.md).
+[workspace.md](../../../sdd/workspace.md).
 On resume, read progress, the saved run and returned reports. Continue pending work rather than repeating
 completed rounds. A still-running dispatch needs a reachable agent; an unreachable one follows recovery below.
 
@@ -37,13 +37,13 @@ completed rounds. A still-running dispatch needs a reachable agent; an unreachab
    Clean QA proceeds to a fresh [sdd-review](../sdd-review/SKILL.md) lead.
 4. Failed code review returns to the fixer, then QA runs again before code review.
    Return when QA and the code review following it are clean under
-   [sdd.cycle.5](../../../docs/instructions/implementation/cycle.md#review-cleanliness).
+   [sdd.cycle.5](../../../sdd/instructions/implementation/cycle.md#review-cleanliness).
 
 Give leads the task, execution boundary, original starting commits and **progress owner: coordinator**;
 give the code-review lead the QA report path and its lead's returned cleanliness/coverage status.
 Leads prepare the map, dispatch specialists and verify.
 Route the verified final result without another source investigation under
-[sdd.cycle.6](../../../docs/instructions/implementation/cycle.md#finding-verification).
+[sdd.cycle.6](../../../sdd/instructions/implementation/cycle.md#finding-verification).
 The fixer checks current source and owns dispositions.
 
 ## Stops and recovery
@@ -69,17 +69,17 @@ Return repairable gaps to the original lead; if evidence or capability remains u
 the user rather than repeatedly dispatching the same unavailable work.
 
 A required decision pauses dependent work. Record it in the register and hand it back.
-Plan adjustments follow [evolution](../../../docs/instructions/implementation/escalation.md),
+Plan adjustments follow [evolution](../../../sdd/instructions/implementation/escalation.md),
 with agent/person origin; only explicit human re-settlement reopens step 2.
 
 ## Progress and hand-back
 
 You own progress. Open/resume step entries and close each before moving to the next under
-[the progress rules](../../../docs/instructions/implementation/cycle.md#progressmd).
+[the progress rules](../../../sdd/instructions/implementation/cycle.md#progressmd).
 Reread progress immediately before writing; delegated fixers and leads do not write it.
-Use the [progress template](../../../docs/instructions/implementation/templates/progress.md).
+Use the [progress template](../../../sdd/instructions/implementation/templates/progress.md).
 Return the outcome, final reports, actual limits and decisions needed, linking existing detail.
 
 Mark the run handed-back and handle local checkpoints under
-[sdd.commit.5](../../../docs/instructions/implementation/cycle.md#commits) only when returning to the user.
+[sdd.commit.5](../../../sdd/instructions/implementation/cycle.md#commits) only when returning to the user.
 Preserve settlement commits. Never freeze defects out of review or deliver from this role.

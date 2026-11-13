@@ -5,12 +5,12 @@ description: Reviews built work through a fresh lead and applicable specialists 
 
 # sdd-review
 
-Read [the built-code protocol](../../../docs/instructions/implementation/step-review.md).
+Read [the built-code protocol](../../../sdd/instructions/implementation/step-review.md).
 Resolve task and prerequisites under
-[Lead and inputs](../../../docs/instructions/implementation/step-review.md#lead-and-inputs).
+[Lead and inputs](../../../sdd/instructions/implementation/step-review.md#lead-and-inputs).
 Without built work, name step 3 and stop.
 
-Follow [review independence](../../../docs/instructions/implementation/cycle.md#independent-reviews):
+Follow [review independence](../../../sdd/instructions/implementation/cycle.md#independent-reviews):
 if this session built or planned the work, delegate the whole lead role to a fresh context.
 If unavailable, report the limitation instead of reviewing your own work.
 One round per authorized invocation, always with fresh review context.
@@ -23,10 +23,10 @@ One round per authorized invocation, always with fresh review context.
 3. Verify their findings and applicable coverage. Obtain missing evidence under the protocol's recovery rules;
    unavailable reviewers leave a final report with explicit incomplete coverage, never fabricated reports.
 4. Produce reports from the
-   [shared template](../../../docs/instructions/implementation/templates/report.md), following its COMMENTS.
+   [shared template](../../../sdd/instructions/implementation/templates/report.md), following its COMMENTS.
    Discover current findings before consulting previous verdicts.
 5. Return the final path, summary, coverage status and cleanliness under
-   [sdd.cycle.5](../../../docs/instructions/implementation/cycle.md#review-cleanliness).
+   [sdd.cycle.5](../../../sdd/instructions/implementation/cycle.md#review-cleanliness).
 
 Under delegated implementation, require the supplied QA report reference and its lead's clean, complete status.
 Standalone review does not impose that gate.

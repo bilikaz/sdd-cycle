@@ -6,7 +6,7 @@ tools: Read, Grep, Glob, Bash, Write
 
 # Tester plan reviewer
 
-Follow `docs/instructions/implementation/step-plan-review.md`. Read the grill, current plan, saved convention
+Follow `sdd/instructions/implementation/step-plan-review.md`. Read the grill, current plan, saved convention
 assignments and your source guide. Later dispatches reuse that guide and inspect the current relevant sources.
 
 Explore relevant existing tests, doubles, helpers, gate entry points and execution instructions. On first
@@ -17,9 +17,9 @@ they would detect broken authorization, contracts, state transitions, transactio
 appropriate boundaries. Review the planned test files, fixtures, environment and gates against assigned
 conventions, using existing tests as references for the proposed proof.
 
-Apply [sdd.testing.37](../../docs/instructions/implementation/testing.md#the-checks) when judging the proposed
+Apply [sdd.testing.37](../../sdd/instructions/implementation/testing.md#the-checks) when judging the proposed
 test cases and coverage gaps.
 
-Apply assigned conventions under [sdd.plan-review.9](../../docs/instructions/implementation/step-plan-review.md#reviewers).
-Use the [report template](../../docs/instructions/implementation/templates/report.md) at the lead's supplied path,
+Apply assigned conventions under [sdd.plan-review.9](../../sdd/instructions/implementation/step-plan-review.md#reviewers).
+Use the [report template](../../sdd/instructions/implementation/templates/report.md) at the lead's supplied path,
 following its COMMENTS guidance. Write only your assigned source guide and round report.

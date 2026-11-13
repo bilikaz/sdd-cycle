@@ -1,7 +1,7 @@
 # sdd-cycle
 
 A task cycle with steps 0–5 for building software with a coding agent — and the ten skills that
-run it. Copy it into a repository, point your agent at [`AGENTS.md`](AGENTS.md), and every task runs the
+run it. Use it as an outer workspace, point your agent at [`AGENTS.md`](AGENTS.md), and every task runs the
 same way: **initialize → grill → settle → build → review → deliver**.
 
 Not a framework and not code: a small set of markdown instructions plus agent skills. The instructions
@@ -10,7 +10,7 @@ a different person.
 
 ## The cycle
 
-One folder per task, under `docs/tasks/task<n>/`. Six numbered steps, **driven by the user** — they name the step,
+One folder per task, under `project/docs/tasks/task<n>/`. Six numbered steps, **driven by the user** — they name the step,
 an agent runs it and stops.
 
 | Step | Skill | Does |
@@ -23,65 +23,64 @@ an agent runs it and stops.
 | review | `sdd-review` | a fresh lead coordinates applicable built-code specialists and returns verified findings |
 | plan review | `sdd-plan-review` | a fresh lead coordinates applicable proposed-design specialists and verifies their findings |
 | 2 ↔ plan review | `sdd-planner` | draft and review the plan under delegated routing, then present it for confirmation |
-| 5 | `sdd-commit` | deliver under the [step-5 rules](docs/instructions/implementation/step-5-commit.md) |
+| 5 | `sdd-commit` | deliver under the [step-5 rules](sdd/instructions/implementation/step-5-commit.md) |
 | 3 ↔ 4 · review | `sdd-implementer` | coordinate implementation, QA and code review under explicit delegation, then return the report |
 
-The steps' rules live in [`docs/instructions/implementation/`](docs/instructions/implementation/cycle.md),
+The steps' rules live in [`sdd/instructions/implementation/`](sdd/instructions/implementation/cycle.md),
 carry stable ids (`sdd.step3.4`), and are the model a skill only points at.
 
 ## Install
 
-1. Copy `docs/instructions/` into your project's `docs/`.
-2. Copy `.agents/skills/` and `.agents/agents/` into your project (the canonical skills and specialist definitions).
-3. Copy `.claude/` into your project, preserving its relative directory symlinks:
-   `skills` points to `../.agents/skills` and `agents` to `../.agents/agents`. Keep these links in Git.
-4. Point your agent at `AGENTS.md`.
-5. Configure each repository's gate in the workspace map. `scripts/ci.sh` is an unwired starter;
-   connect it to the project's checks or use an existing full gate.
-6. Copy `scripts/changes.sh` (requires Git and Python 3). Follow the
-   [change-map protocol](docs/instructions/implementation/changes.md) to record starting commits and generate
-   each task's shared `changes.md` before QA and built-code reviews.
+1. Clone or copy this repository as the outer workspace, keeping `sdd/`, `.agents/`, `scripts/`,
+   `tests/` and `AGENTS.md` together. The application lives in an independent checkout at `project/`.
+2. Clone an existing application into `project/`, or run `bash scripts/init-project.sh` to initialize
+   an empty Git repository there. The script copies missing starter documents and a gate starter from
+   `sdd/templates/project/`; existing files are preserved. It creates no commits or remotes.
+3. Point the agent at the outer `AGENTS.md`. Keep `.claude/` aliases pointing to the canonical
+   `.agents/skills/` and `.agents/agents/` when using Claude.
+4. Fill in [this workspace's map](sdd/workspace.md), including the project's Git policy and full gate.
+   Wire `project/scripts/ci.sh` to the application's required checks. `bash scripts/ci.sh` runs that entry
+   point from the project root and forwards arguments and its exit status. The supplied starter fails
+   until checks are configured; no script starts a development environment.
+5. Record task starting commits and use `bash scripts/changes.sh taskN --base <starting-commit>`
+   under the [change-map protocol](sdd/instructions/implementation/changes.md).
 
 ## Project setup
 
-Start with the guided, empty [workspace map](docs/instructions/workspace.md). Grilling gathers relevant
-setup answers; planning records known repository, execution and verification details there. Update it as
-setup develops, like any standing document, and deliver its changes in step 5. Existing standing documents
-are used when available; a new project does not need a full set before grilling.
+The [workspace map](sdd/workspace.md) belongs to the outer repository and describes this workspace's
+checkouts, execution environments and allocations. Each persistent workspace keeps its own map and
+`project/` checkout. Reuse the portable instructions and skills; retain the destination workspace's
+configuration when updating them.
 
-| Path | What |
+Project task records and standing documents belong to the application Git repository. The outer
+repository ignores `project/`; application commits include their own `docs/tasks/` records. The
+tracked `sdd/templates/project/` directory supplies starter files for new projects. Once copied, those
+files are maintained as the consuming project's documents, not synchronized on every initialization.
+
+| Path relative to outer workspace | Purpose |
 |---|---|
-| `docs/architecture/INDEX.md` | the map: what exists, present tense |
-| `docs/architecture/glossary.md` | the glossary: one canonical name per concept |
-| `docs/conventions/INDEX.md` | the binding engineering rules, portable across projects |
-| `docs/adr/` | the decision log |
-| `docs/tasks/INDEX.md` | the task register |
-| `scripts/ci.sh` | starter for a configured gate — currently unwired |
+| `sdd/instructions/` | Portable cycle rules and task-document templates |
+| `sdd/workspace.md` | Current workspace configuration |
+| `sdd/templates/project/` | Starter files copied only when absent |
+| `project/` | Independent application Git checkout |
+| `project/docs/architecture/` | Architecture map and glossary |
+| `project/docs/conventions/` | Project engineering rules |
+| `project/docs/adr/` | Project decision records |
+| `project/docs/tasks/` | Task register, plans, progress and review records |
+| `.agents/` | Canonical skills and specialist definitions |
+| `scripts/` | Workspace initialization, gate dispatch and change-map tools |
+| `tests/` | Verification of the workspace scripts |
 
 ## Persistent workspaces and Docker
 
 We prefer persistent workspace folders for parallel work on one project. Each checkout retains its local
 environment files, container identity, port allocations and storage across task branches. Docker defines the
-runtime and service topology; the [workspace map](docs/instructions/workspace.md) records each configured
-workspace and the services shared once per host. Follow the [Docker](docs/conventions/docker.md) and
-[port](docs/conventions/service-ports.md) conventions for the common layout and allocation rules.
+runtime and service topology; the [workspace map](sdd/workspace.md) records each configured
+workspace and the services shared once per host. Follow the [Docker](project/docs/conventions/docker.md) and
+[port](project/docs/conventions/service-ports.md) conventions for the common layout and allocation rules.
 
 Git worktrees provide separate code checkouts and can use separate environment files and Docker resources.
 They do not provision that infrastructure: a new per-task checkout still needs local configuration,
 credentials and unique runtime allocations supplied. Persistent configured folders let us reuse that setup.
 See [Git worktrees](https://git-scm.com/docs/git-worktree) and
 [Compose project isolation](https://docs.docker.com/compose/how-tos/project-name/).
-
-## Layout
-
-```
-AGENTS.md                                  this project's guide for an agent
-docs/instructions/implementation/          steps 0–5, escalation, testing
-docs/instructions/documentation/           the laws about the documents the cycle keeps
-docs/architecture · docs/conventions · docs/adr · docs/tasks   the stubs a project fills
-.agents/skills/sdd-*/SKILL.md              the skills, canonical
-.agents/agents/sdd-*.md                    specialist agent definitions, canonical
-.claude/skills                            relative symlink to ../.agents/skills
-.claude/agents                            relative symlink to ../.agents/agents
-scripts/ci.sh                              the gate
-```

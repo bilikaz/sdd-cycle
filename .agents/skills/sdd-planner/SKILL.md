@@ -13,12 +13,12 @@ This file owns the loop and its stops.
 
 - Require the user's request for this role or its loop. A single-step request or an agent's own invocation
   supplies no delegation; otherwise name `sdd-plan` and stop.
-- Read [the cycle](../../../docs/instructions/implementation/cycle.md) and
-  [step-2 entry](../../../docs/instructions/implementation/step-2-settle.md#entry).
+- Read [the cycle](../../../sdd/instructions/implementation/cycle.md) and
+  [step-2 entry](../../../sdd/instructions/implementation/step-2-settle.md#entry).
   Satisfy prerequisites before any write. An unfinished initial grill names `sdd-grill` and stops;
   after implementation begins, require explicit human re-settlement.
 - Record delegation as a verbatim G-row in grill.md and maintain Planner run in the task's report.md under the
-  [report template](../../../docs/instructions/implementation/templates/report.md).
+  [report template](../../../sdd/instructions/implementation/templates/report.md).
   You own the step-2 progress entry; reviewers do not.
 - Default to **five review dispatches per delegated run**, unless the user instructs another limit.
   Start a new run at zero; resume an active run's saved count. Increment before dispatch, including
@@ -29,10 +29,10 @@ This file owns the loop and its stops.
 ## Draft and review
 
 Draft from the ledger under step 2 and the
-[implementation template](../../../docs/instructions/implementation/templates/implementation.md).
+[implementation template](../../../sdd/instructions/implementation/templates/implementation.md).
 Delegate each review to a fresh lead with the task path and current documents.
 Read its verified report. As the plan's fixer, check relevant current material while applying corrections
-under [sdd.cycle.6](../../../docs/instructions/implementation/cycle.md#finding-verification).
+under [sdd.cycle.6](../../../sdd/instructions/implementation/cycle.md#finding-verification).
 Append dispositions under sdd.step2.10.
 
 Apply factual corrections as one batch, then review the changed documents once, within the run limit.
@@ -47,7 +47,7 @@ Ask no decision questions between review waves.
 ## Stops
 
 - **Clean:** current documents satisfy
-  [sdd.cycle.5](../../../docs/instructions/implementation/cycle.md#review-cleanliness).
+  [sdd.cycle.5](../../../sdd/instructions/implementation/cycle.md#review-cleanliness).
   Proceed to presentation.
 - **Limit:** stop dispatching at the configured limit. Prioritize presenting and resolving the Proposals
   and Alternatives gathered so far, then identify remaining findings. Do not automatically start another
@@ -67,7 +67,7 @@ Ask no decision questions between review waves.
 
 On hand-back, persist unresolved choices/findings in the plan or register and link them in the reply.
 Mark the run handed-back and leave step 2 current; no separate occasion entry under
-[sdd.progress.5](../../../docs/instructions/implementation/cycle.md#progressmd).
+[sdd.progress.5](../../../sdd/instructions/implementation/cycle.md#progressmd).
 Waiting for choices or document confirmation keeps the run active.
 Hand-back or settlement ends the run. A later user instruction to continue starts a new allowance;
 an answer to a pending question alone does not authorize another review loop.
