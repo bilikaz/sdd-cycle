@@ -1,10 +1,17 @@
 # Testing — what to run and what to record
 
-The project owns its gates; this file governs their use in the task cycle.
+The project owns its gates; this file governs their use at the end of implementation.
+
+## Scope
+
+- **sdd.testing.39.** This procedure applies only at the end of `sdd step 3`, before implementation is
+  handed back. Its testing and verification requirements do not apply to any other step. Other steps use
+  the recorded step-3 results; this procedure does not require or authorize rerunning tests, lint, builds,
+  coverage or gates there.
 
 ## The gate
 
-- **sdd.testing.1.** Run the full gate configured for each changed repository in
+- **sdd.testing.1.** At the end of `sdd step 3`, run the full gate configured for each changed repository in
   [workspace.md](../../workspace.md#verification-gates), in its selected environment. The gate reports failures
   with a nonzero exit and does not silently skip required checks.
 - **sdd.testing.2.** Step 3 requires an executed, passing gate for each changed root. Record its command,
