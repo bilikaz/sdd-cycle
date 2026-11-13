@@ -1,8 +1,8 @@
 # Conventions
 
 Binding engineering rules for a TypeScript project, one topic per file: the rule, why it exists, how to apply
-it. A project keeps this folder as its own — it adds its topics, records a deviation where it departs from a
-rule, and adopts a rule for new and changed code without rewriting what already stands.
+it. Agents manually compare and adopt the shared default and optional platform conventions for the consuming
+project. Apply adopted rules to new and changed code; record project wiring and named deviations separately.
 
 ## Code shape
 
@@ -43,7 +43,7 @@ rule, and adopts a rule for new and changed code without rewriting what already 
 
 | Topic | Rule in one line |
 |---|---|
-| [data-model-naming.md](data-model-naming.md) | Tables plural; `<singular_table>_id` keys; one generated single-column primary key; natural keys are unique constraints |
+| [data-model-naming.md](data-model-naming.md) | Tables plural; named id columns; prefer join-table uniqueness, natural keys, independent UUIDs, then internal auto-increment surrogates |
 | [ownership-keys.md](ownership-keys.md) | Never upsert on a key that decides ownership; never unbind the last credential |
 | [destructive-actions.md](destructive-actions.md) | A delete names exactly what it destroys; deleted listed items leave visible tombstones |
 | [testing.md](testing.md) | Mock at the port, drive real engines, assert structure; a model-dependent result is judged over runs |
@@ -58,4 +58,17 @@ rule, and adopts a rule for new and changed code without rewriting what already 
 | [llm-interfaces.md](llm-interfaces.md) | model calls | Stable schemas, catalogs as data, bounded resubmitted payloads, one placeholder primitive |
 | [pluggable-backends.md](pluggable-backends.md) | interchangeable backends | One feature, a per-record backend discriminant, an adapter per backend behind a neutral type |
 | [module-registries.md](module-registries.md) | a keyed family of implementations | The folder layout is the registry: one module per implementation, resolved by path |
-| [traceability.md](traceability.md) | handed-off work | Handed-off work carries a trace id one registry creates; the work completes it |
+| [traceability.md](traceability.md) | handed-off work | Carry the application's persisted work identity through handoffs; completion comes from stored outcomes |
+
+## Enforcement
+
+Keep reusable lint implementations, their regression tests and shared lint presets with the pack whose rules
+they enforce. General TypeScript checks belong in the default pack; checks for a reusable application stack
+belong in that stack's shared pack. Consuming projects supply package names, source roots, generated-file paths
+and justified exceptions through configuration. Project-specific wiring does not require a private copy of a
+shared check.
+
+## Shared sources
+
+Shared lint code and its tests live in the starter's `eslint-rules/`. Agents adopt them manually alongside
+the applicable conventions; project configuration supplies paths and named exceptions.

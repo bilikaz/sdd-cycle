@@ -28,6 +28,8 @@ starter = workspace / 'sdd/templates/project'
 for source in sorted(starter.rglob('*')):
     if not source.is_file():
         continue
+    if source.is_relative_to(starter / 'docs/conventions-platform'):
+        continue
     target = project / source.relative_to(starter)
     if target.exists() or target.is_symlink():
         continue

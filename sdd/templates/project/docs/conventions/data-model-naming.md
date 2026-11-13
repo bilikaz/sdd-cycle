@@ -1,10 +1,10 @@
 # Data-model naming
 
 **Rule.** Tables are plural and self-explanatory: a root entity is a bare plural, and a sub-entity owned by one
-root carries that root's name as a prefix. Every table has a single-column generated primary key named
-`<singular_table>_id`, spelled identically as the primary key and as every foreign key that points at it — no bare
-`id`. A natural key is a unique constraint, never the primary key. Status columns are plain strings, guarded by a
-string-union type in code.
+root carries that root's name as a prefix. Choose keys in order: unique indexes for join tables, suitable
+natural keys such as slugs, UUIDs where independent identity is needed, then auto-increment surrogates for the
+remaining internal cases. An id column is named `<singular_table>_id`, spelled identically wherever it is
+referenced — no bare `id`. Status columns are plain strings, guarded by a string-union type in code.
 
 ## Rules
 
@@ -16,13 +16,18 @@ string-union type in code.
    `users.user_id`, `user_logins.user_login_id` (+ `user_logins.user_id`).
 4. **A self-reference → `<role>_<singular_table>_id`:** the key's whole name with its role in front, since the
    plain name is the row's own key — a tree's row carries its parent as `parent_<singular_table>_id`.
-5. **Every table has a single-column generated primary key.** Ids come from the project's one id generator —
-   random, not guessable-sequential. The one exception is a slug id: a key entered by a person or derived from the
-   row's stable name.
-6. **A natural key is a unique constraint plus index, never the primary key.** A multi-column natural key
-   (`(provider, external_id)`) gets a `UNIQUE` constraint and the index its read path needs. A row may be looked up
-   by its natural key and still keeps its generated primary key as its identity. A generated key is not permission
-   to leave a natural key unconstrained: a natural key without a unique constraint is only an intention.
+5. **Choose identity in this preference order.**
+   - For a join table, prefer a unique index over the fields identifying the relationship. A composite primary
+     key may enforce that same identity; do not add an independent id unless a consumer needs one.
+   - Prefer a suitable natural key, such as a `slugId` entered by a person or derived from a stable name.
+   - Prefer a UUID when an independently generated identity is needed: for a user-facing identifier without a
+     suitable natural key, or an id reused in a filename, related work or another reference before the row exists.
+     Use the project's shared UUID generator.
+   - Use `AUTO_INCREMENT` as the default internal surrogate in the remaining cases. It follows the choices above;
+     it is not the first choice for every table.
+6. **Enforce uniqueness independently of the surrogate choice.** When a row has a surrogate primary key,
+   constrain its natural keys and relationship combinations separately with `UNIQUE` indexes. A table does not
+   need a generated id merely because it is a table. Choose indexes and column order for the actual read paths.
 7. **Status and state columns are plain strings, never a SQL `ENUM`.** Adding a state is a code change, not an
    `ALTER TABLE`. Each status column has one string-union type, and every write goes through it.
 8. **Scope:** this governs the persistence model (tables and columns). Application payloads and DTOs keep their own
@@ -34,9 +39,10 @@ A column named `job_id` tells you both the table it keys and what a foreign key 
 removes the `id`-here, `job_id`-there drift that forks joins. An unqualified sub-entity (`attempts`) is ambiguous;
 `job_attempts` answers "of what?" in the name.
 
-A composite primary key propagates: every foreign key carries all its columns, every join widens, and a change to
-the natural key becomes a migration across every referencing table. A single generated key keeps identity one
-column wide and lets the natural key be what it is — a uniqueness rule that can change without touching identity.
+A unique index expresses a relationship's identity directly. A suitable natural key keeps an existing stable
+identifier useful. A UUID can be minted before insertion and reused independently of the database. An internal
+row that needs none of those properties can use an auto-increment surrogate. A referenced composite key carries
+all its columns into foreign keys, so choose its fields as the stable identity being referenced.
 
 A SQL `ENUM` is weaker than it reads: it orders and compares by position, and some modes coerce an invalid value
 instead of erroring. A string-union type fails an invalid literal at typecheck, earlier and louder.
@@ -48,6 +54,7 @@ instead of erroring. A string-union type fails an invalid literal at typecheck, 
 // jobs        (job_id PK, user_id FK, status VARCHAR, ...)
 // user_logins (user_login_id PK, user_id FK, provider VARCHAR, external_id VARCHAR,
 //              UNIQUE (provider, external_id))
+// user_roles  (user_id FK, role_id FK, UNIQUE (user_id, role_id))
 
 type JobStatus = "queued" | "running" | "finished" | "failed";
 

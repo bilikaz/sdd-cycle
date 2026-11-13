@@ -31,8 +31,8 @@ carry stable ids (`sdd.step3.4`), and are the model a skill only points at.
 
 ## Install
 
-1. Clone or copy this repository as the outer workspace, keeping `sdd/`, `.agents/`, `scripts/`,
-   `tests/` and `AGENTS.md` together. The application lives in an independent checkout at `project/`.
+1. Clone or copy this repository as the outer workspace, keeping `sdd/`, `.agents/`, `scripts/`
+   and `AGENTS.md` together. The application lives in an independent checkout at `project/`.
 2. Clone an existing application into `project/`, or run `bash scripts/init-project.sh` to initialize
    an empty Git repository there. The script copies missing starter documents and a gate starter from
    `sdd/templates/project/`; existing files are preserved. It creates no commits or remotes.
@@ -55,7 +55,22 @@ configuration when updating them.
 Project task records and standing documents belong to the application Git repository. The outer
 repository ignores `project/`; application commits include their own `docs/tasks/` records. The
 tracked `sdd/templates/project/` directory supplies starter files for new projects. Once copied, those
-files are maintained as the consuming project's documents, not synchronized on every initialization.
+files are maintained as the consuming project's documents.
+
+## Shared conventions and enforcement
+
+The default convention pack and reusable lint code live in `sdd/templates/project/`. The optional
+`docs/conventions-platform/` overlay contains the shared core, API, console and design-system rules;
+agents adopt its applicable rules into the same convention folder so existing rule links stay stable.
+The current project's stronger conventions take precedence when reconciling differences. Project wiring lives in the
+project's architecture documents, and named departures in its `docs/conventions/deviations.md`.
+
+Agents compare and adopt conventions manually, reconciling the shared guidance with the consuming
+project's rules, wiring and exceptions.
+
+The enforcement module exports the rule implementations plus shared configuration constants.
+Consumers provide their package names, source roots and named exceptions. Rule implementations and
+portable regression tests are adopted together; project-specific integration tests remain local.
 
 | Path relative to outer workspace | Purpose |
 |---|---|
@@ -70,7 +85,6 @@ files are maintained as the consuming project's documents, not synchronized on e
 | `project/docs/tasks/` | Task register, plans, progress and review records |
 | `.agents/` | Canonical skills and specialist definitions |
 | `scripts/` | Workspace initialization, gate dispatch and change-map tools |
-| `tests/` | Verification of the workspace scripts |
 
 ## Persistent workspaces and Docker
 

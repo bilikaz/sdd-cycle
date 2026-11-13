@@ -1,43 +1,44 @@
-# Destructive actions
+# Destructive actions: name the loss, leave tombstones
 
-**Rule.** A delete affordance names exactly the thing that is destroyed — no more, no less — and an item
-deleted from any historical enumeration in the UI leaves a visible tombstone, never a silent gap.
-
-## Rules
-
-1. **Name the actual loss, consistently.** Pick the noun for what is really destroyed and use it on every
-   surface: the button, the confirmation and the tombstone ("Delete run log" → "Run log deleted"). If the
-   honest noun sounds harmless, that is the point — it was harmless.
-2. **Scope bulk claims with counts.** "Delete 15 run logs" promises exactly the blast radius.
-3. **Leave a tombstone in history.** When a deleted item was enumerated somewhere (chips, rows, links),
-   render an inert tombstone in its place — muted, unclickable, with a hint saying what survived and where
-   ("Its result stays in the report"). Stable counts tell the user nothing else was lost.
-4. **Never undersell.** If live work stops as a side effect (deleting a running task cancels it), the
-   surrounding flow makes that consequence known; a safe-sounding label must not hide an unsafe effect.
-5. **Live views are exempt.** A "what is active now" view is a snapshot, not a history; an item leaving it
-   on close is expected. Split the two: the live panel drops the item, the durable log renders the
-   tombstone. The test: would a user expect this list only ever to grow? If yes, it is a history.
+**Rule:** A delete affordance names exactly the thing that is destroyed — no
+more, no less — and a deleted item in any enumerated UI leaves a visible
+tombstone, never a silent gap.
 
 ## Why
 
-Users infer data loss from the shape of the UI, not from the implementation. A label that oversells the
-loss ("Delete agent" when only a transcript goes) makes a safe cleanup feel dangerous. A list of linked
-items that shrinks as referenced items are deleted reads as corruption, even when nothing the system
-depends on was lost.
+Users infer data loss from UI shape, not from implementation. Two failure
+modes, both observed in real work:
+
+- **Overselling the loss.** A button labeled "Delete run" (or worse, "Delete
+  agent") when only the run's *transcript* is destroyed — its answer survives
+  elsewhere — makes a safe cleanup feel dangerous, so users avoid it or fear
+  they broke something.
+- **Silent shrink.** A list of five linked items becoming four, then three, as
+  referenced items are deleted reads as corruption ("where did my context
+  go?") even when nothing the system depends on was lost.
 
 ## How to apply
 
-```ts
-type LinkedItem =
-  | { kind: 'live'; id: string; title: string }
-  | { kind: 'deleted'; id: string; survivedIn?: string };
-
-function renderLink(item: LinkedItem): Chip {
-  if (item.kind === 'deleted') {
-    return { label: 'Run log deleted', muted: true, clickable: false, hint: item.survivedIn };
-  }
-  return { label: item.title, clickable: true, href: `/runs/${item.id}` };
-}
-
-const confirmText = (count: number) => `Delete ${count} run log${count === 1 ? '' : 's'}?`;
-```
+- Pick the noun for what is actually destroyed and keep it consistent across
+  every surface: the action button, the confirmation text, and the tombstone
+  ("Delete run log" → "Run log deleted"). If the honest noun sounds harmless,
+  that's the point — it was harmless.
+- Scope claims with counts where bulk applies: "Delete 15 run logs" promises
+  exactly the blast radius.
+- When a deleted item was enumerated somewhere (chips, rows, links), render an
+  inert tombstone in its place — muted, unclickable, with a hint saying what
+  survived and where ("Its answer stays in the tool result"). Counts staying
+  stable is what tells the user nothing else was lost.
+- Conversely, never *undersell*: if live work is killed as a side effect
+  (deleting a streaming task stops it), the surrounding flow must make that
+  consequence knowable — a safe-sounding label must not hide an unsafe effect.
+- **Live "what's active now" views are exempt from the tombstone rule** — they
+  are a snapshot of current state, not a history, so an item leaving on close is
+  expected, not a silent shrink (a running-processes list shrinks when a process
+  exits; nobody reads corruption into it). The tombstone obligation falls on the
+  **historical** enumeration instead. Split the two: the live panel drops the
+  item; the durable log (transcript, audit list) renders the inert tombstone. The
+  test for which surface is which: would a user expect this list to only ever
+  grow? If yes it's a history (tombstone); if it tracks "right now" it may drop.
+  (Example: closing a browser window removes it from the all-windows panel, while
+  the tool-call that opened it keeps an alive-link-or-tombstone in the transcript.)
