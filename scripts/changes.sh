@@ -131,20 +131,21 @@ def main():
         epilog='''Includes committed changes since the starting commit, staged and unstaged changes,
 and nonignored untracked files. Excludes docs/tasks/ in every root and the selected task record tree.
 Reports the net change: paths, additions, deletions and changed line ranges, without patch text.
-Writes project/docs/tasks/task<ID>/changes.md for a task ID, or <task-folder>/changes.md for a path.
+Writes project/docs/tasks/<folder>/changes.md for a task ID or folder name, or <task-folder>/changes.md for a path.
 The task folder must already exist. Requires Git and Python 3.
 Task IDs and the default Git root use project/ beside this script's workspace.
 Explicit task-folder paths and --root paths are relative to the invocation directory.
 
 Examples (run from your workspace):
   bash scripts/changes.sh task1 --base abc1234
+  bash scripts/changes.sh 2026-01-15-M2-login-flow --base abc1234
   bash scripts/changes.sh 1 --base abc1234
   bash scripts/changes.sh project/docs/tasks/task1 --root project --base abc1234
   bash scripts/changes.sh task1 --root project --base abc1234 --root ./other --base def5678
 
 Use the task's original starting commit again on later runs; do not move the baseline to HEAD.'''
     )
-    parser.add_argument('task_folder', metavar='TASK', help='Task ID (1 or task1) or an existing task-folder path')
+    parser.add_argument('task_folder', metavar='TASK', help='Task ID (1 or task1), a task folder name under project/docs/tasks/, or an existing task-folder path')
     parser.add_argument('--root', action='append', metavar='PATH', help='Git root (default: workspace project/); repeat with one --base per root')
     parser.add_argument('--base', action='append', required=True, metavar='COMMIT', help='Starting Git commit hash or ref; one per root, in the same order')
     args = parser.parse_args()
@@ -155,6 +156,8 @@ Use the task's original starting commit again on later runs; do not move the bas
     task_id = re.fullmatch(r'(?:task)?([0-9]+)', args.task_folder)
     if task_id:
         task = project_root() / 'docs/tasks' / ('task' + task_id.group(1))
+    elif '/' not in args.task_folder and (project_root() / 'docs/tasks' / args.task_folder).is_dir():
+        task = project_root() / 'docs/tasks' / args.task_folder
     else:
         task = Path(args.task_folder).resolve()
     if not task.is_dir():

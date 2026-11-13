@@ -10,7 +10,7 @@ a different person.
 
 ## The cycle
 
-One folder per task, under `project/docs/tasks/task<n>/`. Six numbered steps, **driven by the user** — they name the step,
+One folder per task, under `project/docs/tasks/` — `<YYYY-MM-DD>-<milestone-code>-<slug>/` for a roadmap milestone, `task<n>/` otherwise. Six numbered steps, **driven by the user** — they name the step,
 an agent runs it and stops.
 
 | Step | Skill | Does |

@@ -36,7 +36,7 @@ Point subagents at the same specific documents and verified execution boundaries
 
 ## What the instruction set governs
 
-The task cycle, one task at a time in `project/docs/tasks/task<n>/` — steps 0–5 whose rules carry stable
+The task cycle, one task at a time in `project/docs/tasks/<folder>/` (named per [cycle.md](sdd/instructions/implementation/cycle.md#the-task-folder)) — steps 0–5 whose rules carry stable
 ids, the model being [`sdd/instructions/implementation/cycle.md`](sdd/instructions/implementation/cycle.md).
 This file only points; the standing documents are updated to current truth as work lands, and implementation
 never rewrites a settled document mid-build.

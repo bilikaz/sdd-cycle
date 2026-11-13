@@ -11,9 +11,9 @@ Run from the workspace with Git and Python 3 available:
 bash scripts/changes.sh taskN --base <starting-commit>
 ```
 
-The task argument accepts a numeric ID (`1`), a task name (`task1`) or a task-folder path
-(`project/docs/tasks/task1`). IDs resolve under the workspace script's `project/docs/tasks/`, regardless
-of the invocation directory; the default Git root is that independent `project/` checkout. `--base`
+The task argument accepts a numeric ID (`1`), a task name (`task1`), a task folder's name
+(`2026-01-15-M2-login-flow`) or a task-folder path (`project/docs/tasks/task1`). IDs and names resolve
+under the workspace script's `project/docs/tasks/`, regardless of the invocation directory; the default Git root is that independent `project/` checkout. `--base`
 accepts the starting Git commit hash or a ref, resolved to a fixed hash in the report.
 Run `bash scripts/changes.sh --help` for argument descriptions and examples.
 

@@ -11,8 +11,16 @@ agent reads the folder before it acts, never the conversation.
 Paths here are relative to the outer workspace unless marked project-relative. Repository ownership
 and participation follow [the workspace boundaries](../../workspace.md#repository-and-document-boundaries).
 
-One folder per task under `project/docs/tasks/` — `task<n>/`, numbered in the order opened, registered in the
-[tasks index](../../../project/docs/tasks/INDEX.md) by its delivery (sdd.step5.8).
+One folder per task under `project/docs/tasks/`, registered in the
+[tasks index](../../../project/docs/tasks/INDEX.md) by its delivery (sdd.step5.8). Its name:
+
+| The task | Folder | Example |
+|---|---|---|
+| serves a milestone of the project's roadmap | `<YYYY-MM-DD>-<milestone-code>-<slug>/` — the date it opened, the milestone's code, a short slug | `2026-01-15-M2-login-flow/` |
+| serves no milestone | `task<n>/` — numbered after the highest existing `task<n>`, starting at `task1` | `task7/` |
+
+The roadmap's home is the project's [workspace map](../../workspace.md#standing-documents); the milestone is the one
+the task takes from it, recorded in `task.md` as **Milestone.** A folder carries no developer name.
 
 | File | Holds |
 |---|---|

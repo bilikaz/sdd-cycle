@@ -12,9 +12,11 @@ Step 0 creates the task's branch and records. Its entry point is
   continuation does not exist, report the gap and ask; never turn that request into new-task creation.
 - **sdd.step0.2.** Use the user's brief to name the task. Ask what the task is only when that is missing;
   gather enough to name the branch, leaving the design interview to step 1.
-- **sdd.step0.3.** Allocate `task<n>` after the highest existing task-folder number, starting at `task1`.
-  The branch is `task<n>-<short-slug>` unless the user or configured project naming rules specify another
-  pattern. Check folder and branch availability before creating either; never overwrite an existing task.
+- **sdd.step0.3.** Name the task folder under [cycle.md § The task folder](cycle.md#the-task-folder): a task that
+  serves a roadmap milestone is `<YYYY-MM-DD>-<milestone-code>-<slug>`, dated the day it opens; any other is
+  `task<n>`, after the highest existing `task<n>`, starting at `task1`. Which milestone the task serves comes from
+  the user's brief or the roadmap; when neither settles it, ask. The branch is `task/<folder>` unless the user or
+  configured project naming rules specify another pattern. Check folder and branch availability before creating either; never overwrite an existing task.
 
 ## Preserve existing work
 
@@ -53,7 +55,7 @@ Step 0 creates the task's branch and records. Its entry point is
 
 ## Create the records and stop
 
-- **sdd.step0.11.** Create `project/docs/tasks/task<n>/progress.md` with verified Git context and a step-0 entry,
+- **sdd.step0.11.** Create `project/docs/tasks/<folder>/progress.md` with verified Git context and a step-0 entry,
   and `grill.md` with the user's original brief and initial answers using the
   [grill](templates/grill.md) and [progress](templates/progress.md) templates. Preserve the user's wording.
   Follow step 1's [answer-ledger rules](step-1-grilling.md#grillmd--the-answer-ledger); record the user's
