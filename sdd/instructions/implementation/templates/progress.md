@@ -101,7 +101,7 @@ Record issues noticed during implementation that need a ruling, linking their op
 Review findings and their dispositions stay in their original reports.
 END COMMENTS -->
 
-## sdd step 4 · QA — <qa file> — opened <YYYY-MM-DD>
+## sdd step 4 · QA — <round folder> — opened <YYYY-MM-DD>
 
 Status: current
 Review: <QA report path>
@@ -109,7 +109,7 @@ Summary: <N> blocker · <N> major · <N> warning · <N> info
 
 <!-- COMMENTS
 Only the report filename and numeric finding counts belong here. All other review data stays in its report.
-Example: Review: qa2.md · Summary: 0 blocker · 0 major · 1 warning · 0 info.
+Example: Review: qa/round2/review.md · Summary: 0 blocker · 0 major · 1 warning · 0 info.
 The QA lead writes this entry (sdd.progress.6).
 END COMMENTS -->
 
@@ -138,14 +138,14 @@ active step.
 On hand-back, link pending decisions and reports rather than summarizing their contents.
 END COMMENTS -->
 
-## sdd step plan review — <review file> — opened <YYYY-MM-DD>
+## sdd step plan review — <round folder> — opened <YYYY-MM-DD>
 
 Status: current
 Review: <review report path>
 Summary: <N> blocker · <N> major · <N> warning · <N> info
 
 
-## sdd step review — <review file> — opened <YYYY-MM-DD>
+## sdd step review — <round folder> — opened <YYYY-MM-DD>
 
 Status: current
 Review: <review report path>

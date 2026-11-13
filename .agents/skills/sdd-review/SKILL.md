@@ -29,5 +29,5 @@ One round per authorized invocation, always with fresh review context.
    [sdd.cycle.5](../../../sdd/instructions/implementation/cycle.md#review-cleanliness).
 
 Write no fix or disposition; never commit, push or route to another step. Write this review's progress entry under
-sdd.progress.6: close the open step entry, open `sdd step review — <report>` and close it
+sdd.progress.6: close the open step entry, open `sdd step review — <round folder>` and close it
 under the progress template.

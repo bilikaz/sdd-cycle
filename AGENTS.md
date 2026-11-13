@@ -52,10 +52,10 @@ runs each.
 | `sdd-grill` | 1 | resolve the task's questions in the answer ledger, report completion and wait |
 | `sdd-plan` | 2 | draft or revise an existing task's documents, confirm and settle; related coordinating role: [sdd-planner](.agents/skills/sdd-planner/SKILL.md) |
 | `sdd-implement` | 3 | build to the settled documents, verify and update standing docs; related coordinating role: [sdd-implementer](.agents/skills/sdd-implementer/SKILL.md) |
-| `sdd-qa` | 4 | a fresh QA lead uses the shared change map, dispatches code-review, conventions and drift agents, verifies their reports and writes `qa<y>.md` |
+| `sdd-qa` | 4 | a fresh QA lead uses the shared change map, dispatches code-review, conventions and drift agents, verifies their reports and writes `qa/round<x>/review.md` |
 | `sdd-commit` | 5 | commit the changed repositories and record the delivery under the step-5 rules and the project's configured Git targets |
 | `sdd-review` | review | a fresh lead coordinates applicable specialists under the [review protocol](sdd/instructions/implementation/step-review.md) |
-| `sdd-plan-review` | plan review | a lead coordinates applicable specialists using reusable assignments and reviewer-owned source guides, verifies findings and writes `plan-review<x>.md` for step 2 |
+| `sdd-plan-review` | plan review | a lead coordinates applicable specialists using reusable assignments and reviewer-owned source guides, verifies findings and writes `plan-review/round<x>/review.md` for step 2 |
 | `sdd-planner` | 2 ↔ plan review | draft, delegate plan review, then settle or hand back under the [planner's routing and stop rules](.agents/skills/sdd-planner/SKILL.md) |
 | `sdd-implementer` | 3 ↔ 4 · review | coordinate implementation, QA and code review under explicit delegation, then return the report |
 

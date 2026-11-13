@@ -21,9 +21,9 @@ runs from interview to delivery.
 | [implementation/step-1-grilling.md](implementation/step-1-grilling.md) | `sdd step 1` — the interview, its two doors (grill · citation), and `grill.md`, the answer ledger |
 | [implementation/step-2-settle.md](implementation/step-2-settle.md) | `sdd step 2` — `task.md` and `implementation.md`, their anatomy, the confirmation and the settlement commit |
 | [implementation/step-3-implement.md](implementation/step-3-implement.md) | `sdd step 3` — build, test and documents interleaved; finding dispositions and concise verification results |
-| [implementation/step-4-qa.md](implementation/step-4-qa.md) | a QA lead coordinates code-review, conventions and drift agents, verifies their reports and writes `qa<y>.md` for step 3 |
+| [implementation/step-4-qa.md](implementation/step-4-qa.md) | a QA lead coordinates code-review, conventions and drift agents, verifies their reports and writes `qa/round<x>/review.md` for step 3 |
 | [implementation/step-review.md](implementation/step-review.md) | a lead coordinates applicable specialists, verifies their findings and returns one final report |
-| [implementation/step-plan-review.md](implementation/step-plan-review.md) | a lead coordinates applicable proposed-design reviewers with reusable assignments and source guides, verifies findings and writes `plan-review<x>.md` for step 2 |
+| [implementation/step-plan-review.md](implementation/step-plan-review.md) | a lead coordinates applicable proposed-design reviewers with reusable assignments and source guides, verifies findings and writes `plan-review/round<x>/review.md` for step 2 |
 | [implementation/step-5-commit.md](implementation/step-5-commit.md) | `sdd step 5` — commit task work, record delivery and follow each repository's configured merge/push policy |
 | [implementation/escalation.md](implementation/escalation.md) | Post-settlement changes evolve with agent/person origin; only explicit human re-settlement reopens the plan |
 | [implementation/changes.md](implementation/changes.md) | the shared task change map: fixed starting commits, all Git roots, file counts and original/current line ranges for QA and built-code review |

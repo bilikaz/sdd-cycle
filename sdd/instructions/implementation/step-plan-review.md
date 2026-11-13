@@ -35,9 +35,9 @@ Paths in this section are relative to the task folder. The assignment filename i
 | File | Author | Contents |
 |---|---|---|
 | `plan-review/assignments.md` | Lead | Reviewer names and convention-to-reviewer assignments, created once and reused. |
-| `plan-review/<reviewer>.md` | Reviewer | Reusable source guide under the shared template. |
-| `plan-review<x>-<reviewer>.md` | Reviewer | Current findings and numeric severity counts, using the shared report template. |
-| `plan-review<x>.md` | Lead | Verified current findings and numeric severity counts. |
+| `plan-review/guides/<reviewer>.md` | Reviewer | Reusable source guide under the shared template. |
+| `plan-review/round<x>/<reviewer>.md` | Reviewer | Current findings and numeric severity counts, using the shared report template. |
+| `plan-review/round<x>/review.md` | Lead | Verified current findings and numeric severity counts. |
 
 `<reviewer>` names a role from the roster below. Select round `<x>` under [sdd.naming.1](cycle.md#naming).
 
@@ -54,7 +54,7 @@ Paths in this section are relative to the task folder. The assignment filename i
   reviewer file.
   Naming, documentation and other cross-cutting conventions are assigned within the same six reviewers.
 - **sdd.plan-review.6.** On its first dispatch, each reviewer scans existing implementations relevant to
-  its responsibilities and creates `plan-review/<reviewer>.md`. Follow the
+  its responsibilities and creates `plan-review/guides/<reviewer>.md`. Follow the
   [source-guide template](templates/source-guide.md), then produce the round report. The guide helps future
   reviewers find the relevant files; findings are recorded in the round reports.
 - **sdd.plan-review.7.** Later fresh reviewers start from their saved source guides. They read the current

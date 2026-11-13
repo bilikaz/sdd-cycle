@@ -26,5 +26,5 @@ Run one round per authorized invocation.
 Follow sdd.plan-review.18: write only assigned preparation/reports and the lead's register entries.
 Never edit the plan, ledger or implementation, dispose findings, request settlement, commit or push.
 Write this review's progress entry under sdd.progress.6: close the open step-2 entry, open
-`sdd step plan review — <report>` and close it under the progress template.
+`sdd step plan review — <round folder>` and close it under the progress template.
 Missing independent coverage is never clean; do not impersonate specialists.

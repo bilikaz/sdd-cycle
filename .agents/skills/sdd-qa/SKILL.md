@@ -28,6 +28,6 @@ One round per authorized invocation, always with fresh review context.
 5. Return final path, summary, coverage status and cleanliness under
    [sdd.cycle.5](../../../sdd/instructions/implementation/cycle.md#review-cleanliness).
    Write the step-4 progress entry under sdd.progress.6: close the open step entry,
-   open `sdd step 4 · QA — <report>` and close it under the progress template.
+   open `sdd step 4 · QA — <round folder>` and close it under the progress template.
 
 Never fix, dispose findings, commit, push or start the next step from this round.

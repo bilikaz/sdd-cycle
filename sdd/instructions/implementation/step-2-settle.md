@@ -51,8 +51,7 @@ that already lives in one of [the standing documents](../../workspace.md#standin
 
 - **sdd.step2.10.** Review runs only on request under sdd.cycle.1. With no report, skip disposal; planning
   launches no review on its own, and a requested review belongs to `sdd-plan-review`. Otherwise read the highest
-  review round of `plan-review<x>.md` ([step-plan-review.md](step-plan-review.md)); round 1 is the unnumbered
-  `plan-review.md` under sdd.naming.1. Read that round
+  review round, `plan-review/round<x>/review.md` ([step-plan-review.md](step-plan-review.md)). Read that round
   and any earlier round with unfinished dispositions; file modification times do not determine review order.
   Every finding takes exactly one
   disposition before the documents are presented: **fixed** — `task.md` or `implementation.md` edited in place, one

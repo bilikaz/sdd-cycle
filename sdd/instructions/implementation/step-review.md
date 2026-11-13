@@ -28,9 +28,9 @@ Paths are relative to the task folder.
 |---|---|---|
 | `changes.md` | Script, invoked by lead | Shared file/line inventory. |
 | `review/assignments.md` | Lead | Reviewer roster, convention assignments and skipped roles. |
-| `review/<reviewer>.md` | Specialist | Reusable source paths and relevance. |
-| `review<x>-<reviewer>.md` | Specialist | Current findings and numeric severity counts. |
-| `review<x>.md` | Lead | Verified findings and numeric severity counts. |
+| `review/guides/<reviewer>.md` | Specialist | Reusable source paths and relevance. |
+| `review/round<x>/<reviewer>.md` | Specialist | Current findings and numeric severity counts. |
+| `review/round<x>/review.md` | Lead | Verified findings and numeric severity counts. |
 
 - **sdd.review.4.** Select round `<x>` and exact paths under [sdd.naming.1](cycle.md#naming).
 

@@ -31,18 +31,18 @@ the task takes from it, recorded in `task.md` as **Milestone.** A folder carries
 | `evolution.md` | post-settlement adjustments and their agent/person origin under [evolution](escalation.md) |
 | `open-questions.md` | the register — questions nobody could answer, and defects noticed but not fixed |
 | `changes.md` | the shared file/count/line inventory for QA and built-code review ([changes.md](changes.md)) |
-| `qa/assignments.md` | QA agent roster and convention assignments |
-| `qa/<type>.md` | a QA agent's reusable source guide |
-| `review/assignments.md` | built-code reviewer roster and convention assignments |
-| `review/<reviewer>.md` | a built-code reviewer's reusable source guide |
-| `qa<y>.md` | one QA round's findings, verified and composed by its lead (`<y>` is empty on the first round, sdd.naming.1) |
-| `qa<y>-<type>.md` | one QA sub-agent's own findings |
-| `review<x>.md` | one built-code review's findings ([step-review.md](step-review.md)) |
-| `review<x>-<reviewer>.md` | one built-code reviewer's findings |
-| `plan-review<x>.md` | one independent proposed-design review ([step-plan-review.md](step-plan-review.md)) |
-| `plan-review<x>-<reviewer>.md` | one reviewer's plan-review findings |
-| `plan-review/assignments.md` | one-time reviewer-name list and convention-to-reviewer assignments |
-| `plan-review/<reviewer>.md` | that reviewer's one-time source guide, reused by future fresh agents |
+| `plan-review/assignments.md` | the plan reviewers' roster and convention assignments, created once and reused |
+| `plan-review/guides/<reviewer>.md` | a plan reviewer's reusable source guide |
+| `plan-review/round<x>/review.md` | one proposed-design review round, verified and composed by its lead ([step-plan-review.md](step-plan-review.md)) |
+| `plan-review/round<x>/<reviewer>.md` | one plan reviewer's findings in that round |
+| `qa/assignments.md` | the QA agents' roster and convention assignments |
+| `qa/guides/<type>.md` | a QA agent's reusable source guide |
+| `qa/round<x>/review.md` | one QA round, verified and composed by its lead ([step-4-qa.md](step-4-qa.md)) |
+| `qa/round<x>/<type>.md` | one QA agent's findings in that round |
+| `review/assignments.md` | the built-code reviewers' roster and convention assignments |
+| `review/guides/<reviewer>.md` | a built-code reviewer's reusable source guide |
+| `review/round<x>/review.md` | one built-code review round, verified and composed by its lead ([step-review.md](step-review.md)) |
+| `review/round<x>/<reviewer>.md` | one built-code reviewer's findings in that round |
 
 ## The numbered steps
 
@@ -52,7 +52,7 @@ the task takes from it, recorded in `task.md` as **Milestone.** A folder carries
 | `sdd step 1` Grilling | interviews the user until every branch of the task is resolved | `grill.md` | [step-1-grilling.md](step-1-grilling.md) |
 | `sdd step 2` Settling | settles the plan from the ledger; later re-entry follows explicit human re-settlement | `task.md`, `implementation.md` | [step-2-settle.md](step-2-settle.md) |
 | `sdd step 3` Implementing | builds to the settled documents, verifies, brings the standing documents current; re-entered to dispose of a QA round's findings | the built thing, its tests, current documents | [step-3-implement.md](step-3-implement.md) |
-| `sdd step 4` QA | an independent read of the built work against the settled documents | `qa<y>.md` and its sub-files | [step-4-qa.md](step-4-qa.md) |
+| `sdd step 4` QA | an independent read of the built work against the settled documents | `qa/round<x>/` | [step-4-qa.md](step-4-qa.md) |
 | `sdd step 5` Commit | commits task work, records delivery and follows each root's configured merge/push policy | delivery result and any incomplete action | [step-5-commit.md](step-5-commit.md) |
 
 Escalation and evolution are [escalation.md](escalation.md); verification is [testing.md](testing.md).
@@ -127,7 +127,7 @@ Use the [progress template](templates/progress.md) and its COMMENTS guidance for
   gets its own entry using the progress template.
   A step waiting for the user's guidance or confirmation stays within its current entry; that pause is not
   an occasion.
-- **sdd.progress.6.** A review is a step of its own in progress, and its lead writes that entry. A plan review (`sdd step plan review — <report>`), a QA round (`sdd step 4 · QA — <report>`) or a built-code review (`sdd step review — <report>`) starts by closing the open step entry and opening its own, and closes it, under the [progress template](templates/progress.md). The agent that resumes after opens a new entry for its own step.
+- **sdd.progress.6.** A review is a step of its own in progress, and its lead writes that entry. A plan review (`sdd step plan review — <round folder>`), a QA round (`sdd step 4 · QA — <round folder>`) or a built-code review (`sdd step review — <round folder>`) starts by closing the open step entry and opening its own, and closes it, under the [progress template](templates/progress.md). The agent that resumes after opens a new entry for its own step.
 
 ## Registers
 
@@ -152,8 +152,8 @@ Use the [progress template](templates/progress.md) and its COMMENTS guidance for
 
 - **sdd.commit.1.** Closing `sdd step 2` commits the settlement paths: `grill.md`, `task.md`,
   `implementation.md`, `progress.md` (omit a document only under the user's waiver: sdd.step2.9), plus the
-  plan reviews from that settlement's review cycle, their reviewer reports and the task's persistent `plan-review/`
-  preparation (sdd.step2.10), plus task-level `report.md` when used by that planning run.
+  task's `plan-review/` folder — the rounds of that settlement's review cycle and the persistent preparation
+  (sdd.step2.10), plus task-level `report.md` when used by that planning run.
   Standing documents follow normal step-5 delivery in their owning repositories; the local `sdd/workspace.md` is
   never committed.
   Show the exact paths with the task documents before confirmation. These are committed in the task-record
@@ -184,12 +184,10 @@ Use the [progress template](templates/progress.md) and its COMMENTS guidance for
 
 ## Naming
 
-- **sdd.naming.1.** Only QA and review files carry a number. The first round writes `qa.md` and its sub-files
-  `qa-code-review.md` · `qa-conventions.md` · `qa-drift.md`; the second writes `qa2.md` and `qa2-<type>.md`.
-  The separate review workflows count independently: `review.md` · `review2.md`, and `plan-review.md` ·
-  `plan-review2.md`. Persistent assignment/source-guide files have no round number and never replace reports.
-  For each workflow, choose one greater than its highest final or specialist round present, including
-  partial reports. The unnumbered round is 1; its successor is 2, never a new file with suffix 1.
-  Supply exact output paths and preserve existing reports.
+- **sdd.naming.1.** Each review workflow keeps its own folder — `plan-review/`, `qa/`, `review/` — and its rounds in
+  numbered folders inside it: `round1/`, `round2/`, …, each holding the lead's `review.md` and one `<role>.md` per
+  reviewer. A new round takes one more than the highest round folder present, a partial one included; the
+  workflows count independently. The persistent `assignments.md` and `guides/` sit beside the rounds, carry no
+  number and never replace a report. Supply exact output paths and preserve existing reports.
 - **sdd.naming.2.** A repeated step keeps its id. Two `sdd step 3` entries in one `progress.md` are told apart
   by their place in it, never by a number.

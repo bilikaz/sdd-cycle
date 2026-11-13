@@ -26,12 +26,11 @@ Paths are relative to the task folder.
 |---|---|---|
 | `changes.md` | Script, invoked by lead | Shared inventory under the [changes protocol](changes.md). |
 | `qa/assignments.md` | Lead | Agent roster and convention assignments. |
-| `qa/<type>.md` | Specialist | Reusable source guide: paths and relevance, refreshed against current source. |
-| `qa<y>-<type>.md` | Specialist | Current findings and numeric severity counts. |
-| `qa<y>.md` | Lead | Verified findings and numeric severity counts. |
+| `qa/guides/<type>.md` | Specialist | Reusable source guide: paths and relevance, refreshed against current source. |
+| `qa/round<x>/<type>.md` | Specialist | Current findings and numeric severity counts. |
+| `qa/round<x>/review.md` | Lead | Verified findings and numeric severity counts. |
 
-Types are code-review, conventions and drift. Select round `<y>` under [sdd.naming.1](cycle.md#naming).
-Guides remain under `qa/`; round reports are in the task root.
+Types are code-review, conventions and drift. Select round `<x>` under [sdd.naming.1](cycle.md#naming).
 
 ## Preparation
 
