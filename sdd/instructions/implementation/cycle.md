@@ -163,7 +163,8 @@ Use the [progress template](templates/progress.md) and its COMMENTS guidance for
   `implementation.md`, `progress.md` (omit a document only under the user's waiver: sdd.step2.9), plus the
   plan reviews from that settlement's review cycle, their reviewer reports and the task's persistent `plan-review/`
   preparation (sdd.step2.10), plus task-level `report.md` when used by that planning run.
-  Standing documents and the outer `sdd/workspace.md` follow normal step-5 delivery in their owning repositories.
+  Standing documents follow normal step-5 delivery in their owning repositories; the local `sdd/workspace.md` is
+  never committed.
   Show the exact paths with the task documents before confirmation. These are committed in the task-record
   repo, under the message `docs(tasks): settle <folder>`, committed by path (`git commit -- <the settlement paths>`) so nothing
   else staged in the index — a build's `git mv` included — rides along. This commit is the

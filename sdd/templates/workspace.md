@@ -11,10 +11,11 @@ that repository and owns its independent Git history, application files and `doc
 records. Ordinary application work runs in `project/`; the outer repository participates only when
 its own files change, under the same per-root branch and delivery rules.
 
-Each persistent workspace has its own `sdd/workspace.md` and `project/` checkout. Portable instruction
-updates preserve that map and the consuming project's files. Starter project documents live in
-`sdd/templates/project/`; `bash scripts/init-project.sh` copies only missing files into `project/`.
-This map is committed by its owning outer repository when that repository participates in delivery;
+Each persistent workspace has its own `sdd/workspace.md` and `project/` checkout. This map is local to
+its workspace: the outer repository ignores it and tracks only its template, `sdd/templates/workspace.md`,
+which `bash scripts/init-project.sh` copies into place when the map is missing. Starter project documents
+live in `sdd/templates/project/`; the same script copies only missing files into `project/`. Portable
+instruction updates preserve the map and the consuming project's files. The map is never committed, and
 it is not part of an application's task settlement commit.
 
 ## Filling this template

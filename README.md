@@ -60,7 +60,8 @@ files are maintained as the consuming project's documents, not synchronized on e
 | Path relative to outer workspace | Purpose |
 |---|---|
 | `sdd/instructions/` | Portable cycle rules and task-document templates |
-| `sdd/workspace.md` | Current workspace configuration |
+| `sdd/workspace.md` | Current workspace configuration — local, ignored by Git |
+| `sdd/templates/workspace.md` | The workspace map's template, copied into place when the map is missing |
 | `sdd/templates/project/` | Starter files copied only when absent |
 | `project/` | Independent application Git checkout |
 | `project/docs/architecture/` | Architecture map and glossary |
