@@ -32,8 +32,10 @@ a name must not raise false expectations either (`listen` implies a subscription
    family of same-kind items is named for the kind — `types.ts`, `middleware.ts`, `repos.ts` — never after one
    member. Role naming is for a file whose several exports serve one cohesive purpose; when the members simply are
    the same kind, the kind is the name.
-9. **Datetime columns are `<verb>_at`** — `created_at`, `updated_at`, `deleted_at`, `activated_at` — never a bare
-   `at` and never an unsuffixed noun (`created`).
+9. **A time field names its representation.** A unix timestamp is `<verb>_timestamp` — `created_timestamp`,
+   `deleted_timestamp`, in code `createdTimestamp`; a date-time is `<verb>_at` — `created_at`, `activated_at`, in
+   code `createdAt`. Never a bare `at` or `timestamp`, never an unsuffixed noun (`created`). Which one new fields
+   use is the project's preference ([canonical-shapes](canonical-shapes.md) rule 12).
 10. **Stateful collaborators carry a suffix that says how you use them.** An `<Area>Engine` is a long-lived object
     you call to do work and that owns a subsystem's behaviour; an `<Area>Registry` is a lookup of instances by key;
     an `<Area>Store` holds reactive state you read. Three roles are never all `Manager` or `Service`.

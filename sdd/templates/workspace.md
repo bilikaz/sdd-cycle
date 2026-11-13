@@ -71,6 +71,14 @@ An initial grill does not need a full set.
   [single-source rule](instructions/documentation/single-source.md).
 - **sdd.workspace.8.** Apply each changed root's own conventions; do not assume several roots share all rules.
 
+## Project preferences
+
+| Preference | Value | Rule |
+|---|---|---|
+| Time fields in new code | Timestamps — unix seconds, `<verb>_timestamp` | [canonical-shapes](../project/docs/conventions/canonical-shapes.md) rule 12 · [naming](../project/docs/conventions/naming.md) rule 9 |
+
+A convention that leaves a choice to the project reads it here.
+
 ## Where things run
 
 | Workspace | Checkout or mount reference | Execution environment | Command working directory | Local configuration reference |

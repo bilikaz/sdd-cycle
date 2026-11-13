@@ -13,7 +13,7 @@ rule, and adopts a rule for new and changed code without rewriting what already 
 | [source-comments.md](source-comments.md) | A comment only where the code cannot show it — one checked form, English, no task or ticket ids, no history |
 | [file-granularity.md](file-granularity.md) | Files split by concern — never a file per constant, helper or few-line class |
 | [types-placement.md](types-placement.md) | `types.ts` holds vocabulary several files share; everything else colocates; `import type` across packages |
-| [canonical-shapes.md](canonical-shapes.md) | One concept, one shape end to end; a refusal is thrown, never a second answer shape |
+| [canonical-shapes.md](canonical-shapes.md) | One concept, one shape end to end; a refusal is thrown, never a second answer shape; time is a unix timestamp in seconds |
 | [constants-and-identifiers.md](constants-and-identifiers.md) | A behavioural literal is named; ids come from one generator; persisted keys are namespaced |
 | [type-safety.md](type-safety.md) | The strictest type-aware lint; no assertion but `as const`; outside data parsed, not cast; only erasable syntax |
 | [one-door.md](one-door.md) | A folder's `index` is its one door: the outside imports only it, its own files never import it |

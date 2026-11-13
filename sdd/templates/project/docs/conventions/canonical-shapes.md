@@ -52,6 +52,13 @@ canonical shape is missing.
 
 Rules 2 and 3 are enforced by type-aware lint rules where the project wires them; ESLint has no standard rule for
 either.
+12. **A point in time is a unix timestamp in seconds — the preferred shape.** Time is held, passed and stored as
+    an integer count of seconds since the epoch, compared and computed with plain arithmetic; a date object or a
+    formatted string exists only at the edge that parses or displays it. Milliseconds only where a rule needs that
+    precision — a duration of fast work, an order within one second — and then the name says so (`…Ms`). The
+    project records its preference for new fields in the workspace map (*Project preferences*): a project whose
+    stored time is already date-times, where converting would cost more than it returns, keeps date-times; either
+    way the field's name says which it is ([naming](naming.md) rule 9).
 
 ## Why
 
