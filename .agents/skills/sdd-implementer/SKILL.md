@@ -50,19 +50,40 @@ The fixer checks current source and owns dispositions.
 
 ## Stops and recovery
 
-There is no total implementation-cycle or QA-failure limit. Track QA rounds involving the same recurring
-problem or fixes repeatedly recreating the same issue cycle. Unrelated failures do not share a counter,
-even when ten QA rounds fail in a row. Identify the loop from the returned reports and fixer's results;
-do not repeat their source investigation.
+There is no total implementation-cycle or QA-failure limit. A recurrence counter belongs to a concrete
+defect that persists after an attempted fix or is recreated by a later fix. Before incrementing it,
+validate issue identity against the verified reports and fixer's dispositions, and record a comparison
+in the task's `report.md`:
+
+| Evidence | Required comparison |
+|---|---|
+| Findings | Original and current QA report paths and finding numbers. |
+| Defect identity | Concrete failing condition, violated behavior or obligation, and affected mechanism. |
+| Attempted fix | The intervening correction and what it claimed to resolve. |
+| Continuity | Verified evidence that the same defect persisted or that the correction recreated it; distinguish additional independent sites whose earlier fixes remain correct. |
+| Verdict | Same recurring defect, independent finding, or identity not established; only the first increments that defect's counter. |
+
+A shared rule, category, severity, component, filename or symptom does not establish defect identity.
+For example, newly reported abbreviated variables at different sites are separate findings when the
+previously cited names remain fixed; a shared naming rule does not join them into a recurring defect.
+Unrelated failures keep separate counters, even when ten QA rounds fail in a row.
+Use the returned verified evidence without repeating the source investigation. If identity or causal
+continuity is unclear, ask the returning lead or retained fixer to clarify it before counting; missing
+proof does not justify a recurrence stop or a request for user permission to continue ordinary routing.
 A defect still present after its claimed fix remains unfinished fixer work and returns to that fixer.
 
 For the same issue cycle:
 
 **QA round 1 → retained fixer → QA round 2 → retained fixer → QA round 3 → stop.**
 
-At the third QA round in that recurring loop, stop before another fix or code review and ask for guidance.
-Name the issue, attempted fixes and why the same cycle keeps recurring. Preserve the loop's issue,
-count and QA report references across resume; never carry its count over to a different problem.
+Before a third-round stop, revalidate that all three QA observations and both intervening fixes form
+the same evidenced defect chain. Without that comparison, do not stop on recurrence grounds; route
+independent findings through the normal loop. Other required decisions and blockers still apply.
+When that chain is verified, stop before another fix or code review and ask for guidance, linking the
+comparison and explaining why each attempted fix failed or recreated the defect. Preserve the defect's
+identity, evidence, count and QA report references across resume; never transfer a count to a different
+problem. Correct a misclassified counter and continue authorized routing rather than asking the user
+to approve continuation of an unrelated finding.
 Code-review reports and the total number of QA failures are not this counter.
 
 An unreachable fixer or lead gets one replacement when its work can still be done; otherwise hand back.
