@@ -58,6 +58,13 @@ operation — and the router, not the handler, validates, guards and answers thr
    itself — a redirect, a leniently read body — is registered on the framework's own app. Every other route is a
    verb.
 
+8. **Paginated collections and plain lists have distinct routes.** `GET /<resource>` is the paginated
+   collection read: `pageQuery` returns the declared pagination envelope. When a consumer needs an
+   unpaginated list, `GET /<resource>/list` uses `listQuery` and returns a plain array of the declared
+   entity or response projection, without pagination metadata. It returns the complete authorized list,
+   never a silently truncated first page. Provide the plain-list route only where a consumer needs it;
+   it retains the resource's read authorization. Register `/list` before a parameter route such as `/:id`.
+
 ## Why
 
 Validating, reading the request and answering are the same for every route, so they are written once, in

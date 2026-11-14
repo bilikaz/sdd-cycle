@@ -36,9 +36,9 @@ behaviour never lives there.
    that plus `Json` for what the wire carries:
    `export type UserCreateDto = z.output<typeof userCreateDto>` ·
    `export type UserCreateDtoJson = z.input<typeof userCreateDto>`.
-5. **A route answers an entity, the list envelope over one, or a response DTO — never a hand-written shape**
-   (rule 7) — and names it ([routes](routes.md) rule 1). A `dto.ts` holds its feature's DTOs, requests and
-   responses: behaviour never lives there.
+5. **A route answers a declared entity, response DTO or collection reply — never a hand-written shape**
+   (rule 7). Collection formats follow [routes](routes.md) rule 8, and the route names its answer under
+   rule 1. A `dto.ts` holds its feature's DTOs, requests and responses: behaviour never lives there.
 6. **The contract lives in a shared folder, browser-safe.** A layer-agnostic contract (the entities, the auth
    routes' DTOs) is the core package's; a layer's routes' DTOs and answer views are that layer's shared
    package's — one folder per kind (`entities/` · `dtos/<feature>/dto.ts`), room left for other kinds beside
@@ -53,11 +53,12 @@ behaviour never lives there.
    repo takes its row type from it. A **response DTO** exists only where an answer is not a bare entity — about
    an entity, built from it (`.pick` · `.extend` · a join of two), never a fresh shape; about no entity (a token
    pair, a secret, a BFF's own answer), its own shape — named after the route it answers plus `ResponseDto`
-   (`meQueryResponseDto`), or after its object where several routes share it (`sessionTokensResponseDto`). A list answers the
-   one envelope over its item — an entity, or a response DTO where the item is a view — never a list shape of
-   its own; the one exception is a whole tree, answered unpaged under its own name (the library's
-   `libraryCategoryTreeResponseDto`, `{ categories, rags, categoryRags }`), since a tree is read whole or not at all. Both are DTOs, and the name says the side: `…Dto` is what a route takes, `…ResponseDto` what it
-   answers — the same word from the API and from the console.
+   (`meQueryResponseDto`), or after its object where several routes share it (`sessionTokensResponseDto`).
+   Collection replies follow [routes](routes.md) rule 8; their items are canonical entities or response
+   views derived from them. A composite read, such as a whole tree, has its own named response DTO
+   (the library's `libraryCategoryTreeResponseDto`, `{ categories, rags, categoryRags }`).
+   Both requests and responses are DTOs, and the suffix says the side: `…Dto` is what a route takes,
+   `…ResponseDto` what it answers — the same word from the API and from the console.
 8. **Each kind carries its suffix** — `…Entity`, `…Dto` (a request) or `…ResponseDto` — and a file of a kind exports only that
    kind's schemas and their derived types (rule 4).
 9. **The DTO carries the words a form shows.** A rule's user-facing message is written on the DTO's field, so

@@ -34,7 +34,13 @@
    the build can load every module without a live environment. And delete any comment or
    doc claiming a build is gated unless the CI script demonstrably runs it — false
    assurance about a gate is its own defect.
-8. **No test of the transaction itself.** A test that throws after a write to prove the
+8. **Test application behavior, not infrastructure mechanics.** Verify that our workers
+   are registered, invoked and produce the expected application state and output. Do not
+   re-test infrastructure mechanics such as Inngest scheduling, queue retry timing,
+   balancing or database locking. Do not demand an exact work split between parallel
+   workers. Concurrent tests protect invariants owned by
+   our application, such as data isolation or preventing duplicate publication.
+   A test that throws after a write to prove the
    rollback undid it — the row, the trail, "leaves neither … committed" — proves the
    store's transaction, not the code, and every such test slows the gate for nothing. It
    is not written, and a plan never asks for one. What a refusal answers (its status, its
