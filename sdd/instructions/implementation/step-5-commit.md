@@ -12,7 +12,13 @@ Changes to the settled task follow [evolution](escalation.md), including changes
 - **sdd.step5.2.** Perform only requested, configured pushes to verified project targets.
   Local-only policy or instruction stays local. Missing policy or targets need clarification before mutation.
 - **sdd.step5.3.** Follow each root's configured merge target, method and refs to push.
-  On a conflict or rejected push, stop and report completed actions and what remains.
+  Resolve merge conflicts as part of this step, preserve the intended behavior of both sides, validate
+  the combined changes and complete the merge and push. An ordinary merge conflict is work to finish,
+  not a reason to hand back or ask for permission already granted by step 5.
+  If a push is rejected because the target advanced, refresh only the permitted target, integrate its
+  changes, validate the affected paths and retry the normal push. Stop only for a genuine blocker,
+  such as unavailable access or a conflicting product decision that cannot be resolved from the records;
+  report completed actions, the concrete blocker and what remains.
   Do not force delivery, reset successful work or automatically undo published history.
 - **sdd.step5.4.** Resolve the named task, otherwise the unambiguous task from progress and branch context;
   ask if ambiguous. Before changing Git state, verify every root, task branch, protected ref, execution

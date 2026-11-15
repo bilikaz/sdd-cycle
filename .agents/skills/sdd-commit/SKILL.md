@@ -20,7 +20,9 @@ commit. Commit the whole participating working trees except explicit user and st
 Perform the authorized configured actions and post-delivery actions; report actual results. Never deploy or
 rebuild staging or production as part of delivery; that runs only on the user's explicit request (sdd.step5.9).
 
-On conflict or rejected push, stop and report partial delivery under sdd.step5.3 and .6.
+Complete conflict resolution, integration validation and delivery under sdd.step5.3, including recovery
+when the permitted target advances. Routine conflicts do not end the step or require new permission.
+Report partial delivery under sdd.step5.6 only when a genuine blocker remains.
 Do not force, reset successful work or claim delivery complete. A local-only request stays local.
 Plan adjustments encountered here follow
 [evolution](../../../sdd/instructions/implementation/escalation.md); do not reopen step 2 yourself.
