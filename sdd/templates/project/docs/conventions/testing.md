@@ -69,8 +69,9 @@
 12. **Test a shared mechanism once, not once per value it carries.** When many values ride one mechanism (config
    keys through one reader, routes behind one guard, fields through one mapper), one representative value proves
    it. Test a value on its own only where its own logic lives: its validation, its default, its use.
-13. **Test model-dependent behaviour on the real model.** End-to-end tests run against the real model, so the
-    suite catches a model regression and exposes a weak prompt as a failing assertion. Fake only what has no test
+13. **Test model-dependent behaviour on the real model.** End-to-end tests run against the real model.
+    Classify observed model deviations under [the live-model testing rule](../../../sdd/instructions/implementation/testing.md#the-checks).
+    Fake only what has no test
     value — the outbound transport (post to a recording stub). Mechanics that depend on determinism (content-hash
     dedup of model-written text) run on a deterministic test-double backend (see
     [pluggable-backends](pluggable-backends.md)).

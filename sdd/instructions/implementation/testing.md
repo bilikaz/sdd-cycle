@@ -16,7 +16,8 @@ The project owns its gates; this file governs their use at the end of implementa
   with a nonzero exit and does not silently skip required checks.
 - **sdd.testing.2.** Step 3 requires an executed, passing gate for each changed root. Record its command,
   environment and exit code under [step-3 verification](step-3-implement.md#test).
-  If nothing is testable, state why. A failed or unavailable required gate is incomplete verification.
+  If nothing is testable, state why. A failed or unavailable required gate is incomplete verification,
+  except for the evidenced live-model observations classified under sdd.testing.40.
   An unconfigured gate is a missing prerequisite, not evidence that nothing is testable; resolve it before
   successful completion rather than guessing a command.
 - **sdd.testing.3.** Add missing regression coverage to the owning tests and configured gate.
@@ -48,6 +49,16 @@ The gate script or configuration owns its check inventory. Do not duplicate that
 
 ## The checks
 
+- **sdd.testing.40.** Live models can deviate from requested wording, formatting or selections. When the
+  retained model response establishes that such a deviation alone caused an assertion to fail, log it as
+  **potential prompt hardening needed**, with the test, expected contract, actual response and affected
+  follow-up checks. It is a non-blocking model observation, not an implementation defect or a reason to
+  fail verification or stop review. Preserve the actual runner exit and this classification when an
+  existing runner reported it as a failure; never relabel that historical run as passing. Do not retry
+  until the model happens to comply. Deterministic application behavior remains subject to its normal
+  assertions; missing data, failed tools, transport errors and incorrect parsing of valid model output
+  remain failures. Record any follow-up checks prevented by the observation as unrun, and complete
+  independently required application checks before claiming their coverage.
 - **sdd.testing.7.** Assert observable behavior and results rather than incidental implementation details.
 - **sdd.testing.8.** Mock at external boundaries through their real interfaces, not private methods.
 - **sdd.testing.37.** **Test a shared mechanism once, not once per value it carries.** When many values undergo
@@ -59,9 +70,11 @@ The gate script or configuration owns its check inventory. Do not duplicate that
 
 ## The record
 
-- **sdd.testing.16.** Investigate a failing test: either the implementation or the expectation is wrong.
+- **sdd.testing.16.** Investigate a failing test to distinguish an implementation or expectation defect
+  from a live-model observation under sdd.testing.40.
   Do not weaken assertions, skip cases or trim fixtures merely to pass. A change to settled behavior follows
   [escalation.md](escalation.md).
 - **sdd.testing.17.** State what ran and what did not. Unverified behavior remains unverified.
 - **sdd.testing.26.** A failure that disappears on rerun is still unexplained. Investigate the inconsistency
-  rather than declaring an environment problem from a passing retry. After addressing the cause, rerun the full gate.
+  rather than declaring an environment problem from a passing retry. Classify evidenced model variation
+  under sdd.testing.40. After addressing an implementation or expectation defect, rerun the full gate.
