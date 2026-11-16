@@ -25,10 +25,9 @@ they do, once.
    and nothing above rots.
 5. **An accepted ruling lands in its available home immediately.** Write an approved term, convention,
    decision record or architecture fact into the project's designated document, whatever step is open.
-   During an initial grill with no designated home, keep the answer and intended destination in `grill.md`;
+   During an initial grill with no designated home, keep the answer in `grill.md`;
    planning establishes the needed home in `workspace.md` and lands the approved content there. Do not invent
-   standing documents merely to run the interview. The ledger records the destination and links to it once
-   it exists; an available home is never deferred to a later build or close.
+   standing documents merely to run the interview. An available home is never deferred to a later build or close.
 
 Use the owning project's configured document checks from [workspace.md](../../workspace.md#verification-gates).
 Check changed relative links, rule citations and canonical terms; do not claim an unconfigured checker ran.

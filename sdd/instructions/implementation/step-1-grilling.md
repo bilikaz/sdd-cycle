@@ -67,14 +67,14 @@ grilling process below.
 
 Use the [grill template](templates/grill.md); its COMMENTS block defines the answer fields.
 
-- **sdd.step1.13.** Record each ruling's destination using the template. A step-2 destination can be named
-  before its file exists; step 1 does not create those plans.
-- **sdd.step1.14.** On a bug the ledger holds one row per named defect, the cited text verbatim, landing in the
-  done-when it grounds.
+- **sdd.step1.13.** Record resolved decisions using the answer-ledger template. Step 2 owns expressing
+  their requirements and design in the plan documents; step 1 does not create those plans.
+- **sdd.step1.14.** On a bug the ledger holds one row per named defect with the cited text verbatim;
+  that citation grounds its done-when.
 - **sdd.step1.15.** `grill.md` remains living after step 1 closes. Record additional user answers even while
   waiting for the next requested step, without reopening completed progress or starting planning.
 - **sdd.step1.18.** A revised answer rewrites its row in place to the ruling that now stands — the question as
-  finally decided, the user's words that decided it, its current destinations — and no row keeps what was
+  finally decided and the user's words that decided it — and no row keeps what was
   reverted ([current-truth.md](../documentation/current-truth.md)). A revision changes no other row's id.
 
 ## Closing
@@ -84,8 +84,7 @@ Use the [grill template](templates/grill.md); its COMMENTS block defines the ans
   current: name what is needed and wait rather than inventing an answer or repeatedly asking it.
   Step 2 owns writing the plan documents.
 - **sdd.step1.17.** The agent closes the step-1 entry under sdd.progress.2. Its chat completion report
-  identifies the task, reports the resolved scope with a link to the ledger and any existing destinations,
-  names planned destinations whose files do not yet exist, names any
+  identifies the task, summarizes the resolved scope with a link to the ledger, identifies any
   deferred register items and what they block, and says that
   `sdd-plan` / `sdd step 2` is available. It then stops for the user's instruction. It never starts planning
   automatically.

@@ -15,6 +15,7 @@ END COMMENTS -->
 Each finding names the file:line or section, defect and reason, grounded in a rule, user ruling or
 specific behavioral evidence. Quote only what explains or locates it. Use severity under sdd.step4.10.
 Report only actionable issues. Missing or skipped required work, implementation or review coverage belongs here.
+Apply sdd.cycle.8 to distinguish execution reporting from settlement requirements.
 An empty table is valid. Omit info observations, praise, process notes and extra report sections.
 Example: 1 | major | src/export.ts:42 | Anonymous users can export | Missing membership check, G-1.
 END COMMENTS -->

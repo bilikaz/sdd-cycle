@@ -34,8 +34,8 @@ yourself.
   Run each changed root's full gate and configured supplemental checks in its selected environment.
   Unconfigured, failed or unavailable required checks leave implementation incomplete; report the cause.
 - Update affected standing documents. New standing rules need approval.
-  Produce the implementation tables from the
-  [progress template](../../../sdd/instructions/implementation/templates/progress.md#parts);
+  Record the outcome, verification and decision summaries using the
+  [progress template](../../../sdd/instructions/implementation/templates/progress.md#outcome);
   its section COMMENTS supply the output guidance.
 
 Never claim unrun checks as passing or reject a real defect.

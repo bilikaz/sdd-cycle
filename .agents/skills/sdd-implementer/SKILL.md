@@ -17,7 +17,7 @@ including its settlement or recorded waiver.
 
 Record delegation as a verbatim G-row in grill.md. Keep the run's state in the task's `report.md`: an
 `## Implementer run` table — State (`active` · `handed-back`) · Fixer · Rounds · In flight — and under it a
-`Reviews:` list, one line per returned QA or code-review report with its Summary counts. No step knows this file.
+`Reviews:` list, one line per returned QA or code-review report with its Summary counts only. No step knows this file.
 Resolve roots, task branches, original starting commits, environment and gates from the task and
 [workspace.md](../../../sdd/workspace.md).
 On resume, read progress, the saved run and returned reports. Continue pending work rather than repeating

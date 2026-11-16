@@ -19,7 +19,7 @@ This file owns the loop and its stops.
   after implementation begins, require explicit human re-settlement.
 - Record delegation as a verbatim G-row in grill.md. Keep the run's state in the task's `report.md`: a
   `## Planner run` table — State (`active` · `handed-back` · `settled`) · Limit · Dispatched · In flight — and under
-  it a `Reviews:` list, one line per returned report with its Summary counts. A standalone `sdd-plan` knows
+  it a `Reviews:` list, one line per returned report with its Summary counts only. A standalone `sdd-plan` knows
   nothing of this file; while your run is active, you are step 2's only writer.
 - You run step 2, so you write its entries. Each plan-review lead writes its own review entry under
   [sdd.progress.6](../../../sdd/instructions/implementation/cycle.md#progressmd), closing your open step-2 entry;

@@ -16,7 +16,7 @@ END COMMENTS -->
 **Decisions.** <G-n and ruling; one per line>
 
 <!-- COMMENTS
-Every ledger ruling has a destination here or in its recorded standing home.
+Account for every applicable ledger ruling in the intent or link its canonical standing definition.
 END COMMENTS -->
 
 **Done-whens.** <G-n and verbatim answer; one per line>

@@ -188,7 +188,10 @@ END COMMENTS -->
 | <Relative folder> | <Filenames> | <Change> |
 
 <!-- COMMENTS
+Mandatory for settlement: list the planned file additions, updates, moves and deletions, with their purpose,
+so the user can review and validate the file plan. Keep it complete and consistent with the rest of the design.
 Use one table per root. Follow [format.md](../../documentation/format.md) for path bases and file inventories.
+The settled file plan follows sdd.step2.4; later adjustments follow evolution.
 END COMMENTS -->
 
 ## Key logic

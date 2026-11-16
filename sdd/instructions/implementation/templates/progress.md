@@ -43,19 +43,17 @@ END COMMENTS -->
 Status: current
 
 <!-- COMMENTS
-The implementation agent produces the tables below.
-Keep Parts, Verification, Promotions, Escalations and Findings at close; use None when an empty section has no rows.
-Keep this record current as work lands. Review finding details and dispositions stay in their reports.
+Keep Outcome, Verification, Promotions, Escalations and Findings at close; use None when an empty section has no rows.
+Keep this record current as work lands. Preserve decisions, approval status and unresolved issues for the user's
+closing review. Link supporting rulings and reports; detailed review findings and dispositions stay in their reports.
 END COMMENTS -->
 
-### Parts
+### Outcome
 
-| # | Part | Status | Where |
-|---|---|---|---|
-| <Id> | <Work item> | <Actual status> | <Location> |
+<Short summary of completed behavior and any unfinished work>
 
 <!-- COMMENTS
-Name each implemented or changed part, its actual status and location.
+Describe what now works and any material limits. Follow sdd.cycle.8 for task-record scope.
 END COMMENTS -->
 
 ### Verification
@@ -152,6 +150,6 @@ Review: <review report path>
 Summary: <N> blocker · <N> major · <N> warning · <N> info
 
 <!-- COMMENTS
-Both review entries: the lead writes them (sdd.progress.6) and fills
-Summary with its final report's `## Summary` line when it closes the entry. Nothing else from the review belongs here.
+Both review entries: the lead writes them (sdd.progress.6), recording status, the final report link and
+its Summary counts when closing the entry. Detailed findings stay in the report.
 END COMMENTS -->

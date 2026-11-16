@@ -5,9 +5,9 @@ END COMMENTS -->
 
 # <Task title> — evolution
 
-| # | Initiated by | What changed and why | Decision | Landed in |
-|---|---|---|---|---|
-| E-<n> | <agent or person> | <Change and reason> | <Ruling / authority / pending> | <Location or pending> |
+| # | Initiated by | What changed and why | Decision |
+|---|---|---|---|
+| E-<n> | <agent or person> | <Change and reason> | <Ruling / authority / pending> |
 
 <!-- COMMENTS
 One E-n row per change to the settled task during steps 3–5.
@@ -16,6 +16,5 @@ What changed and why gives the adjustment, reason and originating step or findin
 Decision cites the grill ruling or existing authority; keep exact user wording in grill.md.
 Mark a pending proposal pending and do not apply it. A factual correction can use
 correction — no new ruling, with its supporting citation.
-Landed in identifies the affected implementation or standing-document location; pending work says pending.
-Example: E-1 | agent | Step 3: bound retries to prevent repeated writes | G-7, approved | src/retry.ts.
+Example: E-1 | agent | Step 3: bound retries to prevent repeated writes | G-7, approved.
 END COMMENTS -->

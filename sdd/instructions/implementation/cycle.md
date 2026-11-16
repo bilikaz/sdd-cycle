@@ -93,6 +93,14 @@ retired rule keeps its number and reads *retired, see `<id>`*; a new rule takes 
   Missing reads and coverage gaps are incomplete reviews and belong in Findings under the
   [report template](templates/report.md#findings).
   User confirmation of documents and authorization of further steps or delivery still apply.
+- **sdd.cycle.8.** Agent execution records — progress entries and coordinator reports — preserve outcome,
+  decision, approval, review and verification summaries, including unresolved work for the user's closing review.
+  Git and the generated [change map](changes.md) own the record of edited files; execution records do not
+  repeat it as manual file inventories or edit histories. Settlement documents
+  define the design the user reviews and approves, including the required file plan under
+  [step 2](step-2-settle.md#implementationmd--the-guide). Their completeness, accuracy and implementation
+  conformity remain subject to review. A finding about an execution record must identify an error that
+  affects implementation, authorization, verification or the next action.
 
 ## Finding verification
 
@@ -116,9 +124,11 @@ Use the [progress template](templates/progress.md) and its COMMENTS guidance for
 
 - **sdd.progress.1.** One entry is open at a time. The next step does not open until the previous entry is
   closed.
-- **sdd.progress.2.** Use the role-specific entries in the progress template. Review records contain only
-  report filenames and numeric finding counts; review details stay in their reports. Step 3 carries its implementation tables.
-  Do not add generic summaries or repeat content already in the task records.
+- **sdd.progress.2.** Use the role-specific entries in the progress template. Step 3 records a short outcome
+  summary, actual verification results, promotions, escalations and unresolved findings for the user's closing
+  review, with their approval status or required decision. Review entries contain status, the report link and its numeric
+  severity counts so the user can scan results without opening every report. Detailed findings and dispositions
+  stay in the report.
 - **sdd.progress.3.** A done entry is never rewritten. A further round opens a new entry at the same step id.
 - **sdd.progress.4.** Only the agent running a step writes its entry; nothing else edits `progress.md`. One
   carve-out: an entry an agent left open is either resumed (sdd.cycle.3) or, where the user names another step, closed

@@ -24,7 +24,7 @@ The original plan stays frozen so later agents can distinguish the baseline from
 - **sdd.escalation.11.** Revise an evolution row to its current ruling under
   [current-truth.md](../documentation/current-truth.md). Keep its id; remove a row when none of it stands.
 - **sdd.escalation.6.** Record user answers verbatim in `grill.md`; evolution links the ruling and records
-  the change and its destination. Do not duplicate the discussion.
+  the adjustment to requirements or design. Do not duplicate the discussion.
 - **sdd.escalation.7.** Evolution states what changed and why, with enough detail to implement and review it.
   It supplements the original plan; it is not a replacement plan or a review report.
   Review leads report needed changes; the implementing agent records their approved evolution.

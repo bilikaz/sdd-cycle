@@ -31,7 +31,8 @@ Write from the [task template](templates/task.md), following the COMMENTS beside
 
 - **sdd.step2.1.** A done-when quotes its ledger row verbatim — numbers, orderings and negatives as answered,
   never softened into prose. On a bug it quotes the cited source.
-- **sdd.step2.2.** Every ledger row has a destination this document names, or one the ledger already named.
+- **sdd.step2.2.** Account for every applicable ledger ruling in the intent or link its canonical
+  standing definition. Cite the G-n so coverage can be checked against the ledger.
 
 ## `implementation.md` — the guide
 
@@ -41,9 +42,11 @@ Diagrams and tables follow [format.md](../documentation/format.md). One home per
 that already lives in one of [the standing documents](../../workspace.md#standing-documents) is linked, never restated
 ([single-source.md](../documentation/single-source.md)).
 
-- **sdd.step2.3.** `implementation.md` names every item `task.md` carries: each decision, done-when and
-  out-of-scope line has its place — the file it lands in, the shape it takes, the check that proves it. An item
-  not named is a gap, closed before the document is presented.
+- **sdd.step2.3.** `implementation.md` covers the target behavior, design and verification for every
+  decision and done-when in `task.md`, respecting its scope boundaries. Include the mandatory
+  [Files section](templates/implementation.md#files) for the user's review and validation at settlement.
+  Close gaps before presenting the document. Implementation follows the agreed design and file plan;
+  adjustments follow [evolution](escalation.md#evolution).
 - **sdd.step2.4.** The settlement commit freezes both documents. Later changes follow
   [evolution and human-only re-settlement](escalation.md); neither a finding nor changed scope automatically reopens them.
 
@@ -86,7 +89,7 @@ that already lives in one of [the standing documents](../../workspace.md#standin
 - **sdd.step2.9.** A **refactor**, an **R&D** task or a **debug session** — one whose shape the build itself
   discovers, because it evolves as it is built or as the investigation finds the cause — may settle `task.md` alone, without `implementation.md`, when the user says so. The
   waiver is a ledger row in the user's words; `task.md` is then the freeze, `sdd step 3` builds to it and the
-  ledger, and every shape the build settles is an `evolution.md` row, each round's parts in `progress.md`. The
+  ledger, and every shape the build settles is an `evolution.md` row, each round's outcome in `progress.md`. The
   agent never waives it on its own. A **refactor walk** — the user inspecting the code and pointing at issues, fixed
   on the fly — settles neither document: its issue record follows the evolution template, with user rulings
   in `grill.md` and its waiver the ledger's first row. Step 3 opens on that row and each round closes with the gate.

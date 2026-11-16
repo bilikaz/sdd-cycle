@@ -61,13 +61,14 @@ QA or built-code review findings. Its entry point is
 
 ## The close report
 
-- **sdd.step3.18.** Produce the implementation tables in the
-  [progress template](templates/progress.md#parts), following their local COMMENTS guidance.
+- **sdd.step3.18.** Record the outcome, verification and decision summaries in the
+  [progress template](templates/progress.md#outcome), following its local COMMENTS guidance.
 - **sdd.step3.19.** Keep that record current as work lands; do not invent verification from memory at close.
 
 ## Closing
 
 - **sdd.step3.20.** Complete the step when the build is done, required verification passes and affected
   documents are current. Otherwise report the incomplete work and its cause.
-- **sdd.step3.21.** Close the progress entry with those implementation tables. The reply states the
+- **sdd.step3.21.** Close the progress entry with the required outcome, verification and decision summaries.
+  The reply states the
   outcome, material limits and next step briefly.
