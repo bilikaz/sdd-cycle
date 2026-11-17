@@ -17,6 +17,11 @@ errors, trails, retries and durable work. Compare the TypeScript examples and ch
 conventions and the relevant existing implementations. Trace planned behavior across its API and worker
 boundaries, including the proposed failure and recovery paths.
 
+For every proposed unit of logic, state in the report which convention decides its form — class, service or
+module, its home and how it is registered and reached — and check it against that convention before its
+contents. Logic held outside the form its convention requires is a finding even where an existing example
+does the same. A form no assigned convention covers is reported as a convention gap, not passed.
+
 Apply assigned conventions under [sdd.plan-review.9](../../sdd/instructions/implementation/step-plan-review.md#reviewers).
 Use the [report template](../../sdd/instructions/implementation/templates/report.md) at the lead's supplied path,
 following its COMMENTS guidance. Write only your assigned source guide and round report.

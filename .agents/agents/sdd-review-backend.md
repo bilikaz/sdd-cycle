@@ -19,6 +19,11 @@ errors, trails, retries and durable work. Check conditions, edges, races and ide
 Compare actual types and chosen names with assigned conventions and relevant existing implementations.
 Trace behavior across API and worker boundaries, including failure and recovery paths.
 
+For every built unit of logic, state in the report which convention decides its form — class, service or
+module, its home and how it is registered and reached — and check it against that convention before its
+contents. Logic held outside the form its convention requires is a finding even where an existing example
+does the same. A form no assigned convention covers is reported as a convention gap, not passed.
+
 Apply assigned conventions to your responsibilities above. Other reviewers cover their aspects of shared rules.
 Write to the lead's exact report path using the
 [report template](../../sdd/instructions/implementation/templates/report.md).

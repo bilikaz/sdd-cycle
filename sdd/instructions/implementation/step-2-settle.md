@@ -47,6 +47,12 @@ that already lives in one of [the standing documents](../../workspace.md#standin
   [Files section](templates/implementation.md#files) for the user's review and validation at settlement.
   Close gaps before presenting the document. Implementation follows the agreed design and file plan;
   adjustments follow [evolution](escalation.md#evolution).
+- **sdd.step2.13.** Before writing code examples, check the planned structure against the project's
+  conventions index: for every new unit of logic, name the convention that decides its form — the kind of
+  class or module it is, where it lives and how it is registered and reached — and draw it that way from
+  the first draft. An existing example that differs from a convention does not license the difference. A
+  form no convention covers is asked of the user as a planning question, never settled by the nearest
+  existing example.
 - **sdd.step2.4.** The settlement commit freezes both documents. Later changes follow
   [evolution and human-only re-settlement](escalation.md); neither a finding nor changed scope automatically reopens them.
 
