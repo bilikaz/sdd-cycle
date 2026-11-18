@@ -38,6 +38,11 @@ QA or built-code review findings. Its entry point is
   **fixed** within settled scope; **escalated** when a decision is needed; **rejected** only when it is not
   a defect; or **registered** for an unanswered question entered in `open-questions.md`.
 - **sdd.step3.10.** A real defect is never rejected; escalate it if it cannot be fixed within the settled scope.
+- **sdd.step3.23.** **Fixed** restores the settled behavior and adds nothing beyond it. A remedy that
+  needs a protection the settled documents and approved evolution do not contain — a guard, a validation,
+  a lock, a probe, a timeout, a recovery path — or that answers a scenario they never debated, is
+  **registered** as an open question in `open-questions.md`. It reaches code and documents only after
+  the user answers it.
 - **sdd.step3.11.** The fixer checks current source before acting, under
   [sdd.cycle.6](cycle.md#finding-verification).
 - **sdd.step3.12.** Append [Dispositions from the report template](templates/report.md#dispositions) to the originating report.

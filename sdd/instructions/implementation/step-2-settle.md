@@ -76,6 +76,12 @@ that already lives in one of [the standing documents](../../workspace.md#standin
   complete and the plan is unchanged, the review is clean after dispositions; proceed to presentation without
   re-reviewing unchanged documents. Registered or named blocking findings and coverage gaps still prevent
   a clean result. Finding verification follows [sdd.cycle.6](cycle.md#finding-verification).
+- **sdd.step2.14.** **Fixed** never adds what the ledger did not settle. A remedy that introduces a failure
+  scenario the grill did not debate, or a protection for one — a guard, a validation, a lock, a probe, a
+  timeout, a recovery path, a stored field — is **named**: it is written under the documents' Proposals or
+  Alternatives and waits for the user's ruling. It never enters the plan's body as a solution, whatever
+  the finding's severity. A finding that challenges a stored configuration value beyond its type and
+  shape validation is **rejected** under the project's configuration convention.
 
 ## The confirmation and the commit
 

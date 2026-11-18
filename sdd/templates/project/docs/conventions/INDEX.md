@@ -25,7 +25,7 @@ project. Apply adopted rules to new and changed code; record project wiring and 
 | [consolidation.md](consolidation.md) | Extract only essential or near-universal duplication; code born as a copy is extracted at its second consumer |
 | [earn-the-abstraction.md](earn-the-abstraction.md) | A generic seam only for a consumer you can see; no one-caller pass-through |
 | [no-dead-code.md](no-dead-code.md) | What a change makes obsolete goes in the same change, across its whole reach |
-| [realistic-failures.md](realistic-failures.md) | Handle the failures ordinary operation reaches; a coincidence gets no code, no test and no finding |
+| [realistic-failures.md](realistic-failures.md) | Handle the failures ordinary operation reaches; a coincidence gets no code, no test and no finding; what was not settled with the user is a question, never a change |
 
 ## Failure and runtime
 
@@ -34,7 +34,7 @@ project. Apply adopted rules to new and changed code; record project wiring and 
 | [fail-loudly.md](fail-loudly.md) | A path that cannot know the answer refuses — never a plausible substitute; a blind guard fails |
 | [error-handling.md](error-handling.md) | Normalize what is caught; a message states what failed; per-item catch in batches; bound calls that can hang |
 | [logging.md](logging.md) | Structured events under scoped child loggers; logging never fails what it observes |
-| [configuration.md](configuration.md) | One env read point; typed config injected; exported defaults; settings validated by shape; fail fast at boot |
+| [configuration.md](configuration.md) | One env read point; typed config injected; exported defaults; settings validated by shape and then taken as correct; fail fast at boot |
 | [composition-root.md](composition-root.md) | One visible root per process; dependencies injected down, never acquired ambiently |
 | [capability-injection.md](capability-injection.md) | Platform parts installed onto a shared context at the root; agnostic code gates on their presence |
 | [capability-gating.md](capability-gating.md) | One predicate gates an affordance, enforced where it is advertised and where it is invoked |

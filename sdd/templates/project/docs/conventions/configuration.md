@@ -77,6 +77,12 @@ module graph exists. Neither is a configuration read, and neither is a runtime o
     constant, not as a per-call setting two callers can read differently; separate settings bound each
     finer concern (one external call, one model completion, an attempt budget). A timeout is a first-class
     outcome, recorded as such — never disguised as an empty result.
+15. **Stored configuration is taken as correct.** The people who edit configuration know what they are
+    doing, so a value that passed its type and shape validation is the expected one. Code does not challenge
+    it further: no extra validator, no allow-list, no cross-check against another setting or the
+    environment, no wrapper that protects the system from a legal value, and no fallback for a "wrong" one.
+    When an edit breaks something, the first use fails loudly and the person who made the edit fixes the
+    value. "A setting could be edited into X" is not a defect.
 
 **Tolerated exceptions.** Presentation concerns (TTY detection, `NO_COLOR`) may read the environment at the
 presentation site, and a build-time tool config file may read a deploy-time value it needs before the

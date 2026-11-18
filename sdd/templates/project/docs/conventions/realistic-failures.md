@@ -61,3 +61,8 @@ use already refuses loudly, or for leftover state the normal read excludes and t
 11. **Failure scenarios do not invent delivery guarantees.** An operation follows its settled durable or
    fire-and-forget contract ([durable-execution](durable-execution.md)). An unavailable dependency alone does not
    justify retries, delivery tracking or recovery for an operation allowed to end without delivery.
+12. **What was not settled with the user is a question, never a change.** Failure scenarios and
+    protections are debated with the user before the plan is drawn. A scenario found later — a race, an
+    ordering, a retry, an abuse — or a protection nobody settled — a guard, a validation, a lock, a probe,
+    a timeout, a recovery — is put to the user to rule on. Until the user approves it, it changes no plan,
+    no document and no code.

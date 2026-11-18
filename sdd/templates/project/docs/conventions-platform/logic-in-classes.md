@@ -12,8 +12,9 @@ only for pure transformations.
    ([base-classes](base-classes.md) rules 3 and 6).
 2. **A class that uses the app is a registered service.** Logic that needs the app's stores, configuration or
    other services, and that a worker, a root or more than one feature calls, is a core service: a class on
-   the core's service base in the core's services folder, registered in the manifest under a path and taken
-   from the app by that path and its class. Nothing builds it by hand, and no function hands
+   the core's service base in a services folder, registered in the manifest under a path and taken from the
+   app by that path and its class. Its home follows who uses it: the core's `src/services/<name>/index.ts`
+   when more than one app takes it, `<app>/src/services/<name>/index.ts` when only that app does. Nothing builds it by hand, and no function hands
    it out.
 3. **A feature's own logic is its feature service.** Logic only one feature's routes call stays that
    feature's `service.ts` ([services](services.md)); it takes a registered service as a dependency when it
