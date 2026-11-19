@@ -31,6 +31,12 @@ Changes to the settled task follow [evolution](escalation.md), including changes
   them unpublished. Final results after pushes/checks may need a final records commit under the same policy.
   That commit and its configured publication remain part of this delivery.
 - **sdd.step5.9.** Run configured post-delivery actions in the selected workspace. A deploy or rebuild of a shared environment — staging, production — is never one of them: it runs only when the user asks for that deploy, because several tasks are usually merged and checked together, and a deploy per task spends a long rebuild on a   state nobody reviews. Follow shared-resource ownership under the [Docker convention](../../../project/docs/conventions/docker.md); delivery authorizes no unrelated host or global cleanup. A failure reports which Git actions already succeeded.
+- **sdd.step5.10.** Remove the containers the task left behind: every container the task's work created outside
+  the workspace's configured stacks, such as a hand-made fixture or a one-off probe, running or stopped, with the
+  volumes and networks made for it. Name each one and remove it by name, after checking under
+  [sdd.workspace.10](../../workspace.md#docker-allocations) that it is the project's own. The configured dev,
+  test and Shared stacks stay as they are, and nothing is pruned. A leftover whose owner is unclear, or one a
+  document says to keep for inspection, is reported in the delivery reply instead of removed.
 
 ## Closing
 
