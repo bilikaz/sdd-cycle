@@ -118,3 +118,9 @@ pays to rename them.
     `AuthFeatureService`. The suffix is not invented per feature and no other word stands in for it. A feature
     whose domain has no registered service keeps the bare name (`UsersService`, `SkillsService`) and takes the
     suffix in the change that adds the registered service.
+21. **A method is named for its intent, in the words you would say.** A method that acts starts with its verb
+    (`deleteRenditions`, `splitIntoChunks`). A method that decides says the decision (`tryAgainFailed`: try
+    again, or failed). A method that only reads a value is the plain noun (`objectKey`, `retryStatus`). The class
+    already says whose value it is (`LibraryService.objectKey`), so no new name takes the suffix `Of`, and no name is put in the past form to mean "did it and answers the result"
+    (`renditionsDeleted`, `triedAgain`). An existing name is changed when its code is next moved or rewritten.
+    A route-facing operation keeps the name its DTO gives it.
