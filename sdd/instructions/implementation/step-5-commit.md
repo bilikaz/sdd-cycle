@@ -37,6 +37,7 @@ Changes to the settled task follow [evolution](escalation.md), including changes
   [sdd.workspace.10](../../workspace.md#docker-allocations) that it is the project's own. The configured dev,
   test and Shared stacks stay as they are, and nothing is pruned. A leftover whose owner is unclear, or one a
   document says to keep for inspection, is reported in the delivery reply instead of removed.
+- **sdd.step5.11.** Delete the delivered task branch once it is merged into its target.
 
 ## Closing
 
