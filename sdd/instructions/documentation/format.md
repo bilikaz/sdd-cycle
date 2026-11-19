@@ -22,6 +22,10 @@ either stops rendering or becomes unreadable exactly where it matters.
 - **One record per row.** A row names exactly one thing; entries joined by `+` or `·` are different things and
   each takes its own row, even when several share a description — repeat it per row. Readers cite rows; a row
   naming two things cites two claims.
+- **A logical group may share a row.** Records that are the same in every column but the one naming them — one
+  change made to several files, one field in several tables — may share a row that lists their names together.
+  Both forms are correct, and neither is a finding. A shared row that hides a difference between its records is
+  the defect: give each record its own row.
 
 ## Paths in tables
 

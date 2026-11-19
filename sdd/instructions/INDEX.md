@@ -14,7 +14,7 @@ runs from interview to delivery.
 | [documentation/single-source.md](documentation/single-source.md) | Every rule, name, and table lives in exactly one place; anything else **links**, never restates — and indexes route to folders, not files; an accepted ruling lands in its home the moment it is accepted, in any step |
 | [documentation/current-truth.md](documentation/current-truth.md) | Every document says only what stands: a dropped answer, option, feature or design is deleted everywhere, never kept and labelled — git keeps the history |
 | [documentation/doc-structure.md](documentation/doc-structure.md) | Fixed heading anatomy: H1 title, H2 logical cuts, members below; a description rides directly behind its thing |
-| [documentation/format.md](documentation/format.md) | Diagrams are Mermaid; detail lives in tables, not annotated trees; one record per row; one path base per table; three-column file inventories |
+| [documentation/format.md](documentation/format.md) | Diagrams are Mermaid; detail lives in tables, not annotated trees; one record per row, or one row for records alike in all but their names; one path base per table; three-column file inventories |
 | [implementation/templates/](implementation/templates) | Canonical output structures and examples; COMMENTS blocks tell writers and reviewers how to use each template |
 | [implementation/cycle.md](implementation/cycle.md) | The implementation cycle: user-driven steps 0–5, the task folder, ids, progress and commit boundaries |
 | [implementation/step-0-new-task.md](implementation/step-0-new-task.md) | `sdd step 0` — preserve existing work as instructed, update the selected base from origin, create the task branch and initial records, then stop |
