@@ -111,3 +111,10 @@ pays to rename them.
 19. **Prefer the qualified name over an ambiguous bare word.** Where a common word means several things across
     the codebase, the concept's name is the qualified one — `traceId`, not `trace`; `publishedStatus`, not
     `status` — in prose, identifiers and the glossary alike. Rule 15 still drops what the local scope already says.
+20. **A feature service that shares its domain with a registered service is `<Domain>FeatureService`.** A
+    registered service takes its domain's name (`LibraryService`, `AuthService`). When a feature's service
+    class would carry the same name, the two meet in one scope — the feature service imports the registered
+    one — so rule 15's qualifier applies, and it is always `Feature`: `LibraryFeatureService`,
+    `AuthFeatureService`. The suffix is not invented per feature and no other word stands in for it. A feature
+    whose domain has no registered service keeps the bare name (`UsersService`, `SkillsService`) and takes the
+    suffix in the change that adds the registered service.
