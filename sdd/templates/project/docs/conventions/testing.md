@@ -98,3 +98,4 @@
     as the application user; a migration that legitimately needs more declares it and is verified both ways —
     denied as the application user, applied with elevation. A check that runs with wider authority than
     production is not a check.
+19. **Write no test for a migration.**

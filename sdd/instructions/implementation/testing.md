@@ -67,6 +67,7 @@ The gate script or configuration owns its check inventory. Do not duplicate that
   re-proves the same logic and adds only upkeep. Test a value on its own only where its own logic lives:
   its validation, its default, the code that uses it. Distinct branches and failure modes of the shared
   mechanism still need their own coverage.
+- **sdd.testing.41.** Write no test for a migration.
 
 ## The record
 
