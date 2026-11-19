@@ -15,7 +15,7 @@ default pack; links resolve in the combined convention folder.
 | [dtos.md](dtos.md) | One browser-safe request and response contract per operation. |
 | [feature-layers.md](feature-layers.md) | Registration, routing and service logic have separate responsibilities. |
 | [jobs.md](jobs.md) | The Job engine owns attempts, worker dispatch and captured outcomes. |
-| [logic-in-classes.md](logic-in-classes.md) | A unit of logic is a class; one that uses the app is a registered service; function modules only for pure transformations. |
+| [logic-in-classes.md](logic-in-classes.md) | A unit of logic is a class; one that uses the app is a registered service; a domain's rules are members of its one service, pure or not; function modules only for utilities that name no domain. |
 | [react.md](react.md) | Named functions, hook-based state, stable keys and scoped subscriptions. |
 | [repositories.md](repositories.md) | One thin table owner; the base handles standard reads and writes. |
 | [routes.md](routes.md) | Guarded, validated registrations call one service operation and declare their answer. |
