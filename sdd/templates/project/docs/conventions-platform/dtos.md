@@ -59,12 +59,18 @@ behaviour never lives there.
    (the library's `libraryCategoryTreeResponseDto`, `{ categories, rags, categoryRags }`).
    Both requests and responses are DTOs, and the suffix says the side: `…Dto` is what a route takes,
    `…ResponseDto` what it answers — the same word from the API and from the console.
-8. **Each kind carries its suffix** — `…Entity`, `…Dto` (a request) or `…ResponseDto` — and a file of a kind exports only that
+8. **Each kind carries its suffix** — `…Entity`, `…Dto` (a request), `…ResponseDto`, or `…MultipartDto` /
+   `…ResponseMultipartDto` for one that carries files (rule 10) — and a file of a kind exports only that
    kind's schemas and their derived types (rule 4).
 9. **The DTO carries the words a form shows.** A rule's user-facing message is written on the DTO's field, so
    a console form that validates with the DTO and the API's field refusal say the same thing. A form with a
    field no route takes (a password typed twice) extends the DTO it submits to; only that field and its
    message are the console's.
+10. **A request or answer that carries files is a multipart DTO.** It travels as `multipart/form-data`: its
+    JSON part is the DTO and its file parts are the files that DTO lists. It is a DTO like any other — one per
+    route, named from the route's object and action, declared and validated as rules 1–9 say — named with
+    `MultipartDto` (`avatarUploadMultipartDto`), its answer with `ResponseMultipartDto`; a file it lists is a
+    `MultipartFile`. No other word — bundle, package, payload — names it.
 
 ## Why
 
