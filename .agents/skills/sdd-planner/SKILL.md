@@ -26,7 +26,7 @@ This file owns the loop and its stops.
   on its return, open a new step-2 entry for the dispositions. Waiting for guidance or confirmation stays within
   the current step-2 entry.
 - Give each plan-review lead the task and the current documents only; it treats your request as a user's.
-- A decision needed to go on is a Guidance stop; a choice that can wait is disposed **named** and presented with
+- A decision needed to go on is a Guidance pause; a choice that can wait is disposed **named** and presented with
   the documents. Present outstanding choices only at presentation, never between review waves.
 - Default to **five review dispatches per delegated run**, unless the user instructs another limit.
   Start a new run at zero; resume an active run's saved count. Increment before dispatch, including
@@ -52,7 +52,7 @@ a valid open choice with one consistent option in the body can wait for presenta
 A decision needed to continue drafting or remove a genuine defect goes to Guidance.
 Ask no decision questions between review waves.
 
-## Stops
+## Pauses and stops
 
 - **Clean:** current documents satisfy
   [sdd.cycle.5](../../../sdd/instructions/implementation/cycle.md#review-cleanliness).
@@ -63,8 +63,10 @@ Ask no decision questions between review waves.
   If user rulings change them, record/apply those rulings and hand back the outstanding review.
   Further dispatch needs the user's instruction to continue or extend the limit.
 - **Guidance:** a decision prevents a consistent draft or leaves a genuine defect unresolved.
-  Record it in the register with what it blocks and hand it back before another dispatch.
-  A valid open Proposal or Alternative alone is not this stop.
+  Record it in the register with what it blocks and ask the user before another dispatch. Keep the run
+  active while waiting. When the user answers, record and apply the ruling, then continue the delegated
+  process within its saved review allowance; require no separate instruction to continue.
+  A valid open Proposal or Alternative alone is not this pause.
 - **Cycling:** the same defects recur without progress or fixes reverse one another.
   Hand back the issue and needed ruling; valid alternatives belong in the template's choice sections.
 - **Review failure:** return a repairable coverage gap to the original lead under sdd.cycle.6;
@@ -76,9 +78,11 @@ Ask no decision questions between review waves.
 On hand-back, persist unresolved choices/findings in the plan or register and link them in the reply.
 Mark the run handed-back and leave step 2 current; no separate occasion entry under
 [sdd.progress.5](../../../sdd/instructions/implementation/cycle.md#progressmd).
-Waiting for choices or document confirmation keeps the run active.
-Hand-back or settlement ends the run. A later user instruction to continue starts a new allowance;
-an answer to a pending question alone does not authorize another review loop.
+Waiting for guidance, choices or document confirmation keeps the run active. Answering a pending question
+resumes the already delegated process; a Guidance pause does not end that delegation or reset the saved
+dispatch count. If a run was marked handed-back only because it awaited that answer, restore it to active
+and continue with its saved count. Actual hand-back or settlement ends the run; a later instruction to start
+a new run supplies a new allowance. An answer alone does not replenish an exhausted review allowance.
 
 ## Present and settle
 

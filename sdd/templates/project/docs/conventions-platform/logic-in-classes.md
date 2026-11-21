@@ -1,9 +1,8 @@
-# Logic in classes: a unit of logic is a class, and a domain's rules are members of its one service
+# Logic in classes: a unit of logic belongs to its owning class
 
-**Rule in one line:** logic with dependencies or state is a class that receives what it uses — a registered
-core service when it uses the app, a feature service inside a feature — a domain's rules are members of that
-domain's class even when they are pure, and a module of exported functions is only for utilities that name
-no domain.
+**Rule in one line:** logic with dependencies or state belongs to a class that receives what it uses.
+Application capabilities use registered services; owned objects may be ordinary classes. Domain rules stay
+with their owning class, and function modules hold utilities that name no domain.
 
 ## Rules
 
@@ -11,12 +10,15 @@ no domain.
    file system, a child process or the network belongs to a class. Its helpers are the class's members,
    reading what the class was built with; they are never functions exported beside it
    ([base-classes](base-classes.md) rules 3 and 6).
-2. **A class that uses the app is a registered service.** Logic that needs the app's stores, configuration or
-   other services, and that a worker, a root or more than one feature calls, is a core service: a class on
-   the core's service base in a services folder, registered in the manifest under a path and taken from the
-   app by that path and its class. Its home follows who uses it: the core's `src/services/<name>/index.ts`
-   when more than one app takes it, `<app>/src/services/<name>/index.ts` when only that app does. Nothing builds it by hand, and no function hands
-   it out.
+2. **Register application capabilities; ordinary classes remain valid owners.** A class offered through
+   the app's or plugin's service registry uses its registered service form. An object constructed and owned
+   by a service or composition root may be an ordinary class: its dependencies are passed explicitly and
+   its owner controls its lifetime. Holding state, performing I/O or receiving a service dependency does
+   not by itself require registration. Choose the form by how callers obtain it and who owns its lifetime.
+   Registered core services extend the core's service base, are declared in the manifest and are taken
+   from the app by path and class. Their home is the core's `src/services/<name>/index.ts` when several
+   apps use them, or `<app>/src/services/<name>/index.ts` when one app does. Callers obtain registered
+   services through that registration; no factory hands them out.
 3. **A feature's own logic is its feature service.** Logic only one feature's routes call stays that
    feature's `service.ts` ([services](services.md)); it takes a registered service as a dependency when it
    needs one.
@@ -32,16 +34,15 @@ no domain.
 6. **One concern, one folder.** A service's class, its types and its runtime sit in its own folder; the
    concern is not spread over sibling files of an app's `src`.
 
-7. **A domain's rules are members of the domain's class, pure or not.** What a thing of the domain is or
-   does — its statuses and what follows each, its keys, its limits, its counts — is a member of the class
-   that owns that domain, never a function exported beside it or in a shared folder. The owner follows who
-   calls it: the domain's registered service when a worker or more than one feature does (rule 2), the feature
-   service when one feature's routes do (rule 3), the workers' abstract base when only those workers do
-   (rule 4). A rule that reads none of the class's dependencies is a `static` member, called through the class.
-8. **A domain has one home for its logic.** Each domain has at most one registered service, in
-   `services/<domain>/`, and its rules are gathered there. Before a domain rule is written anywhere else, the
-   plan names why the domain's service cannot hold it. Kinds that have one home for every domain stay there:
-   entities, DTOs, repositories, migrations, workers and console pages.
+7. **A domain's rules are members of their owning class, pure or not.** What a domain object is or does
+   belongs to the class owning that concern, never a function exported beside it or in a shared folder.
+   Choose its registered-service or ordinary-class form under rule 2. Feature operations enter through
+   their service (rule 3); a service can delegate state and object behavior to the classes it owns.
+   A rule that reads none of its owning class's instance state or dependencies is a `static` member.
+8. **A domain has one home for its logic.** Each domain has at most one registered domain service, in
+   `services/<domain>/`. Its concern stays together, with each rule in one owning class. An ordinary class
+   under rule 2 lives with the concern it implements; the plan names its caller, dependencies and lifetime
+   owner. Entities, DTOs, repositories, migrations, workers and console pages keep their designated homes.
 9. **The shared folder holds contracts and utilities, and one browser file per domain.** The core's
    browser-safe shared folder is what the browser may import: entities, DTOs and the utilities of rule 5. A
    domain rule that the console needs as well as a server cannot be a service member, because the browser
@@ -51,11 +52,11 @@ no domain.
 
 ## Why
 
-A set of files exporting functions has no owner: each caller threads the connection, the configuration and
-the logger through every call, nothing registers it, and a test can only replace it by mocking a module. The
-same logic as one registered class is found by its path, built once by the app with everything it uses, and
-replaced in a test as a whole. The loose form also grows plumbing of its own — an object carrying the shared
-state, a callback to hand it to the callers — which is a service written by hand.
+A set of files exporting functions has no owner: each caller threads the connection, configuration and
+logger through every call. A class gathers those dependencies and its state in one place, with behavior
+that can be exercised through its real caller. Service registration supplies application discovery and
+lifetime where those are needed; an explicitly owned object already has a caller that constructs and
+manages it.
 
 A pure rule has the same problem without the plumbing. A function that needs no dependency compiles anywhere,
 so it is put wherever its first caller is, or in the shared folder because two apps need it. Each one is
@@ -67,8 +68,8 @@ and the next rule is written beside them because that is where the last one was.
 - Before making a new file, name the class it belongs to. "None, it exports functions" is an answer only for
   a utility under rule 5; when the functions take a database, a configuration, a logger or a service, or
   state a domain rule, they are members of a class.
-- Planned logic that a worker or a root calls is drawn as a service from the first draft, with its
-  registration path named beside it.
+- Draw the chosen form from the first draft: a service names its registration path; an ordinary class
+  names its constructor caller, explicit dependencies and lifetime owner under rule 2.
 - An existing function that takes a dependency or states a domain rule moves into its class when the code
   around it is next changed. A task that changes a domain's logic lists that domain's remaining loose modules
   in its plan and either moves them or records them in the roadmap.
