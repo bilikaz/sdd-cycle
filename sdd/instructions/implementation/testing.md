@@ -35,6 +35,11 @@ The project owns its gates; this file governs their use at the end of implementa
   only when the user asks, because a rebuild is a long cycle and the dev stack is the user's working state. Tests
   run on the test stack alone. The test stack is recreated at the start of a run and left running after it —
   never stopped as teardown — so its containers, logs and data stay open to inspection.
+- **sdd.testing.42.** When a required check needs something prepared first — dependencies installed, build
+  output or test images rebuilt, the test stack recreated — prepare it and run the check. Do not ask the user
+  whether to prepare it and do not record the check as unrun for that reason. This covers the test space and
+  local build state only; the dev stack and shared services stay under sdd.testing.38 and the
+  [Docker convention](../../../project/docs/conventions/docker.md).
 - **sdd.testing.35.** Run the project's required lint, coverage and other supplemental checks where the full
   gate does not include them. Use its configured thresholds; this cycle supplies no universal coverage percentage.
 
